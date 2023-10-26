@@ -1,0 +1,51 @@
+.landing-nav-container {
+  width: 100%;
+  height: 53px;
+  color: white;
+  background-color: #02021c;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  transition: 0.3s ease;
+}
+
+.landing-nav-logo {
+  padding: 5px 0;
+  margin-right: 16px;
+  width: fit-content;
+}
+
+.landing-nav-logo-img {
+  width: 160px;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+
+.landing-nav-group {
+  display: flex;
+}
+
+.landing-nav-group-button {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  background-color: transparent;
+  line-height: 19px;
+  padding: 6px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.landing-nav-group-button-stream {
+  background-color: #b535f6;
+}
+
+.landing-nav-group-button-stream:hover {
+  background-color: white;
+  color: #02021c;
+  transition: all 0.5s;
+}
