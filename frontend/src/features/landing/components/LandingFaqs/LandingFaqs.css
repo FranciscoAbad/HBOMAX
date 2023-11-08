@@ -1,0 +1,60 @@
+.landing-faqs-container {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 24px 15px;
+}
+
+.landing-faqs-header {
+  width: 100%;
+  text-align: center;
+}
+
+.landing-faqs-header-title {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 32px;
+}
+
+.landing-faqs-content {
+  padding: 0 20px;
+}
+
+.landing-faqs-content-list {
+  list-style: none;
+}
+.landing-faqs-content-list-item {
+  list-style: none;
+}
+
+.landing-faqs-content-list-item-button {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: transparent;
+  color: rgb(158, 134, 255);
+  padding: 20px 0;
+  padding-right: 24px;
+  border: none;
+  border-bottom: 0.5px solid gray;
+  font-weight: 100;
+  line-height: 32px;
+  text-align: left;
+}
+
+.landing-faqs-content-list-item-button-icon {
+  font-size: 40px;
+  font-weight: 0;
+}
+
+.landing-faqs-content-list-item-answer {
+  margin-top: 10px;
+  padding-right: 24px;
+}
+
+.landing-faqs-content-list-item-answer-text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+}

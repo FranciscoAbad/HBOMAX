@@ -1,0 +1,175 @@
+.landing-brands-header {
+  margin: 48px 0;
+  padding: 0 15px;
+}
+
+.landing-brands-header-title {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 32px;
+}
+
+.landing-brands-content {
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
+.landing-brands-content-row {
+  display: flex;
+  min-height: auto;
+}
+
+.landing-brands-content-row-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  padding: 10px;
+  margin-bottom: 16px;
+}
+
+.landing-brands-content-row-card-imgbox {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  padding-top: 160%;
+}
+
+.landing-brands-content-row-card-imgbox-default {
+  position: absolute;
+  top: 0;
+  height: 0;
+  width: 100%;
+  height: auto;
+}
+.landing-brands-content-row-card-imgbox-hover {
+  position: absolute;
+  top: 0;
+  height: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+}
+
+.landing-brands-content-row-card-imgbox-default:hover {
+  opacity: 0;
+  transition: all 0.5s;
+}
+.landing-brands-content-row-card-imgbox-hover:hover {
+  opacity: 100;
+
+  transition: all 0.5s;
+}
+
+.landing-brands-content-displayed-head {
+  width: 100%;
+  text-align: center;
+}
+.landing-brands-content-displayed-head-title {
+  padding: 0 15%;
+  font-size: 24px;
+}
+
+.landing-brands-content-displayed-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 25px;
+}
+.landing-brands-content-displayed-grid-item > img {
+  width: 100%;
+}
+
+.landing-brands-content-displayed {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 2s ease-in-out 0s, opacity 1s ease-in-out 0s;
+}
+
+.landing-brands-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px 0;
+  padding: 0 15px;
+}
+
+.landing-brands-footer-button {
+  margin: 0 auto;
+  white-space: nowrap;
+  background: linear-gradient(
+    345deg,
+    #490cb0 0%,
+    #9b34ef 33%,
+    rgba(255, 255, 255, 0) 66%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  padding: 8px 24px;
+  border-radius: 68px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  max-width: 227px;
+  line-height: 19px;
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  background-position: 99% 50%;
+  background-size: 400% 400%;
+  border: 2px solid transparent;
+  z-index: 2;
+  -webkit-transition: all 0.5s !important;
+  transition: all 0.5s !important;
+  font-weight: 700;
+}
+
+.landing-brands-footer-button:hover {
+  background-position: 1% 50%;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border: 2px solid #c600ff;
+  color: #fff;
+}
+.slide-in {
+  max-height: 1000px; /* Adjust this value as needed to ensure all content is shown */
+  opacity: 1;
+}
+
+.slide-out {
+  max-height: 0;
+  opacity: 0;
+}
+
+.active > img:nth-child(2) {
+  opacity: 100;
+}
+
+.active > img:nth-child(1) {
+  opacity: 0;
+}
+
+.disabled::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 94%;
+  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  transition: background-color 2s ease-in-out;
+}
+
+@media (max-width: 991px) {
+  .landing-brands-content-row-card {
+    padding: 5px;
+  }
+  .landing-brands-content-displayed-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 25px;
+  }
+}

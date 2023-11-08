@@ -1,0 +1,62 @@
+.landing-show-room {
+  margin-top: 48px;
+  margin-bottom: 48px;
+  padding: 48px 15px;
+}
+
+.landing-show-room-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-show-room-header {
+  width: 100%;
+}
+
+.landing-show-room-header-title {
+  font-size: 32px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.anding-show-room-content-swiper-container {
+  width: 100%;
+  margin: 40px 0;
+}
+
+.landing-show-room-swiper-card {
+  width: 25%;
+}
+
+.landing-show-room-swiper-card > div > img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 576px) {
+  .landing-show-room-container {
+    max-width: 520px;
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-show-room-container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .landing-show-room-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .landing-show-room-container {
+    max-width: 1140px;
+  }
+}

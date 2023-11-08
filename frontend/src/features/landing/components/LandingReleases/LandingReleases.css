@@ -1,0 +1,249 @@
+.landing-releases-container {
+  margin: 48px 0;
+}
+
+.landing-releases-title {
+  padding: 0 15px;
+  margin: 0 23px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.landing-releases-swiper-container {
+  margin-top: 56px;
+  background: linear-gradient(0, rgb(62 17 96), rgb(3 3 40));
+}
+
+.landing-releases-swiper-container > div {
+  margin: 0px auto;
+  padding-bottom: 25px;
+}
+
+.landing-releases-flex-band {
+  padding: 0 15px;
+  height: 300px;
+  display: flex;
+}
+.landing-releases-flex-band-card {
+  width: 50%;
+  display: flex;
+}
+.landing-releases-flex-band-card:nth-child(2) {
+  width: 50%;
+  max-height: 100%;
+  height: 100%;
+  background-image: url(https://hbomax-images.warnermediacdn.com/2023-09/doom%20patrol-DSK.jpg?host=wme-hbomax-drupal-prod.s3.amazonaws.com&w=1284);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.landing-releases-flex-band-card-details-title {
+  font-size: 28px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.landing-releases-flex-band-card-details-body {
+  padding-right: 1.5rem;
+  margin-top: 1rem;
+}
+
+.landing-releases-flex-band-card-details-body-text {
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.landing-releases-flex-band-card-details-body-cast {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.landing-releases-flex-band-card-details-body-cast-member {
+  display: flex;
+  flex-direction: column;
+  width: 33.33%;
+  align-items: center;
+}
+.landing-releases-flex-band-card-details-body-cast-member > img {
+  width: 50%;
+  height: auto;
+}
+
+.landing-releases-flex-band-card-details-body-cast-member > p {
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
+
+.bold {
+  font-weight: bold;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.landing-releases-controls-container {
+  display: flex;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-releases-slider-controls {
+  display: flex;
+  font-size: 20px;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+}
+.landing-releases-fade-background {
+  background: linear-gradient(180deg, rgb(62 17 96), rgba(3, 3, 40, 0.4));
+}
+
+.landing-releases-slider-controls-next {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.landing-releases-slider-controls-prev {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.landing-releases-slider-controls-next > svg {
+  width: 15px;
+  height: 20px;
+  fill: #fff;
+  opacity: 0.65;
+  cursor: pointer;
+}
+.landing-releases-slider-controls-next > svg:hover {
+  opacity: 100;
+  transition: all 0.5s;
+}
+
+.landing-releases-slider-controls-prev > svg {
+  width: 15px;
+  height: 20px;
+  fill: #fff;
+  opacity: 0.65;
+  cursor: pointer;
+}
+.landing-releases-slider-controls-prev > svg:hover {
+  opacity: 100;
+  transition: all 0.5s;
+}
+
+.landing-releases-slider-controls-pagination {
+  font-size: 20px;
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+}
+.landing-releases-slider-controls-pagination > span {
+  padding: 0 5px;
+}
+
+.landing-releases-controls-button-container {
+  width: 100%;
+}
+
+.landing-releases-controls-button {
+  margin: 0 auto;
+  white-space: nowrap;
+  background: linear-gradient(
+    345deg,
+    #490cb0 0%,
+    #9b34ef 33%,
+    rgba(255, 255, 255, 0) 66%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  padding: 6px 24px;
+  border-radius: 68px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  max-width: 182px;
+  line-height: 19px;
+  text-align: center;
+  font-size: 11px;
+  width: 100%;
+  background-position: 99% 50%;
+  background-size: 400% 400%;
+  border: 2px solid transparent;
+  z-index: 2;
+  -webkit-transition: all 0.5s !important;
+  transition: all 0.5s !important;
+  font-weight: 700;
+}
+
+.landing-releases-controls-button:hover {
+  background-position: 1% 50%;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border: 2px solid #c600ff;
+  color: #fff;
+}
+
+.active {
+  display: flex;
+}
+
+@media (min-width: 576px) and (max-width: 1024px) {
+  .landing-releases-flex-band-card:nth-child(2) {
+    width: 50%;
+    max-height: 100%;
+    height: 100%;
+    background-image: url(https://hbomax-images.warnermediacdn.com/2023-09/Our%20flag%20means%20death%20s2.jpg?host=wme-hbomax-drupal-prod.s3.amazonaws.com&w=828);
+    background-size: contain;
+    width: 50% !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .landing-releases-controls {
+    max-width: 520px;
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-releases-controls {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .landing-releases-swiper-container > div {
+    max-width: 960px;
+  }
+  .landing-releases-flex-band-card:nth-child(2) {
+    background-size: contain;
+    width: 50% !important;
+  }
+  .landing-releases-controls {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .landing-releases-swiper-container > div {
+    max-width: 1140px;
+  }
+
+  .landing-releases-flex-band-card {
+    padding-right: 1rem;
+  }
+  .landing-releases-controls {
+    max-width: 1140px;
+  }
+}
