@@ -1,0 +1,42 @@
+.validated-input {
+  height: fit-content;
+  width: 100%;
+}
+
+.validated-input-value {
+  position: absolute;
+  color: white;
+  bottom: 5px;
+  left: 1px;
+  width: 90%;
+  line-height: 29px;
+  font-size: 18px;
+  font-weight: 300;
+  background-color: rgba(256, 256, 256, 0);
+  border: none;
+  padding: 0;
+  z-index: 5;
+}
+
+.validated-input-value:focus {
+  outline: none;
+  border: none;
+}
+
+.validated-data-selector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+}
+
+.validated-input-remainder {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-weight: 500;
+  color: #657786;
+}
+
+.dropdown-container {
+  margin-bottom: 20px;
+}

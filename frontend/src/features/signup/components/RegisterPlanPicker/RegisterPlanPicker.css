@@ -1,0 +1,121 @@
+.register-plan-picker-title {
+  width: 100%;
+  margin-top: 18px;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.register-plan-picker-text {
+  font-size: 14px;
+  line-height: 24px;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.register-plan-picker-plans {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.register-plan-picker-plans-card {
+  width: 284px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.12),
+    hsla(0, 0%, 100%, 0)
+  );
+  border-radius: 8px;
+  margin: 20px 15px 0;
+  border: 1px solid hsla(0, 0%, 100%, 0.3);
+}
+
+.register-plan-picker-plans-card-top {
+  padding: 20px 32px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+}
+
+.register-plan-picker-plans-card-top-title {
+  font-size: 32px;
+  text-align: left;
+  line-height: 42px;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.register-plan-picker-plans-card-top-price {
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 22px;
+}
+
+.register-plan-picker-plans-card-top-price > span {
+  font-size: 18px;
+  line-height: 28px;
+  color: hsla(0, 0%, 100%, 0.75);
+}
+
+.register-plan-picker-plans-card-top-info {
+  font-size: 16px;
+  line-height: 20px;
+  color: hsla(0, 0%, 100%, 0.75);
+  white-space: pre-wrap;
+  padding: 20px 0 20px 8px;
+  text-align: left;
+}
+.register-plan-picker-plans-card-top-info-item {
+  padding: 6px 10px 0;
+  white-space-collapse: preserve;
+}
+
+.register-plan-picker-plans-card-top-info-item::marker {
+  content: "+";
+}
+
+.register-plan-picker-plans-card-mid {
+  font-size: 16px;
+  line-height: 20px;
+  width: 90%;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.6);
+  margin: 0 auto 20px;
+  padding: 8px 5px;
+}
+
+.register-plan-picker-plans-card-mid > svg {
+  width: 18px;
+  height: 15px;
+}
+
+.register-plan-picker-plans-card-bot {
+  padding: 0 15px 40px 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.register-plan-picker-plans-card-bot-button {
+  background-color: rgb(123, 42, 191);
+  height: 52px;
+  padding: 0 36px;
+  text-align: center;
+  width: 224.734px;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.register-plan-picker-plans-card-bot-button:hover {
+  background-color: #9a35ef;
+  transition: all 0.5s;
+}

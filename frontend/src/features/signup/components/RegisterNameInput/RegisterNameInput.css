@@ -1,0 +1,34 @@
+.register-name-input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.register-name-content {
+  width: 48%;
+  margin: 0;
+  padding: 0;
+}
+
+.register-name-error {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-family: "GilroyLight";
+  margin-top: 2px;
+  color: #b22365;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.register-name-error > svg {
+  margin-right: 5px;
+  width: 13px;
+}
+
+.register-fullname-content {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

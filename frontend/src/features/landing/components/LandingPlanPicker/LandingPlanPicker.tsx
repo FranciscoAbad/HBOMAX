@@ -1,6 +1,12 @@
 import React from "react";
 import "./LandingPlanPicker.css";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../redux/Store";
+import { updateRegister } from "../../../../redux/Slices/RegisterSlice";
+
 export const LandingPlanPicker: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+
   return (
     <div className="landing-planpicker">
       <div className="landing-planpicker-container">
@@ -45,7 +51,22 @@ export const LandingPlanPicker: React.FC = () => {
                 Igual a $ 630,00 al mes
               </p>
             </div>
-            <button className="landing-planpicker-option-button">
+            <button
+              onClick={() => {
+                dispatch(
+                  updateRegister({
+                    name: "plan",
+                    value: {
+                      type: "basic",
+                      price: 630,
+                      duration: 1,
+                      screens: 2,
+                    },
+                  })
+                );
+              }}
+              className="landing-planpicker-option-button"
+            >
               ELIGE ESTE PLAN
             </button>
           </div>
@@ -57,7 +78,22 @@ export const LandingPlanPicker: React.FC = () => {
                 Igual a $ 630,00 al mes
               </p>
             </div>
-            <button className="landing-planpicker-option-button">
+            <button
+              onClick={() => {
+                dispatch(
+                  updateRegister({
+                    name: "plan",
+                    value: {
+                      type: "medium",
+                      price: 1899,
+                      duration: 3,
+                      screens: 4,
+                    },
+                  })
+                );
+              }}
+              className="landing-planpicker-option-button"
+            >
               ELIGE ESTE PLAN
             </button>
           </div>
@@ -69,7 +105,22 @@ export const LandingPlanPicker: React.FC = () => {
                 Igual a $ 630,00 al mes
               </p>
             </div>
-            <button className="landing-planpicker-option-button">
+            <button
+              onClick={() => {
+                dispatch(
+                  updateRegister({
+                    name: "plan",
+                    value: {
+                      type: "premium",
+                      price: 5999,
+                      duration: 12,
+                      screens: 4,
+                    },
+                  })
+                );
+              }}
+              className="landing-planpicker-option-button"
+            >
               ELIGE ESTE PLAN
             </button>
           </div>

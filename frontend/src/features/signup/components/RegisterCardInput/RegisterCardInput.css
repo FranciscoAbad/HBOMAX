@@ -1,0 +1,19 @@
+.register-card-input {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.register-card-error {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+  color: #b22365;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.register-card-error > svg {
+  width: 13px;
+  margin-right: 5px;
+}

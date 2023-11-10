@@ -5,6 +5,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { Theme } from "./utils/GlobalInterfaces";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Landing } from "./pages/Landing";
+import { SignUp } from "./pages/SignUp";
 //import { Home } from "./pages/Home";
 
 const theme: Theme = {
@@ -35,6 +36,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<div>Home</div>} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </ThemeProvider>
   );
