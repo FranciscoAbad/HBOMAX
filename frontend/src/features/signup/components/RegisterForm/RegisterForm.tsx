@@ -1,15 +1,21 @@
 import React from "react";
 import { RegisterNameInput } from "../RegisterNameInput/RegisterNameInput";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/Store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../../redux/Store";
 import "./RegisterForm.css";
 import {
   RegisterConfirmEmail,
   RegisterEmailInput,
 } from "../RegisterEmailInput/RegisterEmailInput";
 import { RegisterPasswordInput } from "../RegisterPasswordInput/RegisterPasswordInput";
+import { incrementStep } from "../../../../redux/Slices/RegisterSlice";
 export const RegisteForm: React.FC = () => {
   const registerState = useSelector((state: RootState) => state.register);
+  const dispatch: AppDispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(incrementStep());
+  };
 
   return (
     <div className="register-form">
@@ -49,7 +55,17 @@ export const RegisteForm: React.FC = () => {
               acuerdo a la Política de Privacidad, si dicho consentimiento es
               requerido en el lugar donde vives.
             </p>
-            <button className="register-form-bottom-wrapper-submit">
+            <button
+              disabled={
+                !registerState.firstNameValid ||
+                !registerState.lastNameValid ||
+                !registerState.emailValid ||
+                registerState.password === "" ||
+                registerState.confirmEmail === ""
+              }
+              onClick={handleClick}
+              className="register-form-bottom-wrapper-submit"
+            >
               CREAR CUENTA
             </button>
           </div>

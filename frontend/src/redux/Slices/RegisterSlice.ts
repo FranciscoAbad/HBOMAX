@@ -64,7 +64,7 @@ const initialState: RegisterSliceState = {
   email: "",
   emailValid: false,
   confirmEmail: "",
-  step: 3,
+  step: 1,
   code: "",
   password: "",
   login: false,

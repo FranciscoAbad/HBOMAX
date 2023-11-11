@@ -1,8 +1,15 @@
 import React from "react";
 import { RegisterFullNameInput } from "../RegisterNameInput/RegisterNameInput";
 import { RegisterCardInput } from "../RegisterCardInput/RegisterCardInput";
+import { AppDispatch } from "../../../../redux/Store";
+import { useDispatch } from "react-redux";
+import { incrementStep } from "../../../../redux/Slices/RegisterSlice";
 
 export const RegisterFormTwo: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const handleClick = () => {};
+
   return (
     <div className="register-form">
       <h1 className="register-form-title">Crea tu cuenta</h1>
@@ -31,7 +38,10 @@ export const RegisterFormTwo: React.FC = () => {
               acuerdo a la Política de Privacidad, si dicho consentimiento es
               requerido en el lugar donde vives.
             </p>
-            <button className="register-form-bottom-wrapper-submit">
+            <button
+              onClick={handleClick}
+              className="register-form-bottom-wrapper-submit"
+            >
               CREAR CUENTA
             </button>
           </div>
