@@ -1,0 +1,87 @@
+.login-form-title {
+  width: 100%;
+  margin-top: 18px;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.login-form-inputs-wrapper {
+  padding-top: 32px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.login-form-inputs-row {
+}
+
+.register-form-bottom {
+  padding: 40px 0px 0px;
+}
+
+.login-form-bottom-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.register-form-bottom-wrapper-terms {
+  padding: 0 0 20px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: left;
+  color: #f0f0f0;
+}
+
+.login-form-bottom-wrapper-submit {
+  background-color: rgb(123, 42, 191);
+  height: 52px;
+  padding: 0 36px;
+  text-align: center;
+  width: 225px;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.login-form-bottom-wrapper-provider {
+  background-color: transparent;
+  height: 52px;
+  padding: 0 36px;
+  text-align: center;
+  width: 412px;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+  font-weight: 600;
+  border: 2px solid white;
+  border-radius: 100px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 32px;
+}
+.login-form-bottom-wrapper-submit:hover {
+  background-color: #9a35ef;
+  transition: all 0.5s;
+}
+
+.login-form-bottom-wrapper-provider:hover {
+  border-color: #9a35ef;
+  transition: all 0.5s;
+}
+
+.register-form-bottom-text {
+  font-size: 12px;
+  line-height: 18px;
+  text-align: left;
+
+  padding: 16px 0;
+  color: #f0f0f0;
+}

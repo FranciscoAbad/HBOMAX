@@ -51,13 +51,11 @@ export const RegisterPasswordInput: React.FC = () => {
         )}
       </div>
       {passwordValid ? (
-        <p className="register-password-input-text">
-          Tu contraseña debe tener, como mínimo, 8 caracteres, e incluir un
-          número o un carácter especial.
-        </p>
+        <></>
       ) : (
         <p className="register-password-input-error">
-          <ErrorOutlineIcon /> The password you've provided is invalid
+          <ErrorOutlineIcon /> Tu contraseña debe tener, como mínimo, 6
+          caracteres
         </p>
       )}
     </div>

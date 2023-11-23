@@ -8,12 +8,22 @@ import {
   RegisterEmailInput,
 } from "../RegisterEmailInput/RegisterEmailInput";
 import { RegisterPasswordInput } from "../RegisterPasswordInput/RegisterPasswordInput";
-import { incrementStep } from "../../../../redux/Slices/RegisterSlice";
+import {
+  incrementStep,
+  registerUser,
+} from "../../../../redux/Slices/RegisterSlice";
 export const RegisteForm: React.FC = () => {
   const registerState = useSelector((state: RootState) => state.register);
   const dispatch: AppDispatch = useDispatch();
 
   const handleClick = () => {
+    const user = {
+      firstName: registerState.firstName,
+      lastName: registerState.lastName,
+      email: registerState.email,
+      password: registerState.password,
+    };
+    dispatch(registerUser(user));
     dispatch(incrementStep());
   };
 

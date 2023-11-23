@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "swiper/css";
 
@@ -10,8 +10,20 @@ import { LandingShowRoom } from "../features/landing/components/LandingShowRoom/
 import { LandingFeatures } from "../features/landing/components/LandingFeatures/LandingFeatures";
 import { LandingBrands } from "../features/landing/components/LandingBrands/LandingBrands";
 import { LandingFaqs } from "../features/landing/components/LandingFaqs/LandingFaqs";
+import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "../redux/Store";
+import { useDispatch } from "react-redux";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const Landing: React.FC = () => {
+  const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (jwt !== "") navigate("/home");
+  }, []);
+
   return (
     <>
       <LandingNav />
