@@ -23,10 +23,7 @@ public class TitleController {
     }
 
     @PostMapping("/{title}/addGenre/{genre}")
-    public Title addGenreToTitle(
-            @PathVariable String title,
-            @PathVariable String genre) {
-
+    public Title addGenreToTitle(@PathVariable String title, @PathVariable String genre) {
         return  titleService.addGenreToTitle(genre,title);
     }
 
@@ -35,10 +32,13 @@ public class TitleController {
         return titleService.addCountryToTitle(country,title);
     }
 
+    @PostMapping("{title}/addLenguage/{lenguage}")
+    public Title addLenguageToTitle(@PathVariable String title,@PathVariable String lenguage){
+        return titleService.addLenguageToTitle(lenguage,title);
+    }
+
     @PostMapping("/name/{titleName}")
     public Title retrieveTitle(@PathVariable String titleName){
-
-
         return titleService.retrieveTitle(titleName);
     }
 
@@ -48,13 +48,9 @@ public class TitleController {
         return ResponseEntity.ok(title);
     }
 
-
-
     @GetMapping("/all/person/{firstName}/{lastName}")
     public Set<Title> getAllFromPerson(@PathVariable String firstName, @PathVariable String lastName){
-
         return titleService.getAllTitlesOfPerson(firstName,lastName);
-
     }
 
     @GetMapping("/all/genre/{genreName}")
@@ -66,5 +62,11 @@ public class TitleController {
     public Set<Title> getAllFromCountry(@PathVariable String countryName){
         return titleService.getAllTitlesOfCountry(countryName);
     }
+    @GetMapping("/all/lengauge/{lenguageName}")
+    public Set<Title> getAllFromLenguage(@PathVariable String lenguageName){
+        return titleService.getAllTitlesOfLenguage(lenguageName);
+    }
+
+
 
 }

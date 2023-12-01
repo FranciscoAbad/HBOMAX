@@ -24,7 +24,7 @@ public class HbomaxBackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo){
+	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo,LenguageRepository lenguageRepo){
 		return args ->{
 			Role r =roleRepo.save(new Role(1,"USER"));
 
@@ -89,7 +89,13 @@ public class HbomaxBackendApplication {
 			countryRepo.save(unitedStates);
 
 
+			Lenguage spanish=new Lenguage();
+			spanish.setLenguage("spanish");
+			lenguageRepo.save(spanish);
 
+			Lenguage english=new Lenguage();
+			english.setLenguage("english");
+			lenguageRepo.save(english);
 
 
 

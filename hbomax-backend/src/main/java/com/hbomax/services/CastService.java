@@ -10,6 +10,7 @@ import com.hbomax.models.TitleRole;
 import com.hbomax.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class CastService {
         this.castInfoRepo = castInfoRepo;
     }
 
-    public CastInfo addMovieWithPersonAndRole(String titleName, String firstName, String lastName, String roleName,String character) {
+    public CastInfo addMovieWithPersonAndRole(String titleName, String firstName, String lastName, String roleName, String character) {
         Title title = titleRepo.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
         Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
         TitleRole role = roleRepo.findByRole(roleName).orElseThrow(RoleDoesNotExistException::new);
@@ -41,6 +42,7 @@ public class CastService {
         castInfo.setPerson(person);
         castInfo.setRole(role);
         castInfo.setCharacter(character);
+
 
 
         return castInfoRepo.save(castInfo);

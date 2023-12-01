@@ -23,5 +23,8 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
 
     @Query("SELECT t from Title t JOIN t.countries c WHERE c.country=:countryName")
     Set<Title> findTitlesByCountry(@Param("countryName") String countryName);
+
+    @Query("SELECT t from Title t JOIN t.lenguages l WHERE l.lenguage=:lenguageName")
+    Set<Title> findTitlesByLenguage(@Param("lenguageName") String lenguageName);
 }
 

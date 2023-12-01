@@ -1,16 +1,14 @@
 package com.hbomax.services;
 
-import com.hbomax.exceptions.CountryDoesNotExistException;
-import com.hbomax.exceptions.GenreDoesNotExistException;
-import com.hbomax.exceptions.TitleDoesNotExistException;
-import com.hbomax.models.Country;
-import com.hbomax.models.Genre;
-import com.hbomax.models.Title;
+import com.hbomax.exceptions.*;
+import com.hbomax.models.*;
 import com.hbomax.repositories.CountryRepository;
 import com.hbomax.repositories.GenreRepository;
+import com.hbomax.repositories.LenguageRepository;
 import com.hbomax.repositories.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -26,32 +24,53 @@ public class TitleService {
 
     private final CountryRepository countryRepository;
 
-    @Autowired
+    private final LenguageRepository lenguageRepository;
 
-    public TitleService(TitleRepository titleRepository, GenreRepository genreRepository,CountryRepository countryRepository) {
+    private final ImageService imageService;
+    @Autowired
+    public TitleService(TitleRepository titleRepository, GenreRepository genreRepository, CountryRepository countryRepository, LenguageRepository lenguageRepository, ImageService imageService) {
         this.titleRepository = titleRepository;
         this.genreRepository = genreRepository;
-        this.countryRepository=countryRepository;
+        this.countryRepository = countryRepository;
+        this.lenguageRepository = lenguageRepository;
+        this.imageService = imageService;
     }
 
 
 
 
 
-    public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, Float popularity, Integer budget, Integer revenue){
 
-        Title newTitle=new Title();
-        newTitle.setTitle(title);
-        newTitle.setOverview(overview);
-        newTitle.setSeasonNr(seasonNr);
-        newTitle.setEpisodeNr(episodeNr);
-        newTitle.setRuntime(runtime);
-        newTitle.setReleaseDate(releaseDate);
-        newTitle.setPopularity(popularity);
-        newTitle.setBudget(budget);
-        newTitle.setRevenue(revenue);
 
-        return titleRepository.save(newTitle);
+
+
+
+    public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, Float popularity, Integer budget, Integer revenue, MultipartFile banner, MultipartFile poster){
+
+        try {
+            Title newTitle=new Title();
+            newTitle.setTitle(title);
+            newTitle.setOverview(overview);
+            newTitle.setSeasonNr(seasonNr);
+            newTitle.setEpisodeNr(episodeNr);
+            newTitle.setRuntime(runtime);
+            newTitle.setReleaseDate(releaseDate);
+            newTitle.setPopularity(popularity);
+            newTitle.setBudget(budget);
+            newTitle.setRevenue(revenue);
+           Image bannerPicture =imageService.uploadImage(banner,"banner");
+           Image posterPicture =imageService.uploadImage(poster,"poster");
+            newTitle.setBannerPicture(bannerPicture);
+            newTitle.setPosterPicture(posterPicture);
+
+            return titleRepository.save(newTitle);
+        }catch (Exception e){
+            throw new UnableToCreateTitleException();
+        }
+
+
+
+
     }
 
     public Title addGenreToTitle(String genre,String title){
@@ -72,6 +91,14 @@ public class TitleService {
         return titleRepository.save(auxTitle);
     }
 
+    public Title addLenguageToTitle(String lenguage,String title){
+        Title auxTitle=titleRepository.findByTitle(title).orElseThrow(TitleDoesNotExistException::new);
+        Lenguage auxLenguage=lenguageRepository.findByLenguage(lenguage).orElseThrow(LenguageDoesNotExistException::new);
+        auxTitle.getLenguages().add(auxLenguage);
+
+return titleRepository.save(auxTitle);
+    }
+
     public Title retrieveTitle(String titleName){
         return titleRepository.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
     }
@@ -89,6 +116,10 @@ public class TitleService {
 
     public Set<Title> getAllTitlesOfCountry(String countryName) {
         return titleRepository.findTitlesByCountry(countryName);
+    }
+
+    public Set<Title> getAllTitlesOfLenguage(String lenguageName){
+        return titleRepository.findTitlesByLenguage(lenguageName);
     }
 
 }

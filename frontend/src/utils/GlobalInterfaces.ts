@@ -41,10 +41,15 @@ export interface SVGProps {
   color?: string;
 }
 
+export interface Profile {
+  name: string;
+}
+
 export interface User {
   userId: number;
   firstName: string;
   lastName: string;
   username: string;
   email: string;
+  selectedProfile: Profile | null;
 }

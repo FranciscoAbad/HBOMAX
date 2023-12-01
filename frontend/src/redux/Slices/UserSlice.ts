@@ -108,6 +108,7 @@ export const UserSlice = createSlice({
           lastName: action.payload.user.lastName,
           email: action.payload.user.email,
           username: action.payload.user.username,
+          selectedProfile: null,
         },
         token: action.payload.token,
       };

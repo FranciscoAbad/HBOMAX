@@ -43,6 +43,15 @@ public class Title {
     @Column(name = "revenue")
     private Integer revenue;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="profile_picture", referencedColumnName="image_id")
+    private Image posterPicture;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="banner_picture", referencedColumnName="image_id")
+    private Image bannerPicture;
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="title_genre_junction",
     joinColumns ={@JoinColumn(name = "title_id")},
@@ -55,15 +64,36 @@ public class Title {
             inverseJoinColumns = {@JoinColumn(name="country_id")})
     Set<Country> countries;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="title_lenguage_junction",
+            joinColumns ={@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name="lenguage_id")})
+    Set<Lenguage> lenguages;
+
 
 
     public Title() {
         super();
         this.genres=new HashSet<>();
         this.countries=new HashSet<>();
+        this.lenguages=new HashSet<>();
     }
 
+    public Image getPosterPicture() {
+        return posterPicture;
+    }
 
+    public void setPosterPicture(Image posterPicture) {
+        this.posterPicture = posterPicture;
+    }
+
+    public Image getBannerPicture() {
+        return bannerPicture;
+    }
+
+    public void setBannerPicture(Image bannerPicture) {
+        this.bannerPicture = bannerPicture;
+    }
 
     public Integer getTitleId() {
         return titleId;
@@ -160,5 +190,13 @@ public class Title {
 
     public void setCountries(Set<Country> countries) {
         this.countries = countries;
+    }
+
+    public Set<Lenguage> getLenguages() {
+        return lenguages;
+    }
+
+    public void setLenguages(Set<Lenguage> lenguages) {
+        this.lenguages = lenguages;
     }
 }
