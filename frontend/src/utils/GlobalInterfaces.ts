@@ -42,7 +42,9 @@ export interface SVGProps {
 }
 
 export interface Profile {
+  profileId: number;
   name: string;
+  titles: any[];
 }
 
 export interface User {

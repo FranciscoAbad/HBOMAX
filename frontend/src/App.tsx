@@ -9,6 +9,7 @@ import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 
 import { Home } from "./pages/Home";
+import { ProfilePicker } from "./pages/ProfilePicker";
 
 const theme: Theme = {
   colors: {
@@ -40,6 +41,7 @@ export const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/profile/select" element={<ProfilePicker />} />
       </Routes>
     </ThemeProvider>
   );

@@ -33,7 +33,9 @@ public class ApplicationUser {
     @JsonIgnore
     private String password;
 
-
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private Set<Profile> profiles;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -54,6 +56,15 @@ public class ApplicationUser {
     public ApplicationUser() {
         this.authorities = new HashSet<>();
         this.enabled = false;
+        this.profiles=new HashSet<>();
+    }
+
+    public Set<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(Set<Profile> profiles) {
+        this.profiles = profiles;
     }
 
     public Integer getUserId() {
@@ -127,4 +138,6 @@ public class ApplicationUser {
     public void setVerification(Long verification) {
         this.verification = verification;
     }
+
+
 }
