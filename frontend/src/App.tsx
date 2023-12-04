@@ -10,6 +10,8 @@ import { SignIn } from "./pages/SignIn";
 
 import { Home } from "./pages/Home";
 import { ProfilePicker } from "./pages/ProfilePicker";
+import { ProfileCreate } from "./pages/ProfileCreate";
+import { ProfileEditor } from "./features/profile/components/ProfileEditor/ProfileEditor";
 
 const theme: Theme = {
   colors: {
@@ -42,6 +44,7 @@ export const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/profile/select" element={<ProfilePicker />} />
+        <Route path="/profile/editor/*" element={<ProfileEditor />} />
       </Routes>
     </ThemeProvider>
   );

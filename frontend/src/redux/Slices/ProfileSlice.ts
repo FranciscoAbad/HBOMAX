@@ -13,6 +13,7 @@ interface ProfileSliceState {
   selectedProfile: Profile | null;
   loadingProfiles: boolean;
   error: boolean;
+  edit: boolean;
 }
 
 const initialState: ProfileSliceState = {
@@ -20,6 +21,7 @@ const initialState: ProfileSliceState = {
   selectedProfile: null,
   loadingProfiles: false,
   error: false,
+  edit: false,
 };
 
 export const addProfile = createAsyncThunk(
@@ -28,6 +30,7 @@ export const addProfile = createAsyncThunk(
     try {
       const req = await axios.post(
         `http://localhost:8080/user/profile/add/${body.name}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${body.token}`,
@@ -64,6 +67,9 @@ export const ProfileSlice = createSlice({
     selectProfile: (state, action) => {
       state.selectedProfile = action.payload;
     },
+    setEditProfile: (state, action) => {
+      state.edit = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProfiles.pending, (state, action) => {
@@ -91,9 +97,39 @@ export const ProfileSlice = createSlice({
       };
       return state;
     });
+
+    builder.addCase(addProfile.fulfilled, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: false,
+        error: false,
+      };
+
+      return state;
+    });
+
+    builder.addCase(addProfile.pending, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: true,
+        error: false,
+      };
+
+      return state;
+    });
+
+    builder.addCase(addProfile.rejected, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: false,
+        error: true,
+      };
+
+      return state;
+    });
   },
 });
 
-export const { selectProfile } = ProfileSlice.actions;
+export const { selectProfile, setEditProfile } = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

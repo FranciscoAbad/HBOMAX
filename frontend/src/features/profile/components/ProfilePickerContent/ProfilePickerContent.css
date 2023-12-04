@@ -3,7 +3,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 81px);
+}
+
+.profile-picker-title {
+  margin-top: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 36px;
+  letter-spacing: 0px;
+  line-height: 48.6px;
 }
 .profile-picker-profiles {
   display: flex;
@@ -13,12 +22,17 @@
 
 .profile-picker-profiles-card {
   cursor: pointer;
-  margin: 12px;
+  margin: 14px;
   width: 163px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.profile-picker-profiles-card:hover {
+  transform: scale(1.2);
+  transition: all 0.5s;
 }
 .profile-picker-profiles-card-top {
   display: flex;
@@ -54,4 +68,87 @@
   letter-spacing: 0.5px;
   line-height: 60px;
   z-index: 2;
+}
+
+.profile-picker-profiles-card-top-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 999px;
+  height: 130px;
+  position: absolute;
+  width: 130px;
+  z-index: 6;
+}
+
+.profile-picker-profiles-card-top-edit > img {
+  width: 24px;
+}
+
+.profiles-picker-nav {
+  margin-bottom: 24px;
+}
+
+.profiles-picker-nav-group {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.profiles-picker-nav-group-button {
+  margin: 6px;
+  padding: 11px 20px;
+  background-color: rgba(62, 59, 68, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 148px;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.profiles-picker-nav-group-button:hover {
+  background-color: rgba(15, 15, 15, 0.98);
+  border-color: rgba(117, 62, 239);
+  transition: all 0.2s;
+}
+
+.profiles-picker-nav-group-button > span {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 15px;
+  letter-spacing: 0px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.profiles-picker-nav-single {
+  display: flex;
+  justify-content: center;
+}
+
+.profiles-picker-nav-single-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 40px;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.profiles-picker-nav-single-button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.profiles-picker-nav-single-button > span {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 18px;
 }

@@ -16,10 +16,6 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
-  const [profile, setProfile, removeProfile] = useLocalStorageProfile(
-    "profile",
-    null
-  );
 
   useEffect(() => {
     console.log("state -->" + state.token);
@@ -27,12 +23,8 @@ export const Home: React.FC = () => {
       console.log("there is something");
       console.log(state.token);
       dispatch(getUserByToken(state.token));
-      if (stateProfile.selectedProfile === null && profile === null) {
+      if (stateProfile.selectedProfile === null) {
         navigate("/profile/select");
-      } else if (profile === null && stateProfile.selectedProfile !== null) {
-        setProfile(stateProfile.selectedProfile);
-      } else if (profile !== null && stateProfile.selectedProfile === null) {
-        dispatch(selectProfile(profile));
       }
     } else if (jwt === "" && state.token !== "") {
       setJwt(state.token);

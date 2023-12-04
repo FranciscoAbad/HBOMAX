@@ -16,10 +16,7 @@ export const ProfilePicker: React.FC = () => {
   const stateProfile = useSelector((state: RootState) => state.profile);
   const dispatch: AppDispatch = useDispatch();
   const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
-  const [profile, setProfile, removeProfile] = useLocalStorageProfile(
-    "profile",
-    null
-  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
