@@ -28,7 +28,6 @@ public class ProfileService {
         Profile profile=new Profile();
         profile.setName(profileName);
         user.getProfiles().add(profile);
-
         userRepo.save(user);
 
 

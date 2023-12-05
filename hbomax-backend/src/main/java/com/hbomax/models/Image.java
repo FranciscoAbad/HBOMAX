@@ -20,16 +20,19 @@ public class Image {
     private  String imagePath;
     @Column(name="image_url")
     private String imageURL;
+    @Column(name="image_prefix")
+    private String imagePrefix;
 
     public Image(){
         super();
     }
 
-    public Image(String imageName, String imageType, String imagePath, String imageURL) {
+    public Image(String imageName, String imageType, String imagePath, String imageURL,String imagePrefix) {
         this.imageName = imageName;
         this.imageType = imageType;
         this.imagePath = imagePath;
         this.imageURL = imageURL;
+        this.imagePrefix=imagePrefix;
     }
 
     public Image(Long imageId, String imageName, String imageType, String imagePath, String imageURL) {
@@ -78,6 +81,14 @@ public class Image {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getImagePrefix() {
+        return imagePrefix;
+    }
+
+    public void setImagePrefix(String imagePrefix) {
+        this.imagePrefix = imagePrefix;
     }
 
     @Override

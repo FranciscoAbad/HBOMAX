@@ -33,18 +33,16 @@ public class CastController {
         this.titleService = titleService;
     }
 
-    @PostMapping(value="/create",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-    public CastInfo createNewTitle(@RequestPart("json") CreateMovieDTO createMovie, @RequestPart("posterPicture")MultipartFile posterPicture,@RequestPart("bannerPicture") MultipartFile bannerPicture){
-    LocalDate date=LocalDate.now();
-        titleService.registerTitle(createMovie.getTitleName(), "",1,1,120,date,1.2F,120000,120000,bannerPicture,posterPicture);
 
-   return castService.addMovieWithPersonAndRole(createMovie.getTitleName(), createMovie.getFirstNameActor(), createMovie.getLastNameActor(), createMovie.getRoleName(), createMovie.getCharacter());
-
-    }
 
     @PostMapping("/add")
     public CastInfo addPersonToTitle(@RequestBody AddToTitleDTO body){
 return castService.addMovieWithPersonAndRole(body.getTitleName(), body.getFirstName(),body.getLastName(),body.getTitleRole(), body.getCharacer());
+    }
+
+    @PostMapping("add/character/{firstName}/{lastName}/serie/{titleName}/{characterName}")
+    public void addCharacterToSerie(@RequestPart("characterPicture") MultipartFile characterPicture,@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("characterName") String characterName,@PathVariable("titleName") String titleName){
+        castService.addCharacterToSerie(titleName,firstName,lastName,characterName,characterPicture);
     }
 
 

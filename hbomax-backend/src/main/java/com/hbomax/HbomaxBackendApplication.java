@@ -3,6 +3,7 @@ package com.hbomax;
 import com.hbomax.config.RSAKeyProperties;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
+import com.hbomax.services.ImageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,14 +25,13 @@ public class HbomaxBackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo,LenguageRepository lenguageRepo){
+	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo,LenguageRepository lenguageRepo,CompanyRepository companyRepo){
 		return args ->{
 			Role r =roleRepo.save(new Role(1,"USER"));
 
 			Set<Role> roles=new HashSet<>();
 
 			roles.add(r);
-
 
 			ApplicationUser u=new ApplicationUser();
 			u.setAuthorities(roles);
@@ -73,19 +73,17 @@ public class HbomaxBackendApplication {
 			genreRepo.save(horror);
 
 			Genre action=new Genre();
-			horror.setGenre("action");
+			action.setGenre("animation");
 			genreRepo.save(action);
 
-			Genre romance=new Genre();
-			horror.setGenre("romance");
-			genreRepo.save(romance);
+
 
 			Country argentina=new Country();
 			argentina.setCountry("Argentina");
 			countryRepo.save(argentina);
 
 			Country unitedStates=new Country();
-			unitedStates.setCountry("United States");
+			unitedStates.setCountry("united-states");
 			countryRepo.save(unitedStates);
 
 
@@ -96,6 +94,18 @@ public class HbomaxBackendApplication {
 			Lenguage english=new Lenguage();
 			english.setLenguage("english");
 			lenguageRepo.save(english);
+
+			Company hbo=new Company();
+
+			hbo.setCompanyName("hbo");
+			companyRepo.save(hbo);
+
+			Company warnerbros=new Company();
+
+			warnerbros.setCompanyName("warner-bros");
+			companyRepo.save(warnerbros);
+
+
 
 
 

@@ -18,20 +18,10 @@ export const Home: React.FC = () => {
   const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
 
   useEffect(() => {
-    console.log("state -->" + state.token);
-    if (jwt !== "" && state.token !== "") {
-      console.log("there is something");
-      console.log(state.token);
-      dispatch(getUserByToken(state.token));
-      if (stateProfile.selectedProfile === null) {
-        navigate("/profile/select");
-      }
-    } else if (jwt === "" && state.token !== "") {
-      setJwt(state.token);
-    } else if (jwt !== "" && state.token === "") {
-      dispatch(setToken(jwt));
-    } else {
+    if (state.token === "") {
       navigate("/");
+    } else if (stateProfile.selectedProfile === null) {
+      navigate("/profile/select");
     }
   }, [state.token, jwt]);
 

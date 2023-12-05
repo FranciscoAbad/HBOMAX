@@ -28,6 +28,12 @@ public class Title {
     @Column(name = "episode_nr")
     private int episodeNr;
 
+    @Column(name="episode_name")
+    private String episodeName;
+
+    @Column(name="quality")
+    private String quality;
+
     @Column(name = "runtime")
     private int runtime;
 
@@ -42,6 +48,12 @@ public class Title {
 
     @Column(name = "revenue")
     private Integer revenue;
+
+    @Column(name="rating")
+    private String rating;
+
+    @Column(name="type")
+    private String type;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="profile_picture", referencedColumnName="image_id")
@@ -70,6 +82,28 @@ public class Title {
             inverseJoinColumns = {@JoinColumn(name="lenguage_id")})
     Set<Lenguage> lenguages;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="production",
+            joinColumns = {@JoinColumn(name="title_id")},
+            inverseJoinColumns = {@JoinColumn(name="company_id")}
+    )
+    Set<Company> productionCompanies;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="distribution",
+            joinColumns = {@JoinColumn(name="title_id")},
+            inverseJoinColumns = {@JoinColumn(name="company_id")}
+    )
+    Set<Company> distributionCompanies;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="title_brand_junction",
+            joinColumns = {@JoinColumn(name="title_id")},
+            inverseJoinColumns = {@JoinColumn(name="brand_id")}
+    )
+    Set<Brand> brands;
+
+
 
 
     public Title() {
@@ -77,6 +111,9 @@ public class Title {
         this.genres=new HashSet<>();
         this.countries=new HashSet<>();
         this.lenguages=new HashSet<>();
+        this.productionCompanies=new HashSet<>();
+        this.distributionCompanies=new HashSet<>();
+        this.brands=new HashSet<>();
     }
 
     public Image getPosterPicture() {
@@ -198,5 +235,61 @@ public class Title {
 
     public void setLenguages(Set<Lenguage> lenguages) {
         this.lenguages = lenguages;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Set<Company> getProductionCompanies() {
+        return productionCompanies;
+    }
+
+    public void setProductionCompanies(Set<Company> productionCompanies) {
+        this.productionCompanies = productionCompanies;
+    }
+
+    public Set<Company> getDistributionCompanies() {
+        return distributionCompanies;
+    }
+
+    public void setDistributionCompanies(Set<Company> distributionCompanies) {
+        this.distributionCompanies = distributionCompanies;
+    }
+
+    public Set<Brand> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(Set<Brand> brands) {
+        this.brands = brands;
+    }
+
+    public String getEpisodeName() {
+        return episodeName;
+    }
+
+    public void setEpisodeName(String episodeName) {
+        this.episodeName = episodeName;
+    }
+
+    public String getQuality() {
+        return quality;
+    }
+
+    public void setQuality(String quality) {
+        this.quality = quality;
     }
 }

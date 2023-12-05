@@ -1,18 +1,15 @@
 package com.hbomax.services;
 
-import com.hbomax.exceptions.PersonDoesNotExistException;
-import com.hbomax.exceptions.RoleDoesNotExistException;
-import com.hbomax.exceptions.TitleDoesNotExistException;
-import com.hbomax.models.CastInfo;
-import com.hbomax.models.Person;
-import com.hbomax.models.Title;
-import com.hbomax.models.TitleRole;
+import com.hbomax.exceptions.*;
+import com.hbomax.models.*;
 import com.hbomax.repositories.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 
@@ -22,14 +19,23 @@ public class CastService {
     private final TitleRoleRepository roleRepo;
     private final CastInfoRepository castInfoRepo;
 
+    private final CompanyRepository companyRepo;
+
+    private final BrandRepository brandRepo;
+
+    private final ImageService imageService;
+
 
     @Autowired
 
-    public CastService(TitleRepository titleRepo, PersonRepository personRepo, TitleRoleRepository roleRepo, CastInfoRepository castInfoRepo) {
+    public CastService(TitleRepository titleRepo, PersonRepository personRepo, TitleRoleRepository roleRepo, CastInfoRepository castInfoRepo,CompanyRepository companyRepo,BrandRepository brandRepo,ImageService imageService) {
         this.titleRepo = titleRepo;
         this.personRepo = personRepo;
         this.roleRepo = roleRepo;
         this.castInfoRepo = castInfoRepo;
+        this.companyRepo=companyRepo;
+        this.brandRepo=brandRepo;
+        this.imageService=imageService;
     }
 
     public CastInfo addMovieWithPersonAndRole(String titleName, String firstName, String lastName, String roleName, String character) {
@@ -49,11 +55,59 @@ public class CastService {
 
     }
 
+    public CastInfo addMovieWithPersonRoleAndProducer(String titleName,Integer season,Integer episode, String character, String producerCompany,String distributorCompany,String brandName) {
+        Title title = titleRepo.findByTitleSeasonAndEpisode(titleName,season,episode).orElseThrow(TitleDoesNotExistException::new);
+        Company prodCompany=companyRepo.findByCompanyName(producerCompany).orElseThrow(CompanyDoesNotExistException::new);
+        Company distCompany=companyRepo.findByCompanyName(distributorCompany).orElseThrow(CompanyDoesNotExistException::new);
+        Brand brand=brandRepo.findByBrandName(brandName).orElseThrow(BrandDoesNotExistException::new);
+
+        title.getProductionCompanies().add(prodCompany);
+        title.getDistributionCompanies().add(distCompany);
+        title.getBrands().add(brand);
+
+        CastInfo castInfo = new CastInfo();
+        castInfo.setTitle(title);
+        castInfo.setCharacter(character);
+
+
+
+        return castInfoRepo.save(castInfo);
+
+    }
+
+
+
     public void addPersonToTitle(String firstName, String lastName, String titleName){
         Title title=titleRepo.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
         Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
     }
 
+
+    public void addCharacterToSerie(String titleName,String firstName, String lastName,String characterName,MultipartFile file){
+        try{
+       List<Title> title=titleRepo.findAllByTitle(titleName);
+       Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+       TitleRole role=roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
+
+       Image characterPicture=imageService.uploadImage(file,"character");
+
+
+
+       for(int i=0; i<title.size();i++){
+
+          CastInfo cast=new CastInfo();
+          cast.setCharacter(characterName);
+          cast.setTitle(title.get(i));
+          cast.setPerson(person);
+          cast.setCharacterPicture(characterPicture);
+          cast.setRole(role);
+          castInfoRepo.save(cast);
+
+       }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 

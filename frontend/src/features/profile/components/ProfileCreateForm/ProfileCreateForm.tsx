@@ -12,6 +12,7 @@ import { AppDispatch, RootState } from "../../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProfile,
+  editProfile,
   selectProfile,
 } from "../../../../redux/Slices/ProfileSlice";
 import { useNavigate } from "react-router-dom";
@@ -42,9 +43,13 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
   const handleClick = () => {
     dispatch(addProfile({ name: name, token: state.token }));
   };
+
+  const handleClickEdit = () => {
+    dispatch(editProfile({ name: name, token: state.token }));
+  };
   const conditionalStyles = {
-    opacity: !valid ? 0.6 : 1,
-    cursor: valid ? "pointer" : "auto",
+    opacity: valid && name != "" ? 1 : 0.6,
+    cursor: valid && name != "" ? "pointer" : "auto",
   };
 
   const stateProfile = useSelector((state: RootState) => state.profile);
@@ -112,6 +117,21 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
               <span>Cancel</span>
             </button>
           </div>
+          {edit ? (
+            <div
+              style={{ margin: 0 }}
+              className="profile-create-column-wrapper-bottom"
+            >
+              <button
+                className="profile-create-column-wrapper-bottom-button"
+                onClick={handleClick}
+              >
+                <span>Delete</span>
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

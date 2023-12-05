@@ -17,12 +17,13 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 export const SignUp: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const state = useSelector((state: RootState) => state.register);
+  const stateUser = useSelector((state: RootState) => state.user);
 
   const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (jwt !== "") navigate("/home");
+    if (stateUser.token) navigate("/home");
   }, []);
 
   return (

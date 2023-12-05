@@ -44,6 +44,26 @@ export const addProfile = createAsyncThunk(
   }
 );
 
+export const editProfile = createAsyncThunk(
+  "profile/edit",
+  async (body: AddProfile, thunkApi) => {
+    try {
+      const req = await axios.put(
+        `http://localhost:8080/user/profile/edit/${body.name}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${body.token}`,
+          },
+        }
+      );
+      return await req.data;
+    } catch (e) {
+      return thunkApi.rejectWithValue(e);
+    }
+  }
+);
+
 export const getProfiles = createAsyncThunk(
   "profile/get",
   async (token: string, thunkApi) => {
@@ -119,6 +139,36 @@ export const ProfileSlice = createSlice({
     });
 
     builder.addCase(addProfile.rejected, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: false,
+        error: true,
+      };
+
+      return state;
+    });
+
+    builder.addCase(editProfile.fulfilled, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: false,
+        error: false,
+      };
+
+      return state;
+    });
+
+    builder.addCase(editProfile.pending, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: true,
+        error: false,
+      };
+
+      return state;
+    });
+
+    builder.addCase(editProfile.rejected, (state, action) => {
       state = {
         ...state,
         loadingProfiles: false,

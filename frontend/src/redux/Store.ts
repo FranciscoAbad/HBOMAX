@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["profile,user"], // Array of reducers to persist
+  whitelist: ["profile", "user"], // Array of reducers to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

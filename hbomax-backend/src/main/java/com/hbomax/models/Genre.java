@@ -14,6 +14,10 @@ public class Genre {
     @Column(name="genre")
     private String genre;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="genre_picture", referencedColumnName="image_id")
+    private Image genrePicture;
+
     public Genre() {
     }
 
@@ -31,5 +35,13 @@ public class Genre {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Image getGenrePicture() {
+        return genrePicture;
+    }
+
+    public void setGenrePicture(Image genrePicture) {
+        this.genrePicture = genrePicture;
     }
 }

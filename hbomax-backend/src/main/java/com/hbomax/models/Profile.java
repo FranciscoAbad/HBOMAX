@@ -26,6 +26,11 @@ public class Profile {
     )
     private Set<Title> titles;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="profile_picture", referencedColumnName="image_id")
+    private Image profilePicture;
+
+
     public Profile() {
         this.titles=new HashSet<>();
     }
@@ -54,6 +59,11 @@ public class Profile {
         this.titles = titles;
     }
 
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
 
-
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 }

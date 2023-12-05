@@ -20,7 +20,7 @@ export const ProfilePicker: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (jwt !== "" && state.token !== "") {
+    if (state.token !== "") {
       dispatch(getProfiles(state.token));
     } else {
       navigate("/");

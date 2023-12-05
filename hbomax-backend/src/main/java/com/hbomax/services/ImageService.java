@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Set;
 
 
 @Service
@@ -40,7 +41,7 @@ public class ImageService {
 
             String imageURL=URL+img.getName();
 
-            Image i=new Image(img.getName(),file.getContentType(),img.getPath(),imageURL);
+            Image i=new Image(img.getName(),file.getContentType(),img.getPath(),imageURL,prefix);
 
             Image saved=imageRepository.save(i);
 
@@ -70,6 +71,10 @@ public class ImageService {
         Image image=imageRepository.findImageByImageName(fileName).get();
 
         return image.getImageType();
+    }
+
+    public Set<Image> getAllImagesByPrefix(String prefix){
+       return imageRepository.getAllImagesByPrefix(prefix);
     }
 
 

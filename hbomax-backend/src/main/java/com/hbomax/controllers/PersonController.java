@@ -1,6 +1,7 @@
 package com.hbomax.controllers;
 
 
+import com.hbomax.dto.CreatePersonDTO;
 import com.hbomax.models.Person;
 import com.hbomax.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class PersonController {
 @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
+    }
+
+    @PostMapping("/add")
+    public Person createPerson(@RequestBody CreatePersonDTO body){
+    return personService.registerPerson(body.getFirstName(), body.getLastName(), body.getBirthplace(), body.getBio(), body.getGender(), body.getDob());
     }
 
     @GetMapping("/all/{titleName}")

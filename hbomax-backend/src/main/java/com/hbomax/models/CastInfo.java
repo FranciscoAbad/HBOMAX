@@ -25,6 +25,11 @@ public class CastInfo {
     @Column(name="character")
     private String character;
 
+    @ManyToOne
+    @JoinColumn(name = "character_picture", referencedColumnName = "image_id")
+    private Image characterPicture;
+
+
     public CastInfo() {
     }
 
@@ -66,5 +71,13 @@ public class CastInfo {
 
     public void setCharacter(String character) {
         this.character = character;
+    }
+
+    public Image getCharacterPicture() {
+        return characterPicture;
+    }
+
+    public void setCharacterPicture(Image characterPicture) {
+        this.characterPicture = characterPicture;
     }
 }

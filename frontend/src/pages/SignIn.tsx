@@ -17,11 +17,14 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const SignIn: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.register);
+  const state = useSelector((state: RootState) => state);
 
   const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
   const navigate = useNavigate();
 
+  if (state.user.token) {
+    navigate("/home");
+  }
   return (
     <div className="sign-in">
       <SignNav />
