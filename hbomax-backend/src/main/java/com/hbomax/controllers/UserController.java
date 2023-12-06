@@ -47,6 +47,13 @@ public class UserController {
     public Set<Profile> getProfilesByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
         String username=tokenService.getUsernameFromToken(token);
         return profileService.getAllProfilesByUsername(username);
+
+
+    }
+
+    @PutMapping("/profile/{profileId}/image/{imageId}")
+    public Profile setProfilePicture(@PathVariable("profileId") Integer profileId,@PathVariable("imageId") Long imageId){
+        return profileService.setProfilePicture(profileId,imageId);
     }
 
 

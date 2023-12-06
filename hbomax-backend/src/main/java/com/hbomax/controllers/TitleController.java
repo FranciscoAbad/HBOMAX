@@ -2,10 +2,12 @@ package com.hbomax.controllers;
 
 
 import com.hbomax.dto.CreateMovieDTO;
+import com.hbomax.exceptions.*;
 import com.hbomax.models.Country;
 import com.hbomax.models.Title;
 import com.hbomax.services.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,37 @@ public class TitleController {
     public TitleController(TitleService titleService) {
         this.titleService = titleService;
     }
+
+    @ExceptionHandler({TitleDoesNotExistException.class})
+    public  ResponseEntity<String> handleTitleDoesNotExist(){
+        return new ResponseEntity<String>("The title you're looking for does not exist", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({GenreDoesNotExistException.class})
+    public  ResponseEntity<String> handleGenreDoesNotExist(){
+        return new ResponseEntity<String>("The genre you're looking for does not exist", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({BrandDoesNotExistException.class})
+    public  ResponseEntity<String> handleBrandDoesNotExist(){
+        return new ResponseEntity<String>("The brand you're looking for does not exist", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({CompanyDoesNotExistException.class})
+    public  ResponseEntity<String> handleCompanyDoesNotExist(){
+        return new ResponseEntity<String>("The company you're looking for does not exist", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({CountryDoesNotExistException.class})
+    public  ResponseEntity<String> handleCountryDoesNotExist(){
+        return new ResponseEntity<String>("The country you're looking for does not exist", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({LenguageDoesNotExistException.class})
+    public  ResponseEntity<String> handleLenguageDoesNotExist(){
+        return new ResponseEntity<String>("The lenguage you're looking for does not exist", HttpStatus.NOT_FOUND);
+    }
+
 
     @PostMapping(value="/create",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public Title createNewTitle(@RequestPart("json") CreateMovieDTO createMovie, @RequestPart("posterPicture") MultipartFile posterPicture, @RequestPart("bannerPicture") MultipartFile bannerPicture){

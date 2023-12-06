@@ -38,49 +38,12 @@ public class CastService {
         this.imageService=imageService;
     }
 
-    public CastInfo addMovieWithPersonAndRole(String titleName, String firstName, String lastName, String roleName, String character) {
-        Title title = titleRepo.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
-        Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
-        TitleRole role = roleRepo.findByRole(roleName).orElseThrow(RoleDoesNotExistException::new);
-
-        CastInfo castInfo = new CastInfo();
-        castInfo.setTitle(title);
-        castInfo.setPerson(person);
-        castInfo.setRole(role);
-        castInfo.setCharacter(character);
 
 
 
-        return castInfoRepo.save(castInfo);
-
-    }
-
-    public CastInfo addMovieWithPersonRoleAndProducer(String titleName,Integer season,Integer episode, String character, String producerCompany,String distributorCompany,String brandName) {
-        Title title = titleRepo.findByTitleSeasonAndEpisode(titleName,season,episode).orElseThrow(TitleDoesNotExistException::new);
-        Company prodCompany=companyRepo.findByCompanyName(producerCompany).orElseThrow(CompanyDoesNotExistException::new);
-        Company distCompany=companyRepo.findByCompanyName(distributorCompany).orElseThrow(CompanyDoesNotExistException::new);
-        Brand brand=brandRepo.findByBrandName(brandName).orElseThrow(BrandDoesNotExistException::new);
-
-        title.getProductionCompanies().add(prodCompany);
-        title.getDistributionCompanies().add(distCompany);
-        title.getBrands().add(brand);
-
-        CastInfo castInfo = new CastInfo();
-        castInfo.setTitle(title);
-        castInfo.setCharacter(character);
 
 
 
-        return castInfoRepo.save(castInfo);
-
-    }
-
-
-
-    public void addPersonToTitle(String firstName, String lastName, String titleName){
-        Title title=titleRepo.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
-        Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
-    }
 
 
     public void addCharacterToSerie(String titleName,String firstName, String lastName,String characterName,MultipartFile file){
@@ -107,6 +70,10 @@ public class CastService {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Set<Image> getAllCharacterPicturesByBrand(String brandName){
+        return castInfoRepo.findCharacterPicturesByBrandName(brandName);
     }
 
 

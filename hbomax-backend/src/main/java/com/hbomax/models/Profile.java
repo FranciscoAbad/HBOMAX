@@ -1,5 +1,6 @@
 package com.hbomax.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -18,6 +19,7 @@ public class Profile {
     private String name;
 
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "profile_title",
@@ -26,9 +28,10 @@ public class Profile {
     )
     private Set<Title> titles;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="profile_picture", referencedColumnName="image_id")
     private Image profilePicture;
+
 
 
     public Profile() {

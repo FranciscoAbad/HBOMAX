@@ -39,15 +39,6 @@ public class TitleService {
         this.brandRepository=brandRepository;
     }
 
-
-
-
-
-
-
-
-
-
     public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster){
 
         try {
@@ -101,7 +92,6 @@ public class TitleService {
         }catch (Exception e){
             throw new UnableToCreateTitleException();
         }
-
     }
 
     public Title addMovieWithProducerDistributorBrandLenguageCountry(String titleName,Integer season,Integer episode, String producerCompany,String distributorCompany,String brandName,String lenguageName,String countryName,String genreName){

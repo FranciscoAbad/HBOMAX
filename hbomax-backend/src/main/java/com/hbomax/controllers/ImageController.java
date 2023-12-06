@@ -1,6 +1,7 @@
 package com.hbomax.controllers;
 
 import com.hbomax.exceptions.UnableToResolvePhotoException;
+import com.hbomax.exceptions.UnabledToSavePhotoException;
 import com.hbomax.models.Image;
 import com.hbomax.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,13 @@ public class ImageController {
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
+
+
+    @ExceptionHandler({UnabledToSavePhotoException.class,UnableToResolvePhotoException.class})
+    ResponseEntity<String> handlePhotoExceptions(){
+        return new ResponseEntity<String>("Unable to process the photo",HttpStatus.NOT_ACCEPTABLE);
+    }
+
 
     @GetMapping("/all/{prefix}")
     public Set<Image> getAllImagesFromType(@PathVariable String prefix){
