@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { getProfiles } from "../redux/Slices/ProfileSlice";
 import "./ProfilePicker.css";
 import { ProfilePickerContent } from "../features/profile/components/ProfilePickerContent/ProfilePickerContent";
-import { ProfileHeader } from "../features/profile/components/ProfileHeader/ProfileHeader";
+import { ProfileHeader } from "../features/profile/components/ProfileHeaders/ProfileHeader";
 
 export const ProfilePicker: React.FC = () => {
   const state = useSelector((state: RootState) => state.user);

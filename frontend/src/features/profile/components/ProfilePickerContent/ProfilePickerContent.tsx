@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfilePickerContent.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/Store";
 import { Profile } from "../../../../utils/GlobalInterfaces";
 import {
   selectProfile,
+  selectProfileEdit,
   setEditProfile,
 } from "../../../../redux/Slices/ProfileSlice";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +17,17 @@ export const ProfilePickerContent: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(selectProfile(null));
+  }, []);
+
   const handleProfileSelection = (selectedProfile: Profile) => {
     dispatch(selectProfile(selectedProfile));
     navigate("/home");
   };
 
   const handleEditProfileSelection = (selectedProfile: Profile) => {
-    dispatch(selectProfile(selectedProfile));
+    dispatch(selectProfileEdit(selectedProfile));
     navigate("/profile/editor/edit");
   };
 
@@ -52,9 +57,19 @@ export const ProfilePickerContent: React.FC = () => {
           >
             <div className="profile-picker-profiles-card-top">
               <div className="profile-picker-profiles-card-top-box"></div>
-              <div className="profile picker-profiles-card-top-letter">
-                {item.name.substring(0, 1).toLocaleUpperCase()}
-              </div>
+              {item.profilePicture ? (
+                <div className="profile-picker-profiles-card-top-box-hide">
+                  <img
+                    className="profile-picker-profiles-card-top-box-img"
+                    src={item.profilePicture.imageURL}
+                  />
+                </div>
+              ) : (
+                <div className="profile picker-profiles-card-top-letter">
+                  {item.name.substring(0, 1).toLocaleUpperCase()}
+                </div>
+              )}
+
               {edit ? (
                 <div className="profile-picker-profiles-card-top-edit">
                   <img

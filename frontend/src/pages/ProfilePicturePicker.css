@@ -1,0 +1,9 @@
+.profile-picture-picker {
+  width: 100%;
+  background: url("https:play.hbomax.com/default-3840x2160.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border: 1px solid transparent;
+}

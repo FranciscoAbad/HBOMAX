@@ -29,11 +29,23 @@ interface ProfileCreateFormProps {
 export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
   edit,
 }) => {
-  const [name, setName] = useState<string>("");
+  const state = useSelector((state: RootState) => state.user);
+  const stateProfile = useSelector((state: RootState) => state.profile);
+  const [name, setName] = useState<string>(
+    stateProfile.editingProfile ? stateProfile.editingProfile.name : ""
+  );
   const [valid, setValid] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.user);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (edit) {
+      setName(
+        stateProfile.editingProfile ? stateProfile.editingProfile.name : ""
+      );
+    }
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -52,8 +64,6 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
     cursor: valid && name != "" ? "pointer" : "auto",
   };
 
-  const stateProfile = useSelector((state: RootState) => state.profile);
-
   return (
     <div className="profile-create-form-container">
       <h1 className="profile-create-form-title">
@@ -62,11 +72,20 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
       <div className="profile-create-form-column">
         <div className="profile-create-form-column-wrapper">
           <div className="profile-create-form-column-wrapper-top">
-            <div className="profile-create-form-column-wrapper-top-box">
+            <div
+              className="profile-create-form-column-wrapper-top-box"
+              onClick={() => {
+                navigate("/profile/adult/character/select");
+              }}
+            >
               <div className="profile-create-form-column-wrapper-top-box-border"></div>
               <div className="profile-create-form-column-wrapper-top-box-hide">
                 <img
-                  src="https://play.hbomax.com/a54ac6c243485b4e69b6b1a45e35fb94.png"
+                  src={
+                    stateProfile.editingProfile?.profilePicture
+                      ? stateProfile.editingProfile?.profilePicture.imageURL
+                      : "https://play.hbomax.com/a54ac6c243485b4e69b6b1a45e35fb94.png"
+                  }
                   className="profile-create-form-column-wrapper-top-box-image"
                 />
               </div>
@@ -89,6 +108,7 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
               label={"Name"}
               name={"name"}
               changeValue={handleChange}
+              data={name}
             />
             {!valid ? (
               <span className="error">

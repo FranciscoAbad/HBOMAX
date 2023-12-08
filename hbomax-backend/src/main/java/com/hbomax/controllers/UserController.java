@@ -37,23 +37,21 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
-    @PostMapping("/profile/add/{profileName}")
-    public Profile addProfileToUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable String profileName){
+    @PostMapping("/profile/add/{profileName}/{imageId}")
+    public Profile addProfileToUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable("profileName") String profileName,@PathVariable("imageId") Long imageId){
         String username=tokenService.getUsernameFromToken(token);
-        return profileService.createProfile(username,profileName);
+        return profileService.createProfile(username,profileName,imageId);
     }
 
     @GetMapping("/profile")
     public Set<Profile> getProfilesByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
         String username=tokenService.getUsernameFromToken(token);
         return profileService.getAllProfilesByUsername(username);
-
-
     }
 
-    @PutMapping("/profile/{profileId}/image/{imageId}")
-    public Profile setProfilePicture(@PathVariable("profileId") Integer profileId,@PathVariable("imageId") Long imageId){
-        return profileService.setProfilePicture(profileId,imageId);
+    @PutMapping("/profile/{profileId}/image/{imageId}/name/{profileName}")
+    public Profile setProfilePicture(@PathVariable("profileId") Integer profileId,@PathVariable("imageId") Long imageId,@PathVariable("profileName") String profileName){
+        return profileService.setProfilePictureAndName(profileId,imageId,profileName);
     }
 
 

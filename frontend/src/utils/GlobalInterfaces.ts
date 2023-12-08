@@ -44,7 +44,7 @@ export interface SVGProps {
 export interface Profile {
   profileId: number;
   name: string;
-  titles: any[];
+  profilePicture: Image;
 }
 
 export interface User {
@@ -54,4 +54,12 @@ export interface User {
   username: string;
   email: string;
   selectedProfile: Profile | null;
+}
+
+export interface Image {
+  imageId: number;
+  imageName: string;
+  imageType: string;
+  imageURL: string;
+  imagePrefix: string;
 }

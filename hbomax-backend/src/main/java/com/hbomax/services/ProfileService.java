@@ -33,10 +33,14 @@ public class ProfileService {
 
 
 
-    public Profile createProfile(String userName,String profileName){
+    public Profile createProfile(String userName,String profileName,Long imageId){
         ApplicationUser user=userRepo.findByUsername(userName).orElseThrow(UserDoesNotExistException::new);
         Profile profile=new Profile();
         profile.setName(profileName);
+        if(imageId!=-1){
+            Image image=imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
+            profile.setProfilePicture(image);
+        }
         user.getProfiles().add(profile);
         userRepo.save(user);
 
@@ -50,10 +54,11 @@ public class ProfileService {
        return user.getProfiles();
     }
 
-    public Profile setProfilePicture(Integer profileId,Long imageId){
+    public Profile setProfilePictureAndName(Integer profileId,Long imageId,String profileName){
         Profile profile=profileRepo.findByProfileId(profileId).orElseThrow(ProfileDoesNotExistException::new);
         Image image=imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
         profile.setProfilePicture(image);
+        profile.setName(profileName);
 
        return profileRepo.save(profile);
     }

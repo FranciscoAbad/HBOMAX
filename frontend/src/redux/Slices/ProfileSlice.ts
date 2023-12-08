@@ -12,13 +12,20 @@ interface ProfileSliceState {
   profiles: Profile[];
   selectedProfile: Profile | null;
   loadingProfiles: boolean;
+  editingProfile: Profile | null;
   error: boolean;
   edit: boolean;
+}
+
+interface UpdateProfilePicture {
+  profileId: number;
+  imageId: number;
 }
 
 const initialState: ProfileSliceState = {
   profiles: [],
   selectedProfile: null,
+  editingProfile: null,
   loadingProfiles: false,
   error: false,
   edit: false,
@@ -80,12 +87,33 @@ export const getProfiles = createAsyncThunk(
   }
 );
 
+export const setProfilePicture = createAsyncThunk(
+  "profile/set/picture",
+  async (body: UpdateProfilePicture, thunkApi) => {
+    try {
+      const req = await axios.put(
+        `http://localhost:8080/user/profile/${body.profileId}/image/${body.imageId}`
+      );
+      return await req.data;
+    } catch (e) {
+      return thunkApi.rejectWithValue(e);
+    }
+  }
+);
+
 export const ProfileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
     selectProfile: (state, action) => {
       state.selectedProfile = action.payload;
+    },
+    selectProfileEdit: (state, action) => {
+      state.editingProfile = action.payload;
+    },
+    setEditImage: (state, action) => {
+      if (state.editingProfile)
+        state.editingProfile.profilePicture = action.payload;
     },
     setEditProfile: (state, action) => {
       state.edit = action.payload;
@@ -177,9 +205,45 @@ export const ProfileSlice = createSlice({
 
       return state;
     });
+
+    builder.addCase(setProfilePicture.fulfilled, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: false,
+        error: false,
+        selectedProfile: action.payload,
+      };
+
+      return state;
+    });
+
+    builder.addCase(setProfilePicture.pending, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: true,
+        error: false,
+      };
+
+      return state;
+    });
+
+    builder.addCase(setProfilePicture.rejected, (state, action) => {
+      state = {
+        ...state,
+        loadingProfiles: false,
+        error: true,
+      };
+
+      return state;
+    });
   },
 });
 
-export const { selectProfile, setEditProfile } = ProfileSlice.actions;
+export const {
+  selectProfile,
+  setEditProfile,
+  selectProfileEdit,
+  setEditImage,
+} = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;
