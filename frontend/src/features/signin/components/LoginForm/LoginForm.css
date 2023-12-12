@@ -13,8 +13,9 @@
 }
 
 .login-form-inputs-row {
+  position: relative;
+  margin-bottom: 15px;
 }
-
 .register-form-bottom {
   padding: 40px 0px 0px;
 }

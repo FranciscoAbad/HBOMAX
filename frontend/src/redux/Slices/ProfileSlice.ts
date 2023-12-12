@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../utils/GlobalInterfaces";
+import { Image, User } from "../../utils/GlobalInterfaces";
 import axios from "axios";
 import { Profile } from "../../utils/GlobalInterfaces";
 
 interface AddProfile {
   name: string;
+  imageId: number;
   token: string;
 }
 
@@ -17,9 +18,10 @@ interface ProfileSliceState {
   edit: boolean;
 }
 
-interface UpdateProfilePicture {
+interface UpdateProfile {
   profileId: number;
   imageId: number;
+  profileName: string;
 }
 
 const initialState: ProfileSliceState = {
@@ -36,7 +38,7 @@ export const addProfile = createAsyncThunk(
   async (body: AddProfile, thunkApi) => {
     try {
       const req = await axios.post(
-        `http://localhost:8080/user/profile/add/${body.name}`,
+        `http://localhost:8080/user/profile/add/${body.name}/${body.imageId}`,
         {},
         {
           headers: {
@@ -87,12 +89,12 @@ export const getProfiles = createAsyncThunk(
   }
 );
 
-export const setProfilePicture = createAsyncThunk(
-  "profile/set/picture",
-  async (body: UpdateProfilePicture, thunkApi) => {
+export const updateProfile = createAsyncThunk(
+  "profile/update",
+  async (body: UpdateProfile, thunkApi) => {
     try {
       const req = await axios.put(
-        `http://localhost:8080/user/profile/${body.profileId}/image/${body.imageId}`
+        `http://localhost:8080/user/profile/${body.profileId}/image/${body.imageId}/name/${body.profileName}`
       );
       return await req.data;
     } catch (e) {
@@ -118,6 +120,9 @@ export const ProfileSlice = createSlice({
     setEditProfile: (state, action) => {
       state.edit = action.payload;
     },
+    updateTempProfile(state, action: PayloadAction<string>) {
+      if (state.editingProfile) state.editingProfile.name = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProfiles.pending, (state, action) => {
@@ -128,7 +133,6 @@ export const ProfileSlice = createSlice({
       return state;
     });
     builder.addCase(getProfiles.fulfilled, (state, action) => {
-      console.log("this is the payload", action.payload);
       state = {
         ...state,
         profiles: action.payload,
@@ -151,6 +155,7 @@ export const ProfileSlice = createSlice({
         ...state,
         loadingProfiles: false,
         error: false,
+        editingProfile: null,
       };
 
       return state;
@@ -161,6 +166,7 @@ export const ProfileSlice = createSlice({
         ...state,
         loadingProfiles: true,
         error: false,
+        editingProfile: null,
       };
 
       return state;
@@ -171,6 +177,7 @@ export const ProfileSlice = createSlice({
         ...state,
         loadingProfiles: false,
         error: true,
+        editingProfile: null,
       };
 
       return state;
@@ -206,32 +213,34 @@ export const ProfileSlice = createSlice({
       return state;
     });
 
-    builder.addCase(setProfilePicture.fulfilled, (state, action) => {
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
       state = {
         ...state,
         loadingProfiles: false,
         error: false,
-        selectedProfile: action.payload,
+        editingProfile: null,
       };
 
       return state;
     });
 
-    builder.addCase(setProfilePicture.pending, (state, action) => {
+    builder.addCase(updateProfile.pending, (state, action) => {
       state = {
         ...state,
         loadingProfiles: true,
         error: false,
+        editingProfile: null,
       };
 
       return state;
     });
 
-    builder.addCase(setProfilePicture.rejected, (state, action) => {
+    builder.addCase(updateProfile.rejected, (state, action) => {
       state = {
         ...state,
         loadingProfiles: false,
         error: true,
+        editingProfile: null,
       };
 
       return state;
@@ -244,6 +253,7 @@ export const {
   setEditProfile,
   selectProfileEdit,
   setEditImage,
+  updateTempProfile,
 } = ProfileSlice.actions;
 
 export default ProfileSlice.reducer;

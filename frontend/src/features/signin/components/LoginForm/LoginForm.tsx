@@ -8,9 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../redux/Slices/UserSlice";
 import { ValidatedTextInput } from "../../../../components/ValidateInput/ValidatedTextInput";
 import { useNavigate } from "react-router-dom";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+
 export const LoginForm: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [passwordView, togglePasswordView] = useState<boolean>(false);
   const state = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +25,9 @@ export const LoginForm: React.FC = () => {
       password: password,
     };
     dispatch(loginUser(loginInfo));
+  };
+  const toggleView = () => {
+    togglePasswordView(!passwordView);
   };
 
   useEffect(() => {
@@ -58,7 +65,26 @@ export const LoginForm: React.FC = () => {
             name="password"
             label="Password"
             changeValue={handleChange}
+            attributes={{
+              minLength: 8,
+              type: passwordView ? "text" : "password",
+            }}
           />
+          <div onClick={toggleView} className="register-password-input-icon">
+            {passwordView ? (
+              <VisibilityOffOutlinedIcon
+                sx={{
+                  fontSize: "24px",
+                }}
+              />
+            ) : (
+              <VisibilityOutlinedIcon
+                sx={{
+                  fontSize: "24px",
+                }}
+              />
+            )}
+          </div>
         </div>
         <div className="login-form-bottom">
           <div className="login-form-bottom-wrapper">
@@ -66,7 +92,7 @@ export const LoginForm: React.FC = () => {
               onClick={handleClick}
               className="login-form-bottom-wrapper-submit"
             >
-              CREAR CUENTA
+              INICIAR SESIÓN
             </button>
             <button className="login-form-bottom-wrapper-provider">
               INICIAR SESIÓN CON UN PROVEEDOR

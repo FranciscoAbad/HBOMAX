@@ -56,8 +56,10 @@ public class ProfileService {
 
     public Profile setProfilePictureAndName(Integer profileId,Long imageId,String profileName){
         Profile profile=profileRepo.findByProfileId(profileId).orElseThrow(ProfileDoesNotExistException::new);
-        Image image=imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
-        profile.setProfilePicture(image);
+        if(imageId!=-1){
+            Image image=imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
+            profile.setProfilePicture(image);
+        }
         profile.setName(profileName);
 
        return profileRepo.save(profile);

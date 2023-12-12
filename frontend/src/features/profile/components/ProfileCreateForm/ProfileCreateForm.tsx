@@ -14,6 +14,9 @@ import {
   addProfile,
   editProfile,
   selectProfile,
+  selectProfileEdit,
+  updateProfile,
+  updateTempProfile,
 } from "../../../../redux/Slices/ProfileSlice";
 import { useNavigate } from "react-router-dom";
 import {
@@ -21,6 +24,7 @@ import {
   useLocalStorageProfile,
 } from "../../../../hooks/useLocalStorage";
 import { getUserByToken, setToken } from "../../../../redux/Slices/UserSlice";
+import { profile } from "console";
 
 interface ProfileCreateFormProps {
   edit: boolean;
@@ -41,6 +45,21 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
 
   useEffect(() => {
     if (edit) {
+      if (stateProfile.editingProfile?.profileId !== -1) {
+        setName(
+          stateProfile.editingProfile ? stateProfile.editingProfile.name : ""
+        );
+      } else {
+        navigate("/profile/select");
+      }
+    } else {
+      dispatch(
+        selectProfileEdit({
+          profileId: -1,
+          name: name,
+          profilePicture: stateProfile.editingProfile?.profilePicture,
+        })
+      );
       setName(
         stateProfile.editingProfile ? stateProfile.editingProfile.name : ""
       );
@@ -49,15 +68,43 @@ export const ProfileCreateForm: React.FC<ProfileCreateFormProps> = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    dispatch(updateTempProfile(e.target.value));
+    console.log(stateProfile.editingProfile);
     setValid(validateName(e.target.value));
   };
 
   const handleClick = () => {
-    dispatch(addProfile({ name: name, token: state.token }));
+    if (edit) {
+      if (stateProfile.editingProfile) {
+        dispatch(
+          updateProfile({
+            profileId: stateProfile.editingProfile?.profileId,
+            profileName: name,
+            imageId: stateProfile.editingProfile.profilePicture
+              ? stateProfile.editingProfile.profilePicture.imageId
+              : -1,
+          })
+        );
+        navigate("/profile/select");
+      }
+    } else {
+      if (stateProfile.editingProfile) {
+        dispatch(
+          addProfile({
+            name: name,
+            token: state.token,
+            imageId: stateProfile.editingProfile.profilePicture
+              ? stateProfile.editingProfile.profilePicture.imageId
+              : -1,
+          })
+        );
+        navigate("/profile/select");
+      }
+    }
   };
 
   const handleClickEdit = () => {
-    dispatch(editProfile({ name: name, token: state.token }));
+    dispatch(editProfile({ name: name, token: state.token, imageId: 0 }));
   };
   const conditionalStyles = {
     opacity: valid && name != "" ? 1 : 0.6,

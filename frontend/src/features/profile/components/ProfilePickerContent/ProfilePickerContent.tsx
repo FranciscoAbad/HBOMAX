@@ -19,16 +19,26 @@ export const ProfilePickerContent: React.FC = () => {
 
   useEffect(() => {
     dispatch(selectProfile(null));
+    dispatch(
+      selectProfileEdit({ profileId: -1, name: "", profilePicture: null })
+    );
+    if (state.profiles.length === 0) {
+      navigate("/profile/editor/create");
+    }
   }, []);
 
   const handleProfileSelection = (selectedProfile: Profile) => {
-    dispatch(selectProfile(selectedProfile));
-    navigate("/home");
+    if (edit) {
+      dispatch(selectProfileEdit(selectedProfile));
+      navigate("/profile/editor/edit");
+    } else {
+      dispatch(selectProfile(selectedProfile));
+      navigate("/home");
+    }
   };
 
-  const handleEditProfileSelection = (selectedProfile: Profile) => {
-    dispatch(selectProfileEdit(selectedProfile));
-    navigate("/profile/editor/edit");
+  const handleAddProfile = () => {
+    navigate("/profile/editor/create");
   };
 
   const setEditState = () => {
@@ -45,15 +55,9 @@ export const ProfilePickerContent: React.FC = () => {
           <div
             key={item.profileId}
             className="profile-picker-profiles-card"
-            onClick={
-              edit
-                ? () => {
-                    handleEditProfileSelection(item);
-                  }
-                : () => {
-                    handleProfileSelection(item);
-                  }
-            }
+            onClick={() => {
+              handleProfileSelection(item);
+            }}
           >
             <div className="profile-picker-profiles-card-top">
               <div className="profile-picker-profiles-card-top-box"></div>
@@ -90,7 +94,10 @@ export const ProfilePickerContent: React.FC = () => {
           className="profiles-picker-nav-group"
           style={{ visibility: edit ? "hidden" : "visible" }}
         >
-          <div className="profiles-picker-nav-group-button">
+          <div
+            onClick={handleAddProfile}
+            className="profiles-picker-nav-group-button"
+          >
             <span>Add adult</span>
           </div>
           <div className="profiles-picker-nav-group-button">
@@ -102,7 +109,7 @@ export const ProfilePickerContent: React.FC = () => {
             onClick={setEditState}
             className="profiles-picker-nav-single-button"
           >
-            <span> {edit ? "Manage profiles" : "Done"}</span>
+            <span> {edit ? "Done" : "Manage Profiles"}</span>
           </div>
         </div>
       </div>

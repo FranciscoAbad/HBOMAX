@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectProfile,
   setEditImage,
-  setProfilePicture,
 } from "../../../../redux/Slices/ProfileSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +18,11 @@ export const ProfilePicturePickerContent: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = (image: Image) => {
     dispatch(setEditImage(image));
-    navigate("/profile/editor/edit");
+    if (state.profile.editingProfile?.profileId != -1) {
+      navigate("/profile/editor/edit");
+    } else {
+      navigate("/profile/editor/create");
+    }
   };
 
   useEffect(() => {
