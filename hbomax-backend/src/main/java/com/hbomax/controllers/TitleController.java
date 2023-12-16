@@ -2,7 +2,9 @@ package com.hbomax.controllers;
 
 
 import com.hbomax.dto.CreateMovieDTO;
+import com.hbomax.dto.TitleDTO;
 import com.hbomax.exceptions.*;
+import com.hbomax.models.Brand;
 import com.hbomax.models.Country;
 import com.hbomax.models.Title;
 import com.hbomax.services.TitleService;
@@ -14,8 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/title")
@@ -61,15 +66,15 @@ public class TitleController {
 
     @PostMapping(value="/create",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public Title createNewTitle(@RequestPart("json") CreateMovieDTO createMovie, @RequestPart("posterPicture") MultipartFile posterPicture, @RequestPart("bannerPicture") MultipartFile bannerPicture){
-        LocalDate date=LocalDate.now();
-        titleService.registerTitle(createMovie.getTitleName(),createMovie.getOverview(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getRunTime(),date,1.2F,0 ,0,createMovie.getTitleType(),createMovie.getRating(),createMovie.getEpisodeName(),createMovie.getQuality(),bannerPicture,posterPicture);
+
+        titleService.registerTitle(createMovie.getTitleName(),createMovie.getOverview(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getRunTime(),createMovie.getReleaseDate(),createMovie.getAddedDate(),1.2F,0 ,0,createMovie.getTitleType(),createMovie.getRating(),createMovie.getEpisodeName(),createMovie.getQuality(),bannerPicture,posterPicture);
         return titleService.addMovieWithProducerDistributorBrandLenguageCountry(createMovie.getTitleName(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getProducer(),createMovie.getDistributor(),createMovie.getBrand(),createMovie.getLenguage(),createMovie.getCountry(),createMovie.getGenre());
     }
 
     @PostMapping(value="/create/tvshow",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
     public Title createNewSerie(@RequestPart("json") CreateMovieDTO createMovie, @RequestPart("bannerPicture") MultipartFile bannerPicture){
         LocalDate date=LocalDate.now();
-        titleService.registerSerie(createMovie.getTitleName(),createMovie.getOverview(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getRunTime(),date,1.2F,0 ,0,createMovie.getTitleType(),createMovie.getRating(),createMovie.getEpisodeName(),createMovie.getQuality(),bannerPicture);
+        titleService.registerSerie(createMovie.getTitleName(),createMovie.getOverview(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getRunTime(),createMovie.getReleaseDate(),createMovie.getAddedDate(),1.2F,0 ,0,createMovie.getTitleType(),createMovie.getRating(),createMovie.getEpisodeName(),createMovie.getQuality(),bannerPicture);
         return titleService.addMovieWithProducerDistributorBrandLenguageCountry(createMovie.getTitleName(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getProducer(),createMovie.getDistributor(),createMovie.getBrand(),createMovie.getLenguage(),createMovie.getCountry(),createMovie.getGenre());
     }
 
@@ -106,26 +111,32 @@ public class TitleController {
     }
 
     @GetMapping("/all/person/{firstName}/{lastName}")
-    public Set<Title> getAllFromPerson(@PathVariable String firstName, @PathVariable String lastName){
+    public Set<TitleDTO> getAllFromPerson(@PathVariable String firstName, @PathVariable String lastName){
         return titleService.getAllTitlesOfPerson(firstName,lastName);
     }
 
     @GetMapping("/all/genre/{genreName}")
-    public Set<Title> getAllFromGenre(@PathVariable String genreName){
-        return titleService.getAllTitlesOfGenre(genreName);
+    public Set<TitleDTO> getAllFromGenre(@PathVariable String genreName){
+
+       return titleService.getAllTitlesOfGenre(genreName);
     }
 
     @GetMapping("/all/country/{countryName}")
-    public Set<Title> getAllFromCountry(@PathVariable String countryName){
+    public Set<TitleDTO> getAllFromCountry(@PathVariable String countryName){
         return titleService.getAllTitlesOfCountry(countryName);
     }
     @GetMapping("/all/lengauge/{lenguageName}")
-    public Set<Title> getAllFromLenguage(@PathVariable String lenguageName){
+    public Set<TitleDTO> getAllFromLenguage(@PathVariable String lenguageName){
         return titleService.getAllTitlesOfLenguage(lenguageName);
     }
 
     @GetMapping("/all/producer/{producerName}")
-    public Set<Title> getAllFromProducer(@PathVariable String producerName){
+    public Set<TitleDTO> getAllFromProducer(@PathVariable String producerName){
         return titleService.getAllTitlesOfProductor(producerName);
+    }
+
+    @GetMapping("/all/recently/added")
+    public Set<TitleDTO> getAllFromProducer(){
+        return titleService.getTiltesRecentlyAdded();
     }
 }

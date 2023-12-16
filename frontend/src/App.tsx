@@ -8,11 +8,11 @@ import { Landing } from "./pages/Landing";
 import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 
-import { Home } from "./pages/Home";
 import { ProfilePicker } from "./pages/ProfilePicker";
 import { ProfileCreate } from "./pages/ProfileCreate";
 import { ProfileEditor } from "./features/profile/components/ProfileEditor/ProfileEditor";
 import { ProfilePicturePicker } from "./pages/ProfilePicturePicker";
+import { Feed } from "./pages/Feed";
 
 const theme: Theme = {
   colors: {
@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
   font-weight:500;
   margin:0;
   padding:0;
+ 
 }
 `;
 
@@ -41,7 +42,7 @@ export const App = () => {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Feed />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/profile/select" element={<ProfilePicker />} />

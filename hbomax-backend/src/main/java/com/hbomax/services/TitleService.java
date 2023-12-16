@@ -1,6 +1,8 @@
 package com.hbomax.services;
 
+import com.hbomax.dto.TitleDTO;
 import com.hbomax.exceptions.*;
+import com.hbomax.mappers.TitleDTOMapper;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class TitleService {
 
     private final CompanyRepository companyRepository;
 
+
+
     private final BrandRepository brandRepository;
     @Autowired
     public TitleService(TitleRepository titleRepository, GenreRepository genreRepository, CountryRepository countryRepository, LenguageRepository lenguageRepository, ImageService imageService,CompanyRepository companyRepository,BrandRepository brandRepository) {
@@ -39,7 +43,7 @@ public class TitleService {
         this.brandRepository=brandRepository;
     }
 
-    public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster){
+    public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster){
 
         try {
             Title newTitle=new Title();
@@ -56,6 +60,7 @@ public class TitleService {
             newTitle.setRating(rating);
             newTitle.setEpisodeName(episodeName);
             newTitle.setQuality(quality);
+            newTitle.setAddedDate(addedDate);
            Image bannerPicture =imageService.uploadImage(banner,"banner");
            Image posterPicture =imageService.uploadImage(poster,"poster");
             newTitle.setBannerPicture(bannerPicture);
@@ -68,7 +73,7 @@ public class TitleService {
 
     }
 
-    public Title registerSerie(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality ,MultipartFile banner){
+    public Title registerSerie(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality ,MultipartFile banner){
 
         try {
             Title newTitle=new Title();
@@ -85,6 +90,7 @@ public class TitleService {
             newTitle.setRating(rating);
             newTitle.setEpisodeName(episodeName);
             newTitle.setQuality(quality);
+            newTitle.setAddedDate(addedDate);
             Image bannerPicture =imageService.uploadImage(banner,"banner");
             newTitle.setBannerPicture(bannerPicture);
 
@@ -164,24 +170,35 @@ public class TitleService {
     public Title getMovieById(Integer titleId) {
         return titleRepository.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
     }
-    public Set<Title> getAllTitlesOfPerson(String firstName,String lastName){
-        return titleRepository.findTitlesByPerson(firstName,lastName);
+    public Set<TitleDTO>  getAllTitlesOfPerson(String firstName,String lastName){
+        Set<Title> titles=titleRepository.findTitlesByPerson(firstName,lastName);
+        return TitleDTOMapper.mapToDTOSet(titles);
     }
 
-    public Set<Title> getAllTitlesOfGenre(String genreName){
-        return titleRepository.findTitlesByGenre(genreName);
+    public Set<TitleDTO> getAllTitlesOfGenre(String genreName){
+        Set<Title> titles= titleRepository.findTitlesByGenre(genreName);
+        return TitleDTOMapper.mapToDTOSet(titles);
     }
 
-    public Set<Title> getAllTitlesOfCountry(String countryName) {
-        return titleRepository.findTitlesByCountry(countryName);
+    public Set<TitleDTO>  getAllTitlesOfCountry(String countryName) {
+        Set<Title> titles=titleRepository.findTitlesByCountry(countryName);
+        return TitleDTOMapper.mapToDTOSet(titles);
     }
 
-    public Set<Title> getAllTitlesOfLenguage(String lenguageName){
-        return titleRepository.findTitlesByLenguage(lenguageName);
+    public Set<TitleDTO> getAllTitlesOfLenguage(String lenguageName){
+        Set<Title> titles=titleRepository.findTitlesByLenguage(lenguageName);
+        return TitleDTOMapper.mapToDTOSet(titles);
     }
 
-    public Set<Title> getAllTitlesOfProductor(String  companyName){
-        return titleRepository.findTitlesByProductor(companyName);
+    public Set<TitleDTO> getAllTitlesOfProductor(String  companyName){
+        Set<Title> titles=titleRepository.findTitlesByProductor(companyName);
+        return TitleDTOMapper.mapToDTOSet(titles);
     }
 
+    public Set<TitleDTO> getTiltesRecentlyAdded(){
+        LocalDate currentDate=LocalDate.now();
+        currentDate=currentDate.minusMonths(1);
+        Set<Title> titles=titleRepository.findByRecentlyAdded(currentDate);
+            return TitleDTOMapper.mapToDTOSet(titles);
+    }
 }

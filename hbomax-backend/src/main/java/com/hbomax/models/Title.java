@@ -40,6 +40,9 @@ public class Title {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
+    @Column(name = "added_date")
+    private LocalDate addedDate;
+
     @Column(name = "popularity")
     private Float popularity;
 
@@ -114,6 +117,14 @@ public class Title {
         this.productionCompanies=new HashSet<>();
         this.distributionCompanies=new HashSet<>();
         this.brands=new HashSet<>();
+    }
+
+    public LocalDate getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(LocalDate addedDate) {
+        this.addedDate = addedDate;
     }
 
     public Image getPosterPicture() {

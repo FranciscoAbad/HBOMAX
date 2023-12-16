@@ -2,6 +2,8 @@ package com.hbomax.dto;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+
 public class CreateMovieDTO {
 
     private String titleName;
@@ -11,10 +13,12 @@ public class CreateMovieDTO {
     private int runTime;
     private String rating;
     private String overview;
-
     private String episodeName;
-
     private String quality;
+
+    private LocalDate releaseDate;
+
+    private LocalDate addedDate;
     private String producer;
     private String distributor;
     private String brand;
@@ -23,7 +27,7 @@ public class CreateMovieDTO {
     private String genre;
 
 
-    public CreateMovieDTO(String titleName, String titleType, Integer season, Integer episode, int runTime, String rating, String overview, String episodeName, String quality, String producer, String distributor, String brand, String lenguage, String country, String genre) {
+    public CreateMovieDTO(String titleName, String titleType, Integer season, Integer episode, int runTime, String rating, String overview, String episodeName, String quality, LocalDate releaseDate, LocalDate addedDate, String producer, String distributor, String brand, String lenguage, String country, String genre) {
         this.titleName = titleName;
         this.titleType = titleType;
         this.season = season;
@@ -33,6 +37,8 @@ public class CreateMovieDTO {
         this.overview = overview;
         this.episodeName = episodeName;
         this.quality = quality;
+        this.releaseDate = releaseDate;
+        this.addedDate = addedDate;
         this.producer = producer;
         this.distributor = distributor;
         this.brand = brand;
@@ -159,5 +165,21 @@ public class CreateMovieDTO {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public LocalDate getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(LocalDate addedDate) {
+        this.addedDate = addedDate;
     }
 }

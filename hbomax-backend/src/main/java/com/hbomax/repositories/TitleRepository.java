@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -37,5 +38,8 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
 
     @Query("SELECT t from Title t JOIN t.productionCompanies c WHERE c.companyName=:companyName")
     Set<Title> findTitlesByProductor(@Param("companyName") String companyName);
+
+    @Query("SELECT t from Title t WHERE t.addedDate BETWEEN :maxDate AND CURRENT_DATE")
+    Set<Title> findByRecentlyAdded(@Param("maxDate") LocalDate maxDate);
 }
 
