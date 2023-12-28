@@ -2,6 +2,7 @@ package com.hbomax.controllers;
 
 
 import com.hbomax.dto.AddToTitleDTO;
+import com.hbomax.dto.CastInfoDTO;
 import com.hbomax.dto.CreateMovieDTO;
 import com.hbomax.exceptions.*;
 import com.hbomax.models.CastInfo;
@@ -54,17 +55,34 @@ public class CastController {
     }
 
 
-
-
     @PostMapping("add/character/{firstName}/{lastName}/serie/{titleName}/{characterName}")
     public void addCharacterToSerie(@RequestPart("characterPicture") MultipartFile characterPicture,@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("characterName") String characterName,@PathVariable("titleName") String titleName){
         castService.addCharacterToSerie(titleName,firstName,lastName,characterName,characterPicture);
     }
 
+    @PostMapping("add/producer/{firstName}/{lastName}/serie/{titleName}/{producerRole}")
+    public void addProducerToSerie(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("producerRole") String producerRole,@PathVariable("titleName") String titleName){
+        castService.addProducerToSerie(titleName,firstName,lastName,producerRole);
+    }
+
+    @PostMapping("add/writer/{firstName}/{lastName}/serie/{titleName}/{writerRole}")
+    public void addWriterToSerie(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("writerRole") String writerRole,@PathVariable("titleName") String titleName){
+        castService.addWriterToSerie(titleName,firstName,lastName,writerRole);
+    }
+
+    @PostMapping("add/director/{firstName}/{lastName}/serie/{titleName}")
+    public void addWriterToSerie(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("titleName") String titleName){
+        castService.addDirectorToSerie(titleName,firstName,lastName);
+    }
 
     @GetMapping("/get/images/brand/{brandName}")
     public Set<Image> getAllCharacterImagesByBrandName(@PathVariable("brandName") String brandName){
         return castService.getAllCharacterPicturesByBrand(brandName);
+    }
+
+    @GetMapping("/get/all/{titleName}/{seasonNr}/{episodeNr}")
+    public Set<CastInfoDTO> getAllCastByTitleSeasonAndEpisode(@PathVariable("titleName") String titleName, @PathVariable("seasonNr") Integer seasonNr,@PathVariable("episodeNr") Integer episodeNr ){
+        return castService.getAllCastInfoOfTitleSeasonAndEpisode(titleName,seasonNr,episodeNr);
     }
 
 

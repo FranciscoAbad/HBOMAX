@@ -1,6 +1,8 @@
 package com.hbomax.services;
 
+import com.hbomax.dto.CastInfoDTO;
 import com.hbomax.exceptions.*;
+import com.hbomax.mappers.CastInfoMapper;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
 import jakarta.transaction.Transactional;
@@ -39,13 +41,6 @@ public class CastService {
     }
 
 
-
-
-
-
-
-
-
     public void addCharacterToSerie(String titleName,String firstName, String lastName,String characterName,MultipartFile file){
         try{
        List<Title> title=titleRepo.findAllByTitle(titleName);
@@ -72,8 +67,78 @@ public class CastService {
         }
     }
 
+    public void addWriterToSerie(String titleName,String firstName, String lastName,String writerRole){
+        try{
+            List<Title> title=titleRepo.findAllByTitle(titleName);
+            Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+            TitleRole role=roleRepo.findByRole("writer").orElseThrow(RoleDoesNotExistException::new);
+
+
+
+
+
+            for(int i=0; i<title.size();i++){
+
+                CastInfo cast=new CastInfo();
+                cast.setWriterRole(writerRole);
+                cast.setTitle(title.get(i));
+                cast.setPerson(person);
+                cast.setRole(role);
+                castInfoRepo.save(cast);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addProducerToSerie(String titleName,String firstName, String lastName,String producerRole){
+        try{
+            List<Title> title=titleRepo.findAllByTitle(titleName);
+            Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+            TitleRole role=roleRepo.findByRole("producer").orElseThrow(RoleDoesNotExistException::new);
+
+
+            for(int i=0; i<title.size();i++){
+                CastInfo cast=new CastInfo();
+                cast.setProducerRole(producerRole);
+                cast.setTitle(title.get(i));
+                cast.setPerson(person);
+                cast.setRole(role);
+                castInfoRepo.save(cast);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addDirectorToSerie(String titleName,String firstName, String lastName){
+        try{
+            List<Title> title=titleRepo.findAllByTitle(titleName);
+            Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+            TitleRole role=roleRepo.findByRole("director").orElseThrow(RoleDoesNotExistException::new);
+
+
+            for(int i=0; i<title.size();i++){
+                CastInfo cast=new CastInfo();
+                cast.setTitle(title.get(i));
+                cast.setPerson(person);
+                cast.setRole(role);
+                castInfoRepo.save(cast);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     public Set<Image> getAllCharacterPicturesByBrand(String brandName){
         return castInfoRepo.findCharacterPicturesByBrandName(brandName);
+    }
+
+    public Set<CastInfoDTO> getAllCastInfoOfTitleSeasonAndEpisode(String titleName,Integer seasonNr,Integer episodeNr){
+       Set<CastInfo> castInfo =castInfoRepo.findCastInfoByTitleSeasonAndEpisode(titleName,seasonNr,episodeNr);
+       return CastInfoMapper.mapToDTOSet(castInfo);
     }
 
 

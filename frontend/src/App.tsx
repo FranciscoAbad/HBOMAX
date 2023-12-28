@@ -13,6 +13,7 @@ import { ProfileCreate } from "./pages/ProfileCreate";
 import { ProfileEditor } from "./features/profile/components/ProfileEditor/ProfileEditor";
 import { ProfilePicturePicker } from "./pages/ProfilePicturePicker";
 import { Feed } from "./pages/Feed";
+import { Title } from "./pages/Title";
 
 const theme: Theme = {
   colors: {
@@ -27,12 +28,11 @@ const theme: Theme = {
 };
 
 const GlobalStyle = createGlobalStyle`
-*{
-  font-family:'Gilroy', sans-serif;
+*{ 
+  font-family: "Source Sans 3", sans-serif;
   font-weight:500;
   margin:0;
   padding:0;
- 
 }
 `;
 
@@ -51,6 +51,7 @@ export const App = () => {
           path="/profile/adult/character/select"
           element={<ProfilePicturePicker />}
         />
+        <Route path="/title/:type/:id" element={<Title />} />
       </Routes>
     </ThemeProvider>
   );

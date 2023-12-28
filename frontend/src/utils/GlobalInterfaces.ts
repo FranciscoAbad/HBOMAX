@@ -63,3 +63,83 @@ export interface Image {
   imageURL: string;
   imagePrefix: string;
 }
+
+export interface Genre {
+  id: number;
+  genre: string;
+  genrePicture: Image | null;
+}
+
+export interface Country {
+  countryId: number;
+  country: string;
+}
+
+export interface Lenguage {
+  lenguageId: number;
+  lenguage: string;
+}
+
+export interface Brand {
+  brandId: number;
+  brand: string;
+  brandLogo: Image;
+}
+
+export interface FullTitle {
+  titleId: number;
+  title: string;
+  overview: string;
+  seasonNr: number;
+  episodeNr: number;
+  episodeName: string;
+  quality: string;
+  runtime: number;
+  releaseDate: string;
+  popularity: number;
+  rating: string;
+  type: string;
+  posterPicture: Image | null;
+  bannerPicture: Image;
+  namePicture: Image | null;
+  genres: Genre[];
+  brands: Brand[];
+}
+
+export interface TitleRole {
+  roleId: number;
+  role: string;
+}
+
+export interface Person {
+  personId: number;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  dob: string;
+  birthplace: string;
+  bio: string;
+}
+
+export interface Cast {
+  castInfoId: number;
+  person: Person;
+  role: TitleRole;
+  image: Image;
+  characterName: string;
+  producerRole: string;
+  writerRole: string;
+}
+
+export interface TitleDTO {
+  titleId: number;
+  title: string;
+  brandName: string;
+  type: string;
+  episodeNr: number;
+  episodeName: string;
+  runtime: number;
+  rating: string;
+  banner: Image;
+  poster: Image;
+}

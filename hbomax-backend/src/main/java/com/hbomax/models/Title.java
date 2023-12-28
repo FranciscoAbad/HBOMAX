@@ -66,6 +66,10 @@ public class Title {
     @JoinColumn(name="banner_picture", referencedColumnName="image_id")
     private Image bannerPicture;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="name_picture",referencedColumnName = "image_id")
+    private Image namePicture;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="title_genre_junction",
@@ -302,5 +306,11 @@ public class Title {
 
     public void setQuality(String quality) {
         this.quality = quality;
+    }
+    public Image getNamePicture() {
+        return namePicture;
+    }
+    public void setNamePicture(Image namePicture) {
+        this.namePicture = namePicture;
     }
 }

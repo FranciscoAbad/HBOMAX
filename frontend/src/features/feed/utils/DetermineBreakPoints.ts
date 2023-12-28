@@ -41,6 +41,11 @@ export const determineBreakPoints = (
     };
   } else if (hasSide === false) {
     return {
+      0: {
+        slidesPerView: 3.12,
+        slidesPerGroup: 3,
+        spaceBetween: 0,
+      },
       596: {
         slidesPerView: 4.12,
         slidesPerGroup: 4,

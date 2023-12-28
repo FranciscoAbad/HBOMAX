@@ -1,5 +1,6 @@
 package com.hbomax.services;
 
+import com.hbomax.dto.SingleTitleDTO;
 import com.hbomax.dto.TitleDTO;
 import com.hbomax.exceptions.*;
 import com.hbomax.mappers.TitleDTOMapper;
@@ -43,7 +44,7 @@ public class TitleService {
         this.brandRepository=brandRepository;
     }
 
-    public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster){
+    public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster,MultipartFile name){
 
         try {
             Title newTitle=new Title();
@@ -61,10 +62,12 @@ public class TitleService {
             newTitle.setEpisodeName(episodeName);
             newTitle.setQuality(quality);
             newTitle.setAddedDate(addedDate);
-           Image bannerPicture =imageService.uploadImage(banner,"banner");
-           Image posterPicture =imageService.uploadImage(poster,"poster");
+            Image bannerPicture =imageService.uploadImage(banner,"banner");
+            Image posterPicture =imageService.uploadImage(poster,"poster");
+            Image namePicture=imageService.uploadImage(name,"name");
             newTitle.setBannerPicture(bannerPicture);
             newTitle.setPosterPicture(posterPicture);
+            newTitle.setNamePicture(namePicture);
 
             return titleRepository.save(newTitle);
         }catch (Exception e){
@@ -167,8 +170,10 @@ public class TitleService {
         return titleRepository.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
     }
 
-    public Title getMovieById(Integer titleId) {
-        return titleRepository.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
+    public SingleTitleDTO getMovieById(Integer titleId) {
+        Title title=titleRepository.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
+        SingleTitleDTO single=new SingleTitleDTO(title.getTitleId(),title.getTitle(),title.getOverview(),title.getSeasonNr(),title.getEpisodeNr(),title.getEpisodeName(),title.getQuality(),title.getRuntime(),title.getReleaseDate(),title.getPopularity(),title.getRating(),title.getType(),title.getPosterPicture(),title.getBannerPicture(),title.getNamePicture(),title.getGenres(),title.getBrands());
+        return single;
     }
     public Set<TitleDTO>  getAllTitlesOfPerson(String firstName,String lastName){
         Set<Title> titles=titleRepository.findTitlesByPerson(firstName,lastName);
@@ -200,5 +205,14 @@ public class TitleService {
         currentDate=currentDate.minusMonths(1);
         Set<Title> titles=titleRepository.findByRecentlyAdded(currentDate);
             return TitleDTOMapper.mapToDTOSet(titles);
+    }
+
+    public Set<TitleDTO> getTitlesByTitleAndSeason(String title,Integer season){
+        Set<Title> titles=titleRepository.findByTitleSeason(title,season);
+        return TitleDTOMapper.mapToDTOSet(titles);
+    }
+
+    public Integer countSeries(String title){
+        return titleRepository.findSeasonsByTitle(title).size();
     }
 }

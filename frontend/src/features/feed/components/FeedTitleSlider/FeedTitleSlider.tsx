@@ -8,13 +8,14 @@ import "swiper/css/scrollbar";
 import { Swiper as SwiperType } from "swiper";
 import "./FeedTitleSlider.css";
 import axios from "axios";
-import { Image } from "../../../../utils/GlobalInterfaces";
+import { Image, TitleDTO } from "../../../../utils/GlobalInterfaces";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import exp from "constants";
 import { determineBreakPoints } from "../../utils/DetermineBreakPoints";
+import { useNavigate } from "react-router-dom";
 
 interface SliderTitleSide {
   title: string;
@@ -32,14 +33,6 @@ interface FeedTitleSliderProps {
   sideSlide?: SliderTitleSide;
 }
 
-interface TitleDTO {
-  titleId: number;
-  title: string;
-  brandName: string;
-  banner: Image;
-  poster: Image;
-}
-
 export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
   fetchUrl,
   title,
@@ -52,6 +45,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
   const [data, setData] = useState<TitleDTO[]>([]);
   const [isPrevButtonVisible, setIsPrevButtonVisible] = useState(false);
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -152,7 +146,13 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
 
         {data.map((item) => (
           <SwiperSlide className="feed-title-slide">
-            <div className="feed-title-slide-content">
+            <div
+              key={item.titleId}
+              onClick={() => {
+                navigate(`/title/${item.type}/${item.titleId}`);
+              }}
+              className="feed-title-slide-content"
+            >
               <img src={banner ? item.banner.imageURL : item.poster.imageURL} />
               <div className="feed-title-slide-content-controlls">
                 <div className="feed-title-slide-content-controlls-button">

@@ -2,6 +2,7 @@ package com.hbomax.controllers;
 
 
 import com.hbomax.dto.CreateMovieDTO;
+import com.hbomax.dto.SingleTitleDTO;
 import com.hbomax.dto.TitleDTO;
 import com.hbomax.exceptions.*;
 import com.hbomax.models.Brand;
@@ -65,9 +66,9 @@ public class TitleController {
 
 
     @PostMapping(value="/create",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Title createNewTitle(@RequestPart("json") CreateMovieDTO createMovie, @RequestPart("posterPicture") MultipartFile posterPicture, @RequestPart("bannerPicture") MultipartFile bannerPicture){
+    public Title createNewTitle(@RequestPart("json") CreateMovieDTO createMovie, @RequestPart("posterPicture") MultipartFile posterPicture, @RequestPart("bannerPicture") MultipartFile bannerPicture,@RequestPart("namePicture") MultipartFile namePicture){
 
-        titleService.registerTitle(createMovie.getTitleName(),createMovie.getOverview(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getRunTime(),createMovie.getReleaseDate(),createMovie.getAddedDate(),1.2F,0 ,0,createMovie.getTitleType(),createMovie.getRating(),createMovie.getEpisodeName(),createMovie.getQuality(),bannerPicture,posterPicture);
+        titleService.registerTitle(createMovie.getTitleName(),createMovie.getOverview(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getRunTime(),createMovie.getReleaseDate(),createMovie.getAddedDate(),1.2F,0 ,0,createMovie.getTitleType(),createMovie.getRating(),createMovie.getEpisodeName(),createMovie.getQuality(),bannerPicture,posterPicture,namePicture);
         return titleService.addMovieWithProducerDistributorBrandLenguageCountry(createMovie.getTitleName(),createMovie.getSeason(),createMovie.getEpisode(),createMovie.getProducer(),createMovie.getDistributor(),createMovie.getBrand(),createMovie.getLenguage(),createMovie.getCountry(),createMovie.getGenre());
     }
 
@@ -105,8 +106,8 @@ public class TitleController {
     }
 
     @GetMapping("/id/{titleId}")
-    public ResponseEntity<Title> getMovieById(@PathVariable Integer titleId) {
-        Title title = titleService.getMovieById(titleId);
+    public ResponseEntity<SingleTitleDTO> getMovieById(@PathVariable Integer titleId) {
+        SingleTitleDTO title = titleService.getMovieById(titleId);
         return ResponseEntity.ok(title);
     }
 
@@ -125,7 +126,7 @@ public class TitleController {
     public Set<TitleDTO> getAllFromCountry(@PathVariable String countryName){
         return titleService.getAllTitlesOfCountry(countryName);
     }
-    @GetMapping("/all/lengauge/{lenguageName}")
+    @GetMapping("/all/lenguage/{lenguageName}")
     public Set<TitleDTO> getAllFromLenguage(@PathVariable String lenguageName){
         return titleService.getAllTitlesOfLenguage(lenguageName);
     }
@@ -138,5 +139,15 @@ public class TitleController {
     @GetMapping("/all/recently/added")
     public Set<TitleDTO> getAllFromProducer(){
         return titleService.getTiltesRecentlyAdded();
+    }
+
+    @GetMapping("/all/title/{titleName}/season/{seasonNumber}")
+    public Set<TitleDTO> getAllFromTitleAndSeason(@PathVariable("titleName") String titleName,@PathVariable("seasonNumber") int seasonNumber){
+        return titleService.getTitlesByTitleAndSeason(titleName,seasonNumber);
+    }
+
+    @GetMapping("title/{titleName}/seasons")
+    public Integer countSeasons(@PathVariable("titleName") String titleName){
+        return titleService.countSeries(titleName);
     }
 }

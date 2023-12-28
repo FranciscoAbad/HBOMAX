@@ -1,0 +1,130 @@
+.title-episodes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-episodes-header {
+  width: 100%;
+  position: relative;
+}
+
+.title-episodes-header-button {
+  margin-left: 28px;
+  margin-bottom: 30px;
+  width: fit-content;
+}
+
+.title-episodes-header-button-text {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.12);
+  padding-right: 12px;
+  padding-left: 12px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 21px;
+  width: 155.6px;
+}
+
+.title-episodes-header-nav {
+  top: 60px;
+  left: 60px;
+  position: absolute;
+  z-index: 10;
+  max-height: 186px;
+  background-color: rgba(25, 25, 25);
+  overflow-y: scroll;
+}
+.title-episodes-header-nav-button {
+  width: 137px;
+  display: flex;
+  align-items: center;
+
+  min-height: 48px;
+  padding: 16px;
+  margin-bottom: 4px;
+  border-radius: 2px;
+
+  margin: 5px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 21px;
+}
+
+.title-episodes-header-nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.title-episodes-content-grid {
+  margin-left: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-right: 20px;
+}
+
+.title-episodes-content-grid-item {
+  margin-bottom: 24px;
+}
+
+.title-episodes-content-grid-item-banner > img {
+  width: 95%;
+}
+
+.title-episodes-content-grid-item-info-title {
+  -webkit-line-clamp: 2;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  line-height: 18px;
+}
+.title-episodes-content-grid-item-info-subTitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.7px;
+  line-height: 15px;
+}
+
+@media screen and (min-width: 800px) {
+  .title-episodes-content-grid {
+    margin-left: 36px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .title-episodes-header-button {
+    margin-left: 36px;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .title-episodes-content-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-left: 48px;
+  }
+  .title-episodes-header-button {
+    margin-left: 48px;
+  }
+}
+@media screen and (min-width: 1400px) {
+}
+
+@media screen and (min-width: 1800px) {
+  .title-episodes-content-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin-left: 60px;
+  }
+  .title-episodes-header-button {
+    margin-left: 60px;
+  }
+}

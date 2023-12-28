@@ -20,4 +20,7 @@ public interface CastInfoRepository extends JpaRepository<CastInfo,Integer> {
             "WHERE b.brandName = :brandName")
     Set<Image> findCharacterPicturesByBrandName(@Param("brandName") String brandName);
 
+    @Query("SELECT c FROM CastInfo c JOIN c.title t WHERE t.title=:titleName AND t.seasonNr=:seasonNr AND t.episodeNr=:episodeNr")
+    Set<CastInfo> findCastInfoByTitleSeasonAndEpisode(@Param("titleName") String titleName, @Param("seasonNr") Integer seasonNr, @Param("episodeNr") Integer episodeNr);
+
 }

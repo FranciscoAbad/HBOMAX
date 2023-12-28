@@ -19,6 +19,11 @@ public class TitleDTOMapper {
                 title.getTitleId(),
                 title.getTitle(),
                 getFirstBrandName(title),
+                title.getType(),
+                title.getEpisodeNr(),
+                title.getEpisodeName(),
+                title.getRuntime(),
+                title.getRating(),
                 title.getBannerPicture(),
                 title.getPosterPicture()
         );

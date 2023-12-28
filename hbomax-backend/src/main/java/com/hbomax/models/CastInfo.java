@@ -29,6 +29,12 @@ public class CastInfo {
     @JoinColumn(name = "character_picture", referencedColumnName = "image_id")
     private Image characterPicture;
 
+    @Column(name="writer_role")
+    private String writerRole;
+
+    @Column(name="producer_role")
+    private String producerRole;
+
 
     public CastInfo() {
     }
@@ -79,5 +85,21 @@ public class CastInfo {
 
     public void setCharacterPicture(Image characterPicture) {
         this.characterPicture = characterPicture;
+    }
+
+    public String getWriterRole() {
+        return writerRole;
+    }
+
+    public void setWriterRole(String writerRole) {
+        this.writerRole = writerRole;
+    }
+
+    public String getProducerRole() {
+        return producerRole;
+    }
+
+    public void setProducerRole(String producerRole) {
+        this.producerRole = producerRole;
     }
 }

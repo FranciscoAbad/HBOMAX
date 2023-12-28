@@ -15,7 +15,6 @@ public class CreateMovieDTO {
     private String overview;
     private String episodeName;
     private String quality;
-
     private LocalDate releaseDate;
 
     private LocalDate addedDate;

@@ -13,6 +13,7 @@ import { FeedNav } from "../features/feed/components/FeedNav/FeedNav";
 import "./Feed.css";
 import { FeedTitleSlider } from "../features/feed/components/FeedTitleSlider/FeedTitleSlider";
 import { FeedHeaderSlider } from "../features/feed/components/FeedHeaderSlider/FeedHeaderSlider";
+import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 
 export const Feed: React.FC = () => {
   const state = useSelector((state: RootState) => state.user);
@@ -42,6 +43,7 @@ export const Feed: React.FC = () => {
         big={false}
         backgroundFade="background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.992) 6.67%, rgba(0, 0, 0, 0.965) 13.33%, rgba(0, 0, 0, 0.918) 20%, rgba(0, 0, 0, 0.85) 26.67%, rgba(0, 0, 0, 0.77) 33.33%, rgba(0, 0, 0, 0.667) 40%, rgba(0, 0, 0, 0.557) 46.67%, rgba(0, 0, 0, 0.443) 53.33%, rgba(0, 0, 0, 0.333) 60%, rgba(0, 0, 0, 0.23) 66.67%, rgba(0, 0, 0, 0.15) 73.33%, rgba(0, 0, 0, 0.082) 80%, rgba(0, 0, 0, 0.035) 86.67%, rgba(0, 0, 0, 0.008) 93.33%, rgba(0, 0, 0, 0) 100%);"
       />
+      <FeedFooter />
     </div>
   );
 };
