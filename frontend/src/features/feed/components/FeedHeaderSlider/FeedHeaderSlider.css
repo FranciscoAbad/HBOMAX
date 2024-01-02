@@ -1,4 +1,6 @@
 .feed-header-slider-container {
+  padding-bottom: 24px;
+  background: black;
 }
 
 .feed-header-slider::before {

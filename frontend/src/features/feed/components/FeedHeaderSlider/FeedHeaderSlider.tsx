@@ -13,34 +13,18 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./FeedHeaderSlider.css";
-interface TitleDTO {
-  titleId: number;
-  title: string;
-  brandName: string;
-  banner: Image;
-  poster: Image;
+import { useFetchTitles } from "../../../../hooks/useFetchTitles";
+
+interface FeedHeaderSliderProps {
+  fetchUrl: string;
 }
 
-export const FeedHeaderSlider: React.FC = () => {
-  const [data, setData] = useState<TitleDTO[]>([]);
+export const FeedHeaderSlider: React.FC<FeedHeaderSliderProps> = ({
+  fetchUrl,
+}) => {
+  const { data, isFetchig } = useFetchTitles({ fetchUrl });
   const [isPrevButtonVisible, setIsPrevButtonVisible] = useState(false);
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<TitleDTO[]>(
-          "http://localhost:8080/title/all/genre/horror"
-        );
-
-        setData(response.data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error--->", error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const handleSlideChange = (swiper: SwiperType) => {
     if (swiper.activeIndex === 0) {

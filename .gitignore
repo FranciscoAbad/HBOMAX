@@ -36,3 +36,4 @@ build/
 **/resources/*json
 **/StoredCredential
 **/certs/
+**/img

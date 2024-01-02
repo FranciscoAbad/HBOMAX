@@ -16,6 +16,9 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import exp from "constants";
 import { determineBreakPoints } from "../../utils/DetermineBreakPoints";
 import { useNavigate } from "react-router-dom";
+import { useFetchTitles } from "../../../../hooks/useFetchTitles";
+import { FeedTitleSliderItem } from "../FeedTitleSliderItem/FeedTitleSliderItem";
+import { FeedTitleSideContent } from "../FeedTitleSideContent/FeedTitleSideContent";
 
 interface SliderTitleSide {
   title: string;
@@ -42,26 +45,10 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
   sideSlide,
   big,
 }) => {
-  const [data, setData] = useState<TitleDTO[]>([]);
+  const { data, isFetchig } = useFetchTitles({ fetchUrl });
   const [isPrevButtonVisible, setIsPrevButtonVisible] = useState(false);
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<TitleDTO[]>(
-          "http://localhost:8080/title/all/genre/horror"
-        );
-
-        setData(response.data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error--->", error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const handleSlideChange = (swiper: SwiperType) => {
     if (swiper.activeIndex === 0) {
@@ -126,17 +113,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
         {sideSlide ? (
           <>
             <SwiperSlide className="feed-title-slide">
-              <div className="feed-title-slide-content-side">
-                <div className="feed-title-slide-content-side-title">
-                  {sideSlide.title}
-                </div>
-                <div className="feed-title-slide-content-side-subTitle">
-                  {sideSlide.subTitle}
-                </div>
-                <div className="feed-title-slide-content-side-button">
-                  {sideSlide.buttonLabel}
-                </div>
-              </div>
+              <FeedTitleSideContent sideSlide={sideSlide} />
             </SwiperSlide>
             <SwiperSlide className="feed-title-slide"></SwiperSlide>
           </>
@@ -145,24 +122,8 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
         )}
 
         {data.map((item) => (
-          <SwiperSlide className="feed-title-slide">
-            <div
-              key={item.titleId}
-              onClick={() => {
-                navigate(`/title/${item.type}/${item.titleId}`);
-              }}
-              className="feed-title-slide-content"
-            >
-              <img src={banner ? item.banner.imageURL : item.poster.imageURL} />
-              <div className="feed-title-slide-content-controlls">
-                <div className="feed-title-slide-content-controlls-button">
-                  <PlayArrowIcon sx={{ width: 25, height: 25 }} />
-                </div>
-                <div className="feed-title-slide-content-controlls-button">
-                  <AddIcon sx={{ width: 25, height: 25 }} />
-                </div>
-              </div>
-            </div>
+          <SwiperSlide>
+            <FeedTitleSliderItem banner={banner} item={item} />
           </SwiperSlide>
         ))}
         <div className="feed-title-slide-nav-next">

@@ -27,7 +27,7 @@ public class HbomaxBackendApplication {
 	@Bean
 	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo,LenguageRepository lenguageRepo,CompanyRepository companyRepo){
 		return args ->{
-			Role r =roleRepo.save(new Role(1,"USER"));
+/*			Role r =roleRepo.save(new Role(1,"USER"));
 
 			Set<Role> roles=new HashSet<>();
 
@@ -122,7 +122,7 @@ public class HbomaxBackendApplication {
 
 
 
-
+*/
 		};
 }
 
