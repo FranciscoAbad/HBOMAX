@@ -62,6 +62,8 @@ public class TitleService {
             newTitle.setEpisodeName(episodeName);
             newTitle.setQuality(quality);
             newTitle.setAddedDate(addedDate);
+            newTitle.setViews(0);
+            newTitle.setVotes(0);
             Image bannerPicture =imageService.uploadImage(banner,"banner");
             Image posterPicture =imageService.uploadImage(poster,"poster");
             Image namePicture=imageService.uploadImage(name,"name");
@@ -94,6 +96,8 @@ public class TitleService {
             newTitle.setEpisodeName(episodeName);
             newTitle.setQuality(quality);
             newTitle.setAddedDate(addedDate);
+            newTitle.setViews(0);
+            newTitle.setVotes(0);
             Image bannerPicture =imageService.uploadImage(banner,"banner");
             newTitle.setBannerPicture(bannerPicture);
 
@@ -172,7 +176,7 @@ public class TitleService {
 
     public SingleTitleDTO getMovieById(Integer titleId) {
         Title title=titleRepository.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
-        SingleTitleDTO single=new SingleTitleDTO(title.getTitleId(),title.getTitle(),title.getOverview(),title.getSeasonNr(),title.getEpisodeNr(),title.getEpisodeName(),title.getQuality(),title.getRuntime(),title.getReleaseDate(),title.getPopularity(),title.getRating(),title.getType(),title.getPosterPicture(),title.getBannerPicture(),title.getNamePicture(),title.getGenres(),title.getBrands());
+        SingleTitleDTO single=new SingleTitleDTO(title.getTitleId(),title.getTitle(),title.getOverview(),title.getSeasonNr(),title.getEpisodeNr(),title.getEpisodeName(),title.getQuality(),title.getRuntime(),title.getReleaseDate(),title.getPopularity(),title.getRating(),title.getType(),title.getViews(),title.getVotes(),title.getPosterPicture(),title.getBannerPicture(),title.getNamePicture(),title.getGenres(),title.getBrands());
         return single;
     }
     public Set<TitleDTO>  getAllTitlesOfPerson(String firstName,String lastName){

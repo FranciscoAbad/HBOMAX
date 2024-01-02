@@ -15,8 +15,7 @@ private String overview;
 
 private Integer seasonNr;
 private Integer episodeNr;
-
-    private String episodeName;
+private String episodeName;
 private String quality;
 
 private Integer runTime;
@@ -29,6 +28,10 @@ private String rating;
 
 private String type;
 
+    private Integer views;
+
+    private Integer votes;
+
 private Image posterPicture;
 
 private Image bannerPicture;
@@ -39,25 +42,6 @@ private Set<Genre> genres;
 
 private Set<Brand> brands;
 
-    public SingleTitleDTO(Integer titleId, String title, String overview, Integer seasonNr, Integer episodeNr, String episodeName, String quality, Integer runTime, LocalDate releaseDate, float popularity, String rating, String type, Image posterPicture, Image bannerPicture, Image namePicture, Set<Genre> genres, Set<Brand> brands) {
-        this.titleId = titleId;
-        this.title = title;
-        this.overview = overview;
-        this.seasonNr = seasonNr;
-        this.episodeNr = episodeNr;
-        this.episodeName = episodeName;
-        this.quality = quality;
-        this.runTime = runTime;
-        this.releaseDate = releaseDate;
-        this.popularity = popularity;
-        this.rating = rating;
-        this.type = type;
-        this.posterPicture = posterPicture;
-        this.bannerPicture = bannerPicture;
-        this.namePicture = namePicture;
-        this.genres = genres;
-        this.brands = brands;
-    }
 
     public Integer getTitleId() {
         return titleId;
@@ -155,6 +139,22 @@ private Set<Brand> brands;
         this.type = type;
     }
 
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
+
     public Image getPosterPicture() {
         return posterPicture;
     }
@@ -192,6 +192,28 @@ private Set<Brand> brands;
     }
 
     public void setBrands(Set<Brand> brands) {
+        this.brands = brands;
+    }
+
+    public SingleTitleDTO(Integer titleId, String title, String overview, Integer seasonNr, Integer episodeNr, String episodeName, String quality, Integer runTime, LocalDate releaseDate, float popularity, String rating, String type, Integer views, Integer votes, Image posterPicture, Image bannerPicture, Image namePicture, Set<Genre> genres, Set<Brand> brands) {
+        this.titleId = titleId;
+        this.title = title;
+        this.overview = overview;
+        this.seasonNr = seasonNr;
+        this.episodeNr = episodeNr;
+        this.episodeName = episodeName;
+        this.quality = quality;
+        this.runTime = runTime;
+        this.releaseDate = releaseDate;
+        this.popularity = popularity;
+        this.rating = rating;
+        this.type = type;
+        this.views = views;
+        this.votes = votes;
+        this.posterPicture = posterPicture;
+        this.bannerPicture = bannerPicture;
+        this.namePicture = namePicture;
+        this.genres = genres;
         this.brands = brands;
     }
 }

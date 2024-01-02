@@ -46,8 +46,10 @@ Vote voteExists=voteRepo.findVoteByUserAndTitle(username,titleId).orElse(null);
             Vote vote=new Vote();
             vote.setRating(rating);
             vote.setUserVote(user);
+            title.setVotes(title.getVotes()+1);
             vote.setTitle(title);
             vote.setRateDate(LocalDateTime.now());
+
             return voteRepo.save(vote);
 
 

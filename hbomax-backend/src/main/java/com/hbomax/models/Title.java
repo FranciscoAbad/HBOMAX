@@ -58,6 +58,12 @@ public class Title {
     @Column(name="type")
     private String type;
 
+    @Column(name="views")
+    private Integer views;
+
+    @Column(name="votes")
+    private Integer votes;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="profile_picture", referencedColumnName="image_id")
     private Image posterPicture;
@@ -312,5 +318,21 @@ public class Title {
     }
     public void setNamePicture(Image namePicture) {
         this.namePicture = namePicture;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
     }
 }
