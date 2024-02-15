@@ -7,13 +7,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Swiper as SwiperType } from "swiper";
 import "./FeedTitleSlider.css";
-import axios from "axios";
-import { Image, TitleDTO } from "../../../../utils/GlobalInterfaces";
-import AddIcon from "@mui/icons-material/Add";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import exp from "constants";
 import { determineBreakPoints } from "../../utils/DetermineBreakPoints";
 import { useNavigate } from "react-router-dom";
 import { useFetchTitles } from "../../../../hooks/useFetchTitles";
@@ -24,6 +19,7 @@ interface SliderTitleSide {
   title: string;
   subTitle: string;
   buttonLabel: string;
+  imageUrl?: string;
 }
 
 interface FeedTitleSliderProps {
@@ -71,6 +67,13 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
     <div className="feed-title-slider-container">
       {backgroundFade ? (
         <div className="feed-title-slider-gradient"></div>
+      ) : (
+        <></>
+      )}
+      {sideSlide && sideSlide.imageUrl ? (
+        <div className="feed-title-slider-image">
+          <img src={sideSlide.imageUrl} />
+        </div>
       ) : (
         <></>
       )}
@@ -122,7 +125,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
         )}
 
         {data.map((item) => (
-          <SwiperSlide>
+          <SwiperSlide key={item.titleId}>
             <FeedTitleSliderItem banner={banner} item={item} />
           </SwiperSlide>
         ))}

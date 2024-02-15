@@ -25,7 +25,9 @@ public class TitleDTO {
 
     private Image poster;
 
-    public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, Image banner, Image poster) {
+    private Image name;
+
+    public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, Image banner, Image poster, Image name) {
         this.titleId = titleId;
         this.title = title;
         this.brandName = brandName;
@@ -36,6 +38,7 @@ public class TitleDTO {
         this.rating = rating;
         this.banner = banner;
         this.poster = poster;
+        this.name = name;
     }
 
     public Integer getTitleId() {
@@ -116,5 +119,13 @@ public class TitleDTO {
 
     public void setPoster(Image poster) {
         this.poster = poster;
+    }
+
+    public Image getName() {
+        return name;
+    }
+
+    public void setName(Image name) {
+        this.name = name;
     }
 }

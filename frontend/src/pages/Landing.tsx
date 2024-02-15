@@ -16,14 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const Landing: React.FC = () => {
-  const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
   const state = useSelector((state: RootState) => state);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (state.user.token) navigate("/home");
-  }, []);
 
   return (
     <>

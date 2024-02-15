@@ -25,7 +25,8 @@ public class TitleDTOMapper {
                 title.getRuntime(),
                 title.getRating(),
                 title.getBannerPicture(),
-                title.getPosterPicture()
+                title.getPosterPicture(),
+                title.getNamePicture()
         );
     }
 
@@ -33,6 +34,12 @@ public class TitleDTOMapper {
         return titles.stream()
                 .map(TitleDTOMapper::mapToDTO)
                 .collect(Collectors.toSet());
+    }
+
+    public static List<TitleDTO> mapToDTOList(List<Title> titles) {
+        return titles.stream()
+                .map(TitleDTOMapper::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     private static String getFirstBrandName(Title title) {

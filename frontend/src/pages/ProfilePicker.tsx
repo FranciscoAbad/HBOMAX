@@ -10,6 +10,7 @@ import { getProfiles } from "../redux/Slices/ProfileSlice";
 import "./ProfilePicker.css";
 import { ProfilePickerContent } from "../features/profile/components/ProfilePickerContent/ProfilePickerContent";
 import { ProfileHeader } from "../features/profile/components/ProfileHeaders/ProfileHeader";
+import { LoadingPage } from "../components/LoadingPage/LoadingPage";
 
 export const ProfilePicker: React.FC = () => {
   const state = useSelector((state: RootState) => state.user);
@@ -28,14 +29,20 @@ export const ProfilePicker: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className="profile-picker"
-      onClick={() => {
-        console.log(stateProfile.profiles);
-      }}
-    >
-      <ProfileHeader />
-      <ProfilePickerContent />
-    </div>
+    <>
+      {!stateProfile.loadingProfiles ? (
+        <div
+          className="profile-picker"
+          onClick={() => {
+            console.log(stateProfile.profiles);
+          }}
+        >
+          <ProfileHeader />
+          <ProfilePickerContent />
+        </div>
+      ) : (
+        <LoadingPage />
+      )}
+    </>
   );
 };

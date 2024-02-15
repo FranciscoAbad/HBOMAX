@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Hbomax from "../../../../assets/hbomax-med.svg";
 
@@ -16,6 +16,23 @@ export const FeedNavBar: React.FC<FeedNavBarProps> = ({ toggleSideBar }) => {
   const [dropMenu, toggleDropMenu] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
   const switchProfile = () => {
     navigate("/profile/select");
   };
@@ -24,7 +41,14 @@ export const FeedNavBar: React.FC<FeedNavBarProps> = ({ toggleSideBar }) => {
     toggleDropMenu(!dropMenu);
   };
   return (
-    <div className="feed-nav-bar">
+    <div
+      className="feed-nav-bar"
+      style={
+        isScrolled
+          ? { backgroundColor: "rgba(15, 15, 15, 0.98)" }
+          : { backgroundColor: "rgba(255,255,255,0)" }
+      }
+    >
       <div className="feed-nav-bar-flex">
         <div className="feed-nav-bar-flex-left">
           <div

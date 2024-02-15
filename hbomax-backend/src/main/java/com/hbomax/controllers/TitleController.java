@@ -146,6 +146,11 @@ public class TitleController {
         return titleService.getTitlesByTitleAndSeason(titleName,seasonNumber);
     }
 
+    @GetMapping("/all/title/trending")
+    public List<TitleDTO> getAllTrending(){
+        return titleService.getMostPopularTitles();
+    }
+
     @GetMapping("title/{titleName}/seasons")
     public Integer countSeasons(@PathVariable("titleName") String titleName){
         return titleService.countSeries(titleName);

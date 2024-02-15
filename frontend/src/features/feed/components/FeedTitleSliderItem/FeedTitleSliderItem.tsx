@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { Swiper as SwiperType } from "swiper";
+import React from "react";
+
 import "./FeedTitleSliderItem.css";
-import axios from "axios";
-import { Image, TitleDTO } from "../../../../utils/GlobalInterfaces";
+import { TitleDTO } from "../../../../utils/GlobalInterfaces";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import exp from "constants";
-import { determineBreakPoints } from "../../utils/DetermineBreakPoints";
 import { useNavigate } from "react-router-dom";
-import { useFetchTitles } from "../../../../hooks/useFetchTitles";
 
 interface FeedTitleSliderItemProps {
   item: TitleDTO;

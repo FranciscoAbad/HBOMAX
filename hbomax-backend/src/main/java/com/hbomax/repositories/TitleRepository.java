@@ -17,7 +17,9 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
 
     Optional<Title> findByTitle(String title);
 
-      List<Title> findAllByTitle(String title);
+    List<Title> findAllByTitle(String title);
+    @Query("SELECT t FROM Title t WHERE t.seasonNr = :seasonNr ORDER BY t.views DESC")
+    List<Title> findAllBySeasonNrOrderByViewsDesc(@Param("seasonNr") Integer seasonNr);
    @Query("SELECT t from Title t WHERE t.title=:title AND t.seasonNr=:season AND t.episodeNr=:episode")
     Optional<Title> findByTitleSeasonAndEpisode(@Param("title") String title,@Param("season") Integer season,@Param("episode") Integer episode);
 

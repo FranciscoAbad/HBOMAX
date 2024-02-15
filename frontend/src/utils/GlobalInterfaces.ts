@@ -142,4 +142,5 @@ export interface TitleDTO {
   rating: string;
   banner: Image;
   poster: Image;
+  name: Image;
 }

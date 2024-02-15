@@ -25,6 +25,7 @@ export const Feed: React.FC = () => {
 
   useEffect(() => {
     if (state.token === "") {
+      console.log(state);
       navigate("/");
     } else if (stateProfile.selectedProfile === null) {
       navigate("/profile/select");
@@ -34,11 +35,27 @@ export const Feed: React.FC = () => {
   return (
     <div className="feed">
       <FeedNav />
-      <FeedHeaderSlider fetchUrl="title/all/genre/horror" />
+      <FeedHeaderSlider fetchUrl="title/all/title/trending" />
+
+      <FeedTitleSlider
+        fetchUrl="title/all/genre/action"
+        title="Action"
+        subTitle="Our HBO horror specials"
+        banner={false}
+        big={false}
+        backgroundFade="background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.992) 6.67%, rgba(0, 0, 0, 0.965) 13.33%, rgba(0, 0, 0, 0.918) 20%, rgba(0, 0, 0, 0.85) 26.67%, rgba(0, 0, 0, 0.77) 33.33%, rgba(0, 0, 0, 0.667) 40%, rgba(0, 0, 0, 0.557) 46.67%, rgba(0, 0, 0, 0.443) 53.33%, rgba(0, 0, 0, 0.333) 60%, rgba(0, 0, 0, 0.23) 66.67%, rgba(0, 0, 0, 0.15) 73.33%, rgba(0, 0, 0, 0.082) 80%, rgba(0, 0, 0, 0.035) 86.67%, rgba(0, 0, 0, 0.008) 93.33%, rgba(0, 0, 0, 0) 100%);"
+      />
       <FeedTitleSlider
         fetchUrl="title/all/genre/horror"
         title="Horror & Suspense"
-        subTitle="Our HBO horror specials"
+        subTitle=""
+        banner={true}
+        big={false}
+      />
+      <FeedTitleSlider
+        fetchUrl="title/all/title/trending"
+        title=""
+        subTitle=""
         banner={false}
         big={false}
         sideSlide={{
@@ -46,8 +63,9 @@ export const Feed: React.FC = () => {
           subTitle:
             "The most-watched movies and series in argentina in te past few days. Don't miss out!",
           buttonLabel: "BROWSE MORE",
+          imageUrl:
+            "https://art-gallery-latam.api.hbo.com/images/htZbraXlSYDborzH5C2GS$$$8d97f627b6165ecc50dbd43b5007d4f4$$$latam/background?v=034774df1e526034622be9393547ad91&format=png&size=3840x1152&compression=low&protection=false&scaleDownToFit=false&language=en-us",
         }}
-        backgroundFade="background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.992) 6.67%, rgba(0, 0, 0, 0.965) 13.33%, rgba(0, 0, 0, 0.918) 20%, rgba(0, 0, 0, 0.85) 26.67%, rgba(0, 0, 0, 0.77) 33.33%, rgba(0, 0, 0, 0.667) 40%, rgba(0, 0, 0, 0.557) 46.67%, rgba(0, 0, 0, 0.443) 53.33%, rgba(0, 0, 0, 0.333) 60%, rgba(0, 0, 0, 0.23) 66.67%, rgba(0, 0, 0, 0.15) 73.33%, rgba(0, 0, 0, 0.082) 80%, rgba(0, 0, 0, 0.035) 86.67%, rgba(0, 0, 0, 0.008) 93.33%, rgba(0, 0, 0, 0) 100%);"
       />
       <FeedFooter />
     </div>

@@ -66,7 +66,6 @@ export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
           <h4 className="title-header-content-info">
             <span>{runtime} MIN</span>
             <span>{rating}</span>
-
             <span> {quality}</span>
           </h4>
           <div className="title-header-content-controlls">

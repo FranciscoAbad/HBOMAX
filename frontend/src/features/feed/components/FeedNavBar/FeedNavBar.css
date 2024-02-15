@@ -1,6 +1,6 @@
 .feed-nav-bar {
   position: fixed;
-  z-index: 10;
+  z-index: 5;
   width: 100vw;
   overflow: auto;
 }
@@ -129,9 +129,11 @@
 }
 
 .feed-nav-bar-drop-menu {
+  position: fixed;
   top: 78px;
   right: 42px;
-  position: absolute;
+
+  z-index: 10;
   background-color: rgb(25, 25, 25);
   box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 10px;
   padding: 4px 4px 0px 4px;

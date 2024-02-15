@@ -9,6 +9,7 @@ import { FeedTitleSlider } from "../features/feed/components/FeedTitleSlider/Fee
 import { TitlePersons } from "../features/title/components/TitlePersons/TitlePersons";
 import { TitleEpisodes } from "../features/title/components/TitleEpisode/TitleEpisodes";
 import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
+import { useFetchFullTitle } from "../hooks/useFetchFullTitle";
 
 interface Title {
   id: number;
@@ -16,32 +17,11 @@ interface Title {
 
 export const Title: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
-  const [title, setTitle] = useState<FullTitle>();
+  const { title, isFetching } = useFetchFullTitle(id ? id : "");
+
   const [cast, setCast] = useState<Cast[]>([]);
 
-  useEffect(() => {
-    const fetchTitle = async () => {
-      try {
-        const response = await axios.get<FullTitle>(
-          `http://localhost:8080/title/id/${id}`
-        );
-
-        setTitle(response.data);
-
-        const { title, seasonNr, episodeNr } = response.data;
-
-        const castResponse = await axios.get<Cast[]>(
-          `http://localhost:8080/cast/get/all/${title}/${seasonNr}/${episodeNr}`
-        );
-
-        setCast(castResponse.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTitle();
-  }, [id]);
+  useEffect(() => {}, [id]);
 
   return (
     <div className="title">
@@ -67,9 +47,9 @@ export const Title: React.FC = () => {
       )}
       {type === "tv-show" && title && <TitleEpisodes title={title.title} />}
 
-      {type !== "episode" && (
+      {type !== "episode" && !isFetching && (
         <FeedTitleSlider
-          fetchUrl=""
+          fetchUrl={`title/all/genre/${title?.genres[0].genre}`}
           subTitle=""
           title="More like this"
           banner={false}

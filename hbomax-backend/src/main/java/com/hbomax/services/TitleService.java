@@ -12,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -21,13 +23,9 @@ public class TitleService {
 
     private final TitleRepository titleRepository;
     private final GenreRepository genreRepository;
-
     private final CountryRepository countryRepository;
-
     private final LenguageRepository lenguageRepository;
-
     private final ImageService imageService;
-
     private final CompanyRepository companyRepository;
 
 
@@ -214,6 +212,11 @@ public class TitleService {
     public Set<TitleDTO> getTitlesByTitleAndSeason(String title,Integer season){
         Set<Title> titles=titleRepository.findByTitleSeason(title,season);
         return TitleDTOMapper.mapToDTOSet(titles);
+    }
+
+    public List<TitleDTO> getMostPopularTitles(){
+       List<Title> titles=titleRepository.findAllBySeasonNrOrderByViewsDesc(0);
+       return TitleDTOMapper.mapToDTOList(titles.stream().limit(10).collect(Collectors.toList()));
     }
 
     public Integer countSeries(String title){
