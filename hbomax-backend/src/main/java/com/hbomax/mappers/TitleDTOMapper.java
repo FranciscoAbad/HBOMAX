@@ -48,4 +48,6 @@ public class TitleDTOMapper {
                 .map(Brand::getBrandName)
                 .orElse(null);
     }
+
+
 }

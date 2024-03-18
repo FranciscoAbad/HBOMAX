@@ -4,23 +4,43 @@ export const determineBreakPoints = (
   hasSide: boolean
 ) => {
   if (banner) {
-    return {
-      596: {
-        slidesPerView: 3.12,
-        slidesPerGroup: 3,
-        spaceBetween: 0,
-      },
-      1096: {
-        slidesPerView: 4.12,
-        slidesPerGroup: 4,
-        spaceBetween: 0,
-      },
-      1800: {
-        slidesPerView: 6.12,
-        slidesPerGroup: 6,
-        spaceBetween: 0,
-      },
-    };
+    if (big) {
+      return {
+        596: {
+          slidesPerView: 1.12,
+          slidesPerGroup: 1,
+          spaceBetween: 0,
+        },
+        1096: {
+          slidesPerView: 2.12,
+          slidesPerGroup: 2,
+          spaceBetween: 0,
+        },
+        1800: {
+          slidesPerView: 3.12,
+          slidesPerGroup: 3,
+          spaceBetween: 0,
+        },
+      };
+    } else {
+      return {
+        596: {
+          slidesPerView: 3.12,
+          slidesPerGroup: 3,
+          spaceBetween: 0,
+        },
+        1096: {
+          slidesPerView: 4.12,
+          slidesPerGroup: 4,
+          spaceBetween: 0,
+        },
+        1800: {
+          slidesPerView: 6.12,
+          slidesPerGroup: 6,
+          spaceBetween: 0,
+        },
+      };
+    }
   } else if (big) {
     return {
       596: {

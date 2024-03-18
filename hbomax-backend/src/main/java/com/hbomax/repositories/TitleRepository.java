@@ -26,8 +26,8 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
    @Query("SELECT t from Title t Where t.title=:title AND t.seasonNr=:season")
    Set<Title> findByTitleSeason(@Param("title") String title,@Param("season") Integer season);
 
- @Query("SELECT DISTINCT t.seasonNr FROM Title t WHERE t.type = 'episode' AND t.title = :titleName")
- List<Integer> findSeasonsByTitle(@Param("titleName") String titleName);
+   @Query("SELECT DISTINCT t.seasonNr FROM Title t WHERE t.type = 'episode' AND t.title = :titleName")
+   List<Integer> findSeasonsByTitle(@Param("titleName") String titleName);
     @Query("SELECT c.title from CastInfo c WHERE c.person.firstName=:firstName AND c.person.lastName=:lastName")
     Set<Title> findTitlesByPerson(@Param("firstName") String firstName,@Param("lastName") String lastName);
 
@@ -48,5 +48,23 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
 
     @Query("SELECT t from Title t WHERE t.addedDate BETWEEN :maxDate AND CURRENT_DATE AND t.seasonNr=0")
     Set<Title> findByRecentlyAdded(@Param("maxDate") LocalDate maxDate);
+
+    //TWO PARAMS PRINCIPAL=TYPE
+
+    @Query("SELECT t FROM Title t WHERE t.seasonNr = :seasonNr AND t.type= :type ORDER BY t.views DESC")
+    Set<Title> findAllBySeasonNrTypeOrderByViewsDesc(@Param("seasonNr") Integer seasonNr, @Param("type") String type);
+
+    @Query("SELECT t from Title t JOIN t.genres g WHERE g.genre=:genre AND t.seasonNr=0 AND t.type=:type")
+    Set<Title> findAllByTypeGenre(@Param("type") String type, @Param("genre") String genre);
+
+    @Query("SELECT t from Title t WHERE t.addedDate BETWEEN :maxDate AND CURRENT_DATE AND t.seasonNr=0 AND t.type= :type")
+    List<Title> findByRecentlyAddedAndType(@Param("type") String type, @Param("maxDate") LocalDate maxDate);
+
+
+    @Query("SELECT t FROM Title t WHERE t.seasonNr = 0 AND t.type= :type ORDER BY t.title ASC")
+    List<Title> findAllByTypeAlphabetic(@Param("type") String type);
+
+    //"select * from title t where t.season_nr =0 and t.type ='movie'  order by t.title"
+
 }
 

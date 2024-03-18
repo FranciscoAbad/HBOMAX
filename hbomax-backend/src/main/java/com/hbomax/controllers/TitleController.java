@@ -111,7 +111,7 @@ public class TitleController {
         return ResponseEntity.ok(title);
     }
 
-    @GetMapping("/all/person/{firstName}/{lastName}")
+    @GetMapping("/all/person/{firstNadme}/{lastName}")
     public Set<TitleDTO> getAllFromPerson(@PathVariable String firstName, @PathVariable String lastName){
         return titleService.getAllTitlesOfPerson(firstName,lastName);
     }
@@ -155,4 +155,29 @@ public class TitleController {
     public Integer countSeasons(@PathVariable("titleName") String titleName){
         return titleService.countSeries(titleName);
     }
+
+    //FILTERS BY TWO PARAMS STARTING WITH TYPE (MOVIE/TV-SHOW)
+
+    @GetMapping("title/type/{type}/trending")
+    public Set<TitleDTO> getAllByTypeAndTrending(@PathVariable("type") String type){
+        return titleService.getAllTitlesByTypeAndPopularity(type);
+    }
+
+    @GetMapping("title/type/{type}/genre/{genre}")
+    public Set<TitleDTO> getAllByTypeAndGenre(@PathVariable("type") String type,@PathVariable("genre") String genre){
+        return titleService.getAllTitlesByTypeAndGenre(type,genre);
+    }
+
+    @GetMapping("title/type/{type}/just-added")
+    public List<TitleDTO> getAllByTypeAndGenre(@PathVariable("type") String type){
+        return titleService.getAllTitlesByTypeAndRecentlyAdded(type);
+    }
+
+    @GetMapping("title/type/{type}/alphabetic")
+    public List<TitleDTO> getAllByTypeAndAlphabetic(@PathVariable("type") String type){
+        return titleService.getAllTitlesByTypeAndAlphabetic(type);
+    }
+
+
+
 }

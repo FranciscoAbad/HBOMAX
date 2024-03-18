@@ -14,6 +14,7 @@ import { ProfileEditor } from "./features/profile/components/ProfileEditor/Profi
 import { ProfilePicturePicker } from "./pages/ProfilePicturePicker";
 import { Feed } from "./pages/Feed";
 import { Title } from "./pages/Title";
+import { FeedFilter } from "./pages/FeedFilter";
 
 const theme: Theme = {
   colors: {
@@ -52,6 +53,7 @@ export const App = () => {
           element={<ProfilePicturePicker />}
         />
         <Route path="/title/:type/:id" element={<Title />} />
+        <Route path="/:type" element={<FeedFilter />} />
       </Routes>
     </ThemeProvider>
   );

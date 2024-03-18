@@ -222,4 +222,35 @@ public class TitleService {
     public Integer countSeries(String title){
         return titleRepository.findSeasonsByTitle(title).size();
     }
+
+    // TWO PARAMS FILTERS
+
+    public Set<TitleDTO> getAllTitlesByTypeAndPopularity(String type){
+        Set<Title> titles=titleRepository.findAllBySeasonNrTypeOrderByViewsDesc(0,type);
+        return TitleDTOMapper.mapToDTOSet(titles.stream().limit(10).collect(Collectors.toSet()));
+    }
+
+    public Set<TitleDTO>  getAllTitlesByTypeAndGenre(String type,String genre){
+        Set<Title> titles=titleRepository.findAllByTypeGenre(type,genre);
+        return TitleDTOMapper.mapToDTOSet(titles);
+    }
+
+    public List<TitleDTO>  getAllTitlesByTypeAndRecentlyAdded(String type){
+        LocalDate currentDate=LocalDate.now();
+        currentDate=currentDate.minusMonths(1);
+      List<Title> titles=titleRepository.findByRecentlyAddedAndType(type,currentDate);
+        return TitleDTOMapper.mapToDTOList(titles);
+    }
+
+    public List<TitleDTO>  getAllTitlesByTypeAndAlphabetic(String type){
+        List<Title> titles=titleRepository.findAllByTypeAlphabetic(type);
+        return TitleDTOMapper.mapToDTOList(titles);
+    }
+
+
+
+
+
+
+
 }

@@ -335,4 +335,12 @@ public class Title {
     public void setVotes(Integer votes) {
         this.votes = votes;
     }
+
+    @Override
+    public String toString() {
+        return "Title{" +
+                "titleId=" + titleId +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

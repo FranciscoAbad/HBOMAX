@@ -128,4 +128,12 @@ public class TitleDTO {
     public void setName(Image name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "TitleDTO{" +
+                "titleId=" + titleId +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

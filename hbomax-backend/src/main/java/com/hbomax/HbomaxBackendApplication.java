@@ -4,6 +4,7 @@ import com.hbomax.config.RSAKeyProperties;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
 import com.hbomax.services.ImageService;
+import com.hbomax.services.TitleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,8 +26,10 @@ public class HbomaxBackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo,LenguageRepository lenguageRepo,CompanyRepository companyRepo){
+	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo, LenguageRepository lenguageRepo, CompanyRepository companyRepo, TitleService titleService){
 		return args ->{
+			System.out.println("---------->"+titleService.getAllTitlesByTypeAndAlphabetic("movie"));
+
 /*			Role r =roleRepo.save(new Role(1,"USER"));
 
 			Set<Role> roles=new HashSet<>();
