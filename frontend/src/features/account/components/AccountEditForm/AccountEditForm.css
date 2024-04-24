@@ -1,0 +1,47 @@
+/* EMAIL */
+.account-edit-form {
+  width: calc(-70px + 43vw);
+}
+
+.account-edit-form-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(221, 221, 221, 0.06);
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 64px;
+  padding-top: 20px;
+  text-decoration: none;
+  width: auto;
+}
+
+.account-edit-form-row:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.account-edit-form-row:last-child {
+  padding-bottom: 64px;
+  border-bottom: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.account-edit-form-row-title {
+  padding: px 0px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 15px;
+  letter-spacing: 0.2px;
+  position: relative;
+}
+
+.account-edit-form-row-title > svg {
+  fill: transparent;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.account-edit-form-row-text {
+  color: rgba(255, 255, 255, 255);
+}

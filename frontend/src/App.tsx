@@ -15,6 +15,12 @@ import { ProfilePicturePicker } from "./pages/ProfilePicturePicker";
 import { Feed } from "./pages/Feed";
 import { Title } from "./pages/Title";
 import { FeedFilter } from "./pages/FeedFilter";
+import { Movies } from "./pages/Movies";
+import { Series } from "./pages/Series";
+import { Account } from "./pages/Account";
+import { ProtectedRoute } from "./components/AuthWrapper/ProtectedRoute";
+import { useCheckToken } from "./components/AuthWrapper/checkToken";
+import { AccountEdit } from "./pages/AccountEdit";
 
 const theme: Theme = {
   colors: {
@@ -37,23 +43,50 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 
+/*  */
+
 export const App = () => {
+  const { tokenValid, isFetching } = useCheckToken();
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Feed />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/profile/select" element={<ProfilePicker />} />
-        <Route path="/profile/editor/*" element={<ProfileEditor />} />
-        <Route
-          path="/profile/adult/character/select"
-          element={<ProfilePicturePicker />}
-        />
-        <Route path="/title/:type/:id" element={<Title />} />
-        <Route path="/:type" element={<FeedFilter />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/home" element={<Feed />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile/select" element={<ProfilePicker />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile/editor/*" element={<ProfileEditor />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/profile/adult/character/select"
+            element={<ProfilePicturePicker />}
+          />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/account" element={<Account />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/account/edit/email" element={<AccountEdit />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/tv-shows" element={<Series />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/movies" element={<Movies />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/genre/:genre" element={<FeedFilter />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/title/:type/:id" element={<Title />} />
+        </Route>
       </Routes>
     </ThemeProvider>
   );

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { FeedNavBar } from "../FeedNavBar/FeedNavBar";
 import { FeedSideBar } from "../FeedSideBar/FeedSideBar";
 
-export const FeedNav: React.FC = () => {
+interface FeedNavProps {
+  title?: string;
+}
+
+export const FeedNav: React.FC<FeedNavProps> = ({ title }) => {
   const [sideBar, toggleSideBar] = useState<boolean>(false);
 
   const displaySideBar = () => {
@@ -10,7 +14,7 @@ export const FeedNav: React.FC = () => {
   };
   return (
     <>
-      <FeedNavBar toggleSideBar={displaySideBar} />
+      <FeedNavBar toggleSideBar={displaySideBar} title={title} />
       {sideBar ? <FeedSideBar toggleViewSideBar={displaySideBar} /> : <></>}
     </>
   );

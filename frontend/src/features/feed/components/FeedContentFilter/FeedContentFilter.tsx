@@ -7,7 +7,6 @@ import { FeedNav } from "../FeedNav/FeedNav";
 import { FeedContentFilterNav } from "../FeedContentFilterNav/FeedContentFilterNav";
 import { FeedTitlesGrid } from "../FeedGridTitles/FeedTitlesGrid";
 import { filterItsGenre } from "./utils/determineFetchUrl";
-import { FeedNavBar } from "../FeedNavBar/FeedNavBar";
 
 interface FilterTypes {
   label: string;
@@ -28,7 +27,7 @@ export const FeedContentFilter: React.FC<FeedContentFilterTypes> = ({
     <div className="">
       <FeedNav />
       <FeedHeaderSlider fetchUrl={`title/title/type/${type}/trending`} />
-      <FeedContentFilterNav changeValue={setFilter} />
+      <FeedContentFilterNav changeValue={setFilter} types={[]} />
       {filter === "featured" ? (
         <>
           <FeedTitleSlider
@@ -37,6 +36,7 @@ export const FeedContentFilter: React.FC<FeedContentFilterTypes> = ({
             subTitle=""
             banner={false}
             big={false}
+            info={false}
           />
           <FeedTitleSlider
             fetchUrl={`title/title/type/${type}/just-added`}
@@ -44,6 +44,7 @@ export const FeedContentFilter: React.FC<FeedContentFilterTypes> = ({
             subTitle=""
             banner={true}
             big={true}
+            info={false}
           />
           <FeedTitleSlider
             fetchUrl={`title/title/type/${type}/just-added`}
@@ -51,6 +52,7 @@ export const FeedContentFilter: React.FC<FeedContentFilterTypes> = ({
             subTitle=""
             banner={false}
             big={true}
+            info={true}
           />
         </>
       ) : (

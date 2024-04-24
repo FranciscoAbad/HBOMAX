@@ -30,6 +30,7 @@ interface FeedTitleSliderProps {
   big: boolean;
   backgroundFade?: string;
   sideSlide?: SliderTitleSide;
+  info: boolean;
 }
 
 export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
@@ -40,6 +41,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
   backgroundFade,
   sideSlide,
   big,
+  info,
 }) => {
   const { data, isFetchig } = useFetchTitles({ fetchUrl });
   const [isPrevButtonVisible, setIsPrevButtonVisible] = useState(false);
@@ -103,6 +105,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
           banner,
           sideSlide ? true : false
         )}
+        onResize={(swiper: SwiperType) => handleSlideChange(swiper)}
       >
         <div className="feed-title-slide-nav-prev">
           <div
@@ -126,7 +129,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
 
         {data.map((item) => (
           <SwiperSlide key={item.titleId}>
-            <FeedTitleSliderItem banner={banner} item={item} />
+            <FeedTitleSliderItem banner={banner} item={item} info={info} />
           </SwiperSlide>
         ))}
         <div className="feed-title-slide-nav-next">

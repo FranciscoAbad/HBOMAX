@@ -1,0 +1,8 @@
+.account {
+  overflow-y: auto;
+  background-image: url("https://play.hbomax.com/default-3840x2160.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat-y;
+  height: 100%;
+}

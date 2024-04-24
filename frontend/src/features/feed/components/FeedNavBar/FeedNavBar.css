@@ -46,8 +46,17 @@
 
 .feed-nav-bar-flex-mid {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.feed-nav-bar-flex-mid > h4 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 21px;
+  margin-top: 20px;
+  letter-spacing: 1.2px;
 }
 
 .feed-nav-bar-flex-mid > img {
@@ -149,6 +158,7 @@
   margin-bottom: 4px;
   border: 0px solid rgba(0, 0, 0, 0);
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 .feed-nav-bar-drop-menu-button:hover {

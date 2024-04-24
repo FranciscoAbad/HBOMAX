@@ -6,12 +6,20 @@ import "./FeedNavBar.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/Store";
 import { useNavigate } from "react-router-dom";
+import {
+  firstLetterToUpperCase,
+  firstLettesToUpperCaseAndReplace,
+} from "../../../title/utils/TitleUtils";
 
 interface FeedNavBarProps {
   toggleSideBar: () => void;
+  title?: string;
 }
 
-export const FeedNavBar: React.FC<FeedNavBarProps> = ({ toggleSideBar }) => {
+export const FeedNavBar: React.FC<FeedNavBarProps> = ({
+  toggleSideBar,
+  title,
+}) => {
   const state = useSelector((state: RootState) => state);
   const [dropMenu, toggleDropMenu] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -61,11 +69,29 @@ export const FeedNavBar: React.FC<FeedNavBarProps> = ({ toggleSideBar }) => {
               }}
             />
           </div>
-          <div className="feed-nav-bar-flex-left-button">Movies</div>
-          <div className="feed-nav-bar-flex-left-button">Series</div>
+          <div
+            className="feed-nav-bar-flex-left-button"
+            onClick={() => navigate("/movies")}
+          >
+            Movies
+          </div>
+          <div
+            className="feed-nav-bar-flex-left-button"
+            onClick={() => navigate("/tv-shows")}
+          >
+            Series
+          </div>
         </div>
-        <div className="feed-nav-bar-flex-mid">
+        <div
+          className="feed-nav-bar-flex-mid"
+          onClick={() => navigate("/home")}
+        >
           <img src={Hbomax} alt="" />
+          {title && !isScrolled ? (
+            <h4>{firstLettesToUpperCaseAndReplace(title)}</h4>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="feed-nav-bar-flex-right">
           <div className="feed-nav-bar-flex-right-button">
@@ -111,9 +137,23 @@ export const FeedNavBar: React.FC<FeedNavBarProps> = ({ toggleSideBar }) => {
           >
             Switch profiles
           </div>
-          <div className="feed-nav-bar-drop-menu-button">Settings</div>
+          <div
+            className="feed-nav-bar-drop-menu-button"
+            onClick={() => {
+              navigate("/account");
+            }}
+          >
+            Settings
+          </div>
           <div className="feed-nav-bar-drop-menu-line"></div>
-          <div className="feed-nav-bar-drop-menu-button">Sign Out</div>
+          <div
+            className="feed-nav-bar-drop-menu-button"
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
+            Sign Out
+          </div>
         </div>
       ) : (
         <></>

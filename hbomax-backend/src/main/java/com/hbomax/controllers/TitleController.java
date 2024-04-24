@@ -111,7 +111,7 @@ public class TitleController {
         return ResponseEntity.ok(title);
     }
 
-    @GetMapping("/all/person/{firstNadme}/{lastName}")
+    @GetMapping("/all/person/{firstName}/{lastName}")
     public Set<TitleDTO> getAllFromPerson(@PathVariable String firstName, @PathVariable String lastName){
         return titleService.getAllTitlesOfPerson(firstName,lastName);
     }
@@ -177,6 +177,27 @@ public class TitleController {
     public List<TitleDTO> getAllByTypeAndAlphabetic(@PathVariable("type") String type){
         return titleService.getAllTitlesByTypeAndAlphabetic(type);
     }
+
+    //FILTERS BY TWO PARAMS STARTING WITH GENRE
+
+    @GetMapping("title/genre/{genre}/trending")
+    public Set<TitleDTO> getAllByGenreAndTrending(@PathVariable("genre") String genre){
+        return titleService.getAllTitlesByGenreAndPopularity(genre);
+    }
+
+
+    @GetMapping("title/genre/{genre}/just-added")
+    public List<TitleDTO> getAllByGenreAndJustadded(@PathVariable("genre") String genre){
+        return titleService.getAllTitlesByGenreAndRecentlyAdded(genre);
+    }
+
+
+    @GetMapping("title/genre/{genre}/alphabetic")
+    public List<TitleDTO> getAllByGenreAndAlphabetic(@PathVariable("genre") String genre){
+        return titleService.getAllTitlesByGenreAndAlphabetic(genre);
+    }
+
+
 
 
 

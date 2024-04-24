@@ -22,9 +22,6 @@ export const SignIn: React.FC = () => {
   const [jwt, setJwt, removeJwt] = useLocalStorage("token", "");
   const navigate = useNavigate();
 
-  if (state.user.token) {
-    navigate("/home");
-  }
   return (
     <div className="sign-in">
       <SignNav />

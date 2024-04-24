@@ -21,7 +21,7 @@ export const useFetchTitles = (props: UseFetchTitlesProps) => {
       .finally(() => {
         setIsFetching(false);
       });
-  }, []);
+  }, [props.fetchUrl]);
 
   return { data, isFetchig };
 };

@@ -54,6 +54,7 @@ export const Title: React.FC = () => {
           title="More like this"
           banner={false}
           big={false}
+          info={false}
         />
       )}
 

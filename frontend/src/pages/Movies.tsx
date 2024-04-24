@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { FeedContentFilter } from "../features/feed/components/FeedContentFilter/FeedContentFilter";
 import "./FeedFilter.css";
 import { FeedNav } from "../features/feed/components/FeedNav/FeedNav";
 import { FeedHeaderSlider } from "../features/feed/components/FeedHeaderSlider/FeedHeaderSlider";
 import { FeedContentFilterNav } from "../features/feed/components/FeedContentFilterNav/FeedContentFilterNav";
 import { FeedTitleSlider } from "../features/feed/components/FeedTitleSlider/FeedTitleSlider";
+import { filterItsGenre } from "../features/feed/components/FeedContentFilter/utils/determineFetchUrl";
 import { FeedTitlesGrid } from "../features/feed/components/FeedGridTitles/FeedTitlesGrid";
-import types from "../assets/Json/genericFilters.json";
+import types from "../assets/Json/filters.json";
 
-export const FeedFilter: React.FC = () => {
-  const { genre } = useParams<{ genre: string }>();
+interface FilterTypes {
+  label: string;
+}
+
+export const Movies: React.FC = () => {
+  const filters: FilterTypes[] = types as FilterTypes[];
+
   const [filter, setFilter] = useState<string>("featured");
+  console.log(filter === "featured");
 
-  useEffect(() => {}, [genre]);
+  useEffect(() => {}, [filter]);
   return (
     <div className="feed-filter">
-      <FeedNav title={genre} />
-      <FeedHeaderSlider fetchUrl={`title/title/genre/${genre}/trending`} />
+      <FeedNav title={"Movies"} />
+      <FeedHeaderSlider fetchUrl={`title/title/type/movie/trending`} />
       <FeedContentFilterNav changeValue={setFilter} types={types} />
       {filter === "featured" ? (
         <>
           <FeedTitleSlider
-            fetchUrl={`title/title/genre/${genre}/trending`}
+            fetchUrl={`title/title/type/movie/trending`}
             title="Trending"
             subTitle=""
             banner={false}
@@ -30,7 +35,7 @@ export const FeedFilter: React.FC = () => {
             info={false}
           />
           <FeedTitleSlider
-            fetchUrl={`title/titlegenre/${genre}/just-added`}
+            fetchUrl={`title/title/type/movie/just-added`}
             title="Just added"
             subTitle=""
             banner={true}
@@ -38,7 +43,7 @@ export const FeedFilter: React.FC = () => {
             info={false}
           />
           <FeedTitleSlider
-            fetchUrl={`title/title/genre/${genre}/just-added`}
+            fetchUrl={`title/title/type/movie/just-added`}
             title="Trending"
             subTitle=""
             banner={false}
@@ -47,7 +52,13 @@ export const FeedFilter: React.FC = () => {
           />
         </>
       ) : (
-        <FeedTitlesGrid fetchUrl={`title/title/genre/${genre}/${filter}`} />
+        <FeedTitlesGrid
+          fetchUrl={
+            filterItsGenre(filter)
+              ? `title/title/type/movie/genre/${filter}`
+              : `title/title/type/movie/${filter}`
+          }
+        />
       )}
     </div>
   );

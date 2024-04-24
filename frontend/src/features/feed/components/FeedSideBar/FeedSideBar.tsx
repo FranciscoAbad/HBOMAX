@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./FeedSideBar.css";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useNavigate } from "react-router-dom";
 
 interface FeedSideBarProps {
   toggleViewSideBar: () => void;
@@ -11,6 +12,7 @@ export const FeedSideBar: React.FC<FeedSideBarProps> = ({
   toggleViewSideBar,
 }) => {
   const [sideBarSubMenu, toggleSidBarSubMenu] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const displaySubMenu = () => {
     toggleSidBarSubMenu(!sideBarSubMenu);
@@ -31,9 +33,24 @@ export const FeedSideBar: React.FC<FeedSideBarProps> = ({
               </div>
             </div>
             <div className="feed-side-bar-column-list">
-              <div className="feed-side-bar-column-list-button">Home</div>
-              <div className="feed-side-bar-column-list-button">Series</div>
-              <div className="feed-side-bar-column-list-button">Movies</div>
+              <div
+                className="feed-side-bar-column-list-button"
+                onClick={() => navigate("/home")}
+              >
+                Home
+              </div>
+              <div
+                className="feed-side-bar-column-list-button"
+                onClick={() => navigate("/tv-shows")}
+              >
+                Series
+              </div>
+              <div
+                className="feed-side-bar-column-list-button"
+                onClick={() => navigate("/movies")}
+              >
+                Movies
+              </div>
               <div className="feed-side-bar-column-list-button">Originals</div>
               <div className="feed-side-bar-column-list-button">Just Added</div>
               <div className="feed-side-bar-column-list-button">
@@ -90,30 +107,78 @@ export const FeedSideBar: React.FC<FeedSideBarProps> = ({
       {sideBarSubMenu ? (
         <div className="feed-side-bar-genres">
           <div className="feed-side-bar-genres-column">
-            <div className="feed-side-bar-genres-column-button">Action</div>
-            <div className="feed-side-bar-genres-column-button">Animation</div>
-            <div className="feed-side-bar-genres-column-button">Comedy</div>
-            <div className="feed-side-bar-genres-column-button">Crime</div>
-            <div className="feed-side-bar-genres-column-button">
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/action")}
+            >
+              Action
+            </div>
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/animation")}
+            >
+              Animation
+            </div>
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/comedy")}
+            >
+              Comedy
+            </div>
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/crime")}
+            >
+              Crime
+            </div>
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/documentaries")}
+            >
               Documentaries
             </div>
-            <div className="feed-side-bar-genres-column-button">Drama</div>
-            <div className="feed-side-bar-genres-column-button">
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/drama")}
+            >
+              Drama
+            </div>
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/fantasy-&-sci-fi")}
+            >
               Fantasy & Sci-Fi
             </div>
-            <div className="feed-side-bar-genres-column-button">
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/horror")}
+            >
               Horror & Suspense
             </div>
-            <div className="feed-side-bar-genres-column-button">
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/international")}
+            >
               International
             </div>
-            <div className="feed-side-bar-genres-column-button">
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/kids")}
+            >
               Kids & Family
             </div>
-            <div className="feed-side-bar-genres-column-button">
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/local")}
+            >
               Local Productions
             </div>
-            <div className="feed-side-bar-genres-column-button">Romance</div>
+            <div
+              className="feed-side-bar-genres-column-button"
+              onClick={() => navigate("/genre/romance")}
+            >
+              Romance
+            </div>
           </div>
         </div>
       ) : (

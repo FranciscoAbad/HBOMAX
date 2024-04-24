@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Featured",
+    "filter": "featured"
+  },
+  {
+    "label": "A-Z",
+    "filter": "alphabetic"
+  },
+  {
+    "label": "Just Added",
+    "filter": "just-added"
+  },
+  {
+    "label": "Popular",
+    "filter": "trending"
+  }
+]

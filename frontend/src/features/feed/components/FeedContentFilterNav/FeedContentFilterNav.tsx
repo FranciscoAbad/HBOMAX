@@ -11,11 +11,11 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { determineBreakPoints } from "../../utils/DetermineBreakPoints";
 import { useNavigate } from "react-router-dom";
 import { FeedTitleSliderItem } from "../FeedTitleSliderItem/FeedTitleSliderItem";
-import types from "../../../../assets/Json/filters.json";
 import "./FeedContentFitlerNav.css";
 
 interface FeedContentFilterNavProps {
   changeValue: (param: string) => void;
+  types: FilterTypes[];
 }
 
 interface FilterTypes {
@@ -25,11 +25,32 @@ interface FilterTypes {
 
 export const FeedContentFilterNav: React.FC<FeedContentFilterNavProps> = ({
   changeValue,
+  types,
 }) => {
   const filters: FilterTypes[] = types as FilterTypes[];
   const [isPrevButtonVisible, setIsPrevButtonVisible] = useState(false);
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(true);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const container = document.querySelector(".feed-content-navigation");
+      const swiperWrapper = document.querySelector(".feed-button-slider");
+
+      if (container && swiperWrapper) {
+        setIsOverflowing(!(container.clientWidth > swiperWrapper.clientWidth));
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleSlideChange = (swiper: SwiperType) => {
     if (swiper.activeIndex === 0) {
@@ -47,6 +68,9 @@ export const FeedContentFilterNav: React.FC<FeedContentFilterNavProps> = ({
       }
     }
   };
+  console.log(isOverflowing);
+  console.log(isNextButtonVisible);
+  console.log(isPrevButtonVisible);
   return (
     <>
       <div className="feed-title-slider-gradient"></div>
@@ -63,6 +87,7 @@ export const FeedContentFilterNav: React.FC<FeedContentFilterNavProps> = ({
           effect="Cube"
           onSlideChange={(swiper: SwiperType) => handleSlideChange(swiper)}
           modules={[Navigation]}
+          onResize={(swiper: SwiperType) => handleSlideChange(swiper)}
         >
           <div className="feed-button-slide-nav-prev">
             <div

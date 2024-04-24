@@ -54,6 +54,24 @@
 .feed-title-slide-content-controlls-button > svg {
   fill: black;
 }
+.feed-title-slide-info {
+  margin-left: 5px;
+}
+
+.feed-title-slide-info-name {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+.feed-title-slide-info-rate {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.8);
+}
 
 .feed-title-slider:hover .show {
   display: flex;

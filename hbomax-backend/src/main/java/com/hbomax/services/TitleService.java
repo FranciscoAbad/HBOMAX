@@ -247,8 +247,24 @@ public class TitleService {
         return TitleDTOMapper.mapToDTOList(titles);
     }
 
+    // TWO PARAMS FILTERS
 
+    public Set<TitleDTO> getAllTitlesByGenreAndPopularity(String genre){
+        Set<Title> titles=titleRepository.findAllBySeasonNrGenreOrderByViewsDesc(genre);
+        return TitleDTOMapper.mapToDTOSet(titles.stream().limit(10).collect(Collectors.toSet()));
+    }
 
+    public List<TitleDTO>  getAllTitlesByGenreAndRecentlyAdded(String genre){
+        LocalDate currentDate=LocalDate.now();
+        currentDate=currentDate.minusMonths(1);
+        List<Title> titles=titleRepository.findByRecentlyAddedAndGenre(genre,currentDate);
+        return TitleDTOMapper.mapToDTOList(titles);
+    }
+
+    public List<TitleDTO>  getAllTitlesByGenreAndAlphabetic(String genre){
+        List<Title> titles=titleRepository.findAllByGenreAlphabetic(genre);
+        return TitleDTOMapper.mapToDTOList(titles);
+    }
 
 
 

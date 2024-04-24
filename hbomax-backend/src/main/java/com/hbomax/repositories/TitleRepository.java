@@ -60,11 +60,19 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
     @Query("SELECT t from Title t WHERE t.addedDate BETWEEN :maxDate AND CURRENT_DATE AND t.seasonNr=0 AND t.type= :type")
     List<Title> findByRecentlyAddedAndType(@Param("type") String type, @Param("maxDate") LocalDate maxDate);
 
-
     @Query("SELECT t FROM Title t WHERE t.seasonNr = 0 AND t.type= :type ORDER BY t.title ASC")
     List<Title> findAllByTypeAlphabetic(@Param("type") String type);
 
-    //"select * from title t where t.season_nr =0 and t.type ='movie'  order by t.title"
+    //TWO PARAMS PRINCIPAL=GENRE
+
+    @Query("SELECT t from Title t JOIN t.genres g WHERE g.genre=:genre AND t.seasonNr=0 ORDER BY t.views DESC")
+    Set<Title> findAllBySeasonNrGenreOrderByViewsDesc(@Param("genre") String genre);
+
+    @Query("SELECT t from Title t JOIN t.genres g WHERE t.addedDate BETWEEN :maxDate AND CURRENT_DATE AND g.genre=:genre AND t.seasonNr=0 ")
+    List<Title> findByRecentlyAddedAndGenre(@Param("genre") String genre, @Param("maxDate") LocalDate maxDate);
+
+    @Query("SELECT t from Title t JOIN t.genres g WHERE g.genre=:genre AND t.seasonNr=0 ORDER BY t.title ASC")
+    List<Title> findAllByGenreAlphabetic(@Param("genre") String genre);
 
 }
 
