@@ -28,9 +28,9 @@ public class HbomaxBackendApplication {
 	@Bean
 	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo, LenguageRepository lenguageRepo, CompanyRepository companyRepo, TitleService titleService){
 		return args ->{
-			System.out.println("---------->"+titleService.getAllTitlesByTypeAndAlphabetic("movie"));
-
-/*			Role r =roleRepo.save(new Role(1,"USER"));
+			System.out.println("---------->"+titleService.getAllTitlesByOneParam("en"));
+/*
+			Role r =roleRepo.save(new Role(1,"USER"));
 
 			Set<Role> roles=new HashSet<>();
 
@@ -92,7 +92,6 @@ public class HbomaxBackendApplication {
 			Genre action=new Genre();
 			action.setGenre("animation");
 			genreRepo.save(action);
-
 
 
 			Country argentina=new Country();

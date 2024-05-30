@@ -20,7 +20,7 @@ export const FeedTitleSliderItem: React.FC<FeedTitleSliderItemProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <>
+    <div>
       <div
         key={item.titleId}
         onClick={() => {
@@ -48,6 +48,6 @@ export const FeedTitleSliderItem: React.FC<FeedTitleSliderItemProps> = ({
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };

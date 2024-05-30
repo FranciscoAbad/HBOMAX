@@ -47,7 +47,10 @@ export const FeedFilter: React.FC = () => {
           />
         </>
       ) : (
-        <FeedTitlesGrid fetchUrl={`title/title/genre/${genre}/${filter}`} />
+        <FeedTitlesGrid
+          fetchUrl={`title/title/genre/${genre}/${filter}`}
+          banner={false}
+        />
       )}
     </div>
   );

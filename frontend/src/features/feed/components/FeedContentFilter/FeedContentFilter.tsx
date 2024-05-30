@@ -62,6 +62,7 @@ export const FeedContentFilter: React.FC<FeedContentFilterTypes> = ({
               ? `title/title/type/${type}/genre/${filter}`
               : `title/title/type/${type}/${filter}`
           }
+          banner={false}
         />
       )}
     </div>

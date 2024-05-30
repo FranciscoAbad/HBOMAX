@@ -8,9 +8,7 @@ export const LandingFeatures: React.FC = () => {
     <div className="landing-features">
       <div className="landing-features-container container">
         <div className="landing-features-header">
-          <h1 className="landing-features-header-title">
-            Una experiencia sencilla y completa
-          </h1>
+          <h1 className="landing-title">Una experiencia sencilla y completa</h1>
           <p className="landing-features-header-text">
             Disponibilidad varía de acuerdo al plan.
           </p>

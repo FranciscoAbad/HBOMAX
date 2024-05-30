@@ -16,7 +16,7 @@ export const LandingFaqs: React.FC = () => {
     <div className="landing-faqs">
       <div className="landing-faqs-container container">
         <div className="landing-faqs-header">
-          <h2 className="landing-faqs-header-title">
+          <h2 className="landing-title">
             ¿Tienes preguntas? Tenemos las respuestas
           </h2>
         </div>

@@ -2,12 +2,14 @@ package com.hbomax.services;
 
 import com.hbomax.exceptions.TitleDoesNotExistException;
 import com.hbomax.exceptions.UserDoesNotExistException;
+import com.hbomax.exceptions.UserHasAlreadyMadeAView;
 import com.hbomax.models.ApplicationUser;
 import com.hbomax.models.Title;
 import com.hbomax.models.View;
 import com.hbomax.repositories.TitleRepository;
 import com.hbomax.repositories.UserRepository;
 import com.hbomax.repositories.ViewRepository;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,17 +30,30 @@ public class ViewService {
     }
 
 
-    @Transactional
-    public View addView(String username, Integer titleId){
+
+    public View addView(String username, Integer titleId) throws UserHasAlreadyMadeAView{
+        try{
         ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
         Title title=titleRepo.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
-        title.setViews(title.getViews()+1);
-        View view = new View();
-        view.setUserView(user);
-        view.setTitle(title);
-        view.setViewDate(LocalDateTime.now());
+        View alreadyExist=viewRepo.findViewByUserAndTitle(username,titleId).orElse(null);
 
-        return viewRepo.save(view);
+        if(alreadyExist!=null){
+            throw new UserHasAlreadyMadeAView();
+        }
+            title.setViews(title.getViews()+1);
+            View view = new View();
+            view.setUserView(user);
+            view.setTitle(title);
+            view.setViewDate(LocalDateTime.now());
 
-    }
+
+                return viewRepo.save(view);
+        } catch( Exception e){
+             throw new RuntimeException(e);
+            }
+
+
+
+
+}
 }

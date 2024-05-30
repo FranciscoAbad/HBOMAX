@@ -119,6 +119,21 @@ public class UserService implements UserDetailsService {
         return userRepo.save(user);
     }
 
+    public ApplicationUser setEmail(String email, String newEmail){
+        ApplicationUser user=userRepo.findByEmail(email).orElseThrow(UserDoesNotExistException::new);
+
+        user.setEmail(newEmail);
+
+        try{
+            return userRepo.save(user);
+        }catch (Exception e){
+            throw new EmailAlreadyTakenException();
+        }
+
+    }
+
+
+
     private String generateUsername(String name){
         long generatedNumber=(long) Math.floor(Math.random()*1_000_000_000);
         return name+generatedNumber;

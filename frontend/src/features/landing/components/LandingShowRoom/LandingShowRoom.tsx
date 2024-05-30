@@ -15,7 +15,7 @@ export const LandingShowRoom: React.FC = () => {
     <div className="landing-show-room">
       <div className="landing-show-room-container">
         <div className="landing-show-room-header">
-          <h1 className="landing-show-room-header-title">
+          <h1 className="landing-title">
             Episodios gratis, sin necesidad de suscripción
           </h1>
         </div>

@@ -10,7 +10,7 @@ export const LandingPlanPicker: React.FC = () => {
   return (
     <div className="landing-planpicker">
       <div className="landing-planpicker-container">
-        <h1 className="landing-planpicker-title">Elige tu plan Estándar</h1>
+        <h1 className="landing-title">Elige tu plan Estándar</h1>
         <div className="landing-planpicker-details">
           <p className="landing-planpicker-details-title">
             ¿QUÉ ESTA INCLUIDO?

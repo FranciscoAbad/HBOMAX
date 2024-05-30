@@ -28,6 +28,7 @@ private String rating;
 
 private String type;
 
+
     private Integer views;
 
     private Integer votes;

@@ -2,6 +2,7 @@ import React from "react";
 
 import "./LandingBanner.css";
 import Hbomax from "../../../../assets/hbomax-med.svg";
+import { useFetchFullTitle } from "../../../../hooks/useFetchFullTitle";
 
 export const LandingBanner: React.FC = () => {
   return (

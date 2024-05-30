@@ -1,7 +1,7 @@
 import React from "react";
 import "./assets/global.css";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-//import { Landing } from "./pages/Landing";
+
 import { Theme } from "./utils/GlobalInterfaces";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Landing } from "./pages/Landing";
@@ -20,7 +20,11 @@ import { Series } from "./pages/Series";
 import { Account } from "./pages/Account";
 import { ProtectedRoute } from "./components/AuthWrapper/ProtectedRoute";
 import { useCheckToken } from "./components/AuthWrapper/checkToken";
-import { AccountEdit } from "./pages/AccountEdit";
+import { AccountEditEmail } from "./pages/AccountEditEmail";
+import { AccountEditPassword } from "./pages/AccountEditPassword";
+import { AccountEditName } from "./pages/AccountEditName";
+import { TitleRater } from "./features/title/components/TitleRater/TitleRater";
+import { Search } from "./pages/Search";
 
 const theme: Theme = {
   colors: {
@@ -73,7 +77,16 @@ export const App = () => {
           <Route path="/account" element={<Account />} />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/account/edit/email" element={<AccountEdit />} />
+          <Route path="/account/edit/email" element={<AccountEditEmail />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/account/edit/password"
+            element={<AccountEditPassword />}
+          />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/account/edit/name" element={<AccountEditName />} />
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/tv-shows" element={<Series />} />
@@ -86,6 +99,9 @@ export const App = () => {
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/title/:type/:id" element={<Title />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/search" element={<Search />} />
         </Route>
       </Routes>
     </ThemeProvider>

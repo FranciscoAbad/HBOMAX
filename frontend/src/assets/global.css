@@ -66,10 +66,24 @@ body,
   padding: 0 15px;
   margin: 0 auto;
 }
+.landing-title {
+  font-size: 24px;
+  line-height: 28px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  text-align: center;
+}
 
 @media (min-width: 576px) {
   .container {
     max-width: 520px;
+  }
+  .landing-title {
+    font-size: 26px;
+    line-height: 34px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    text-align: center;
   }
 }
 
@@ -77,11 +91,25 @@ body,
   .container {
     max-width: 720px;
   }
+  .landing-title {
+    font-size: 28px;
+    line-height: 34px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    text-align: center;
+  }
 }
 
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
+  }
+  .landing-title {
+    font-size: 32px;
+    line-height: 38px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    text-align: center;
   }
 }
 

@@ -24,6 +24,9 @@ public class View {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime viewDate;
 
+    @Version
+    private Long version;
+
     public View() {
         super();
     }

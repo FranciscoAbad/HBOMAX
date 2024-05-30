@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../utils/GlobalInterfaces";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "../Store";
 
 interface UserSliceState {
   loggedIn: User | undefined;
@@ -8,6 +10,8 @@ interface UserSliceState {
   token: string;
   fromRegister: boolean;
   error: boolean;
+  errorMessage: string | undefined;
+  loading: boolean;
 }
 
 interface LoginBody {
@@ -18,6 +22,11 @@ interface LoginBody {
 interface VerifyUserBody {
   email: string;
   username: string;
+}
+
+interface UpdateEmail {
+  email: string;
+  newEmail: string;
 }
 
 export const verifyUsername = createAsyncThunk(
@@ -49,12 +58,29 @@ export const getUserByToken = createAsyncThunk(
   }
 );
 
+export const updateEmail = createAsyncThunk(
+  "user/email",
+  async (body: UpdateEmail, thunkApi) => {
+    try {
+      const req = await axios.put(
+        "http://localhost:8080/auth/update/email",
+        body
+      );
+      return req.data;
+    } catch (e) {
+      return thunkApi.rejectWithValue(e);
+    }
+  }
+);
+
 const initialState: UserSliceState = {
   loggedIn: undefined,
   username: "",
   token: "",
   fromRegister: false,
   error: false,
+  errorMessage: "",
+  loading: false,
 };
 
 export const loginUser = createAsyncThunk(
@@ -178,6 +204,32 @@ export const UserSlice = createSlice({
       state = {
         ...state,
         error: true,
+      };
+      return state;
+    });
+    builder.addCase(updateEmail.fulfilled, (state, action) => {
+      state = {
+        ...state,
+        loggedIn: action.payload,
+        loading: false,
+        error: false,
+      };
+      return state;
+    });
+    builder.addCase(updateEmail.pending, (state, action) => {
+      state = {
+        ...state,
+        loading: true,
+        error: false,
+      };
+      return state;
+    });
+    builder.addCase(updateEmail.rejected, (state, action) => {
+      state = {
+        ...state,
+        loading: false,
+        error: true,
+        errorMessage: action.error.message,
       };
       return state;
     });

@@ -20,7 +20,6 @@ public class TitleDTO {
 
     private String rating;
 
-
     private Image banner;
 
     private Image poster;

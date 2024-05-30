@@ -58,6 +58,7 @@ export const Movies: React.FC = () => {
               ? `title/title/type/movie/genre/${filter}`
               : `title/title/type/movie/${filter}`
           }
+          banner={false}
         />
       )}
     </div>

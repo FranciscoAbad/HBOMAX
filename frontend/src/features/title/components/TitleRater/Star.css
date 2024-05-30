@@ -1,0 +1,76 @@
+.title-rater {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 28px;
+}
+.title-rater-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title-rater-row-button {
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-rater-row-description {
+  font-size: 13px;
+}
+.title-rater-row-description > span {
+  font-weight: 600;
+}
+
+.star-rating {
+  display: flex;
+}
+.star-rating > div {
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+.star-inner {
+  position: relative;
+  display: inline-block;
+}
+
+.star.filled .star-inner,
+.star.half-filled .star-inner::before,
+.star.half-hovered .star-inner::before,
+.star.hovered .star-inner {
+  color: gold;
+}
+
+.star.half-filled .star-inner::before,
+.star.half-hovered .star-inner::before,
+.star-inner.first-half-hover::before,
+.star-inner.second-half-hover::before {
+  content: "★";
+  color: gold;
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.star-inner.second-half-hover::before {
+  content: "★";
+  color: gold;
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}

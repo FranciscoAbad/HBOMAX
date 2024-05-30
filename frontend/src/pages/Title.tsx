@@ -10,6 +10,8 @@ import { TitlePersons } from "../features/title/components/TitlePersons/TitlePer
 import { TitleEpisodes } from "../features/title/components/TitleEpisode/TitleEpisodes";
 import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 import { useFetchFullTitle } from "../hooks/useFetchFullTitle";
+import { useMakeView } from "../hooks/useMakeView";
+import { TitleSharp } from "@mui/icons-material";
 
 interface Title {
   id: number;
@@ -18,7 +20,7 @@ interface Title {
 export const Title: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
   const { title, isFetching } = useFetchFullTitle(id ? id : "");
-
+  useMakeView(id ? id : "");
   const [cast, setCast] = useState<Cast[]>([]);
 
   useEffect(() => {}, [id]);
@@ -39,8 +41,10 @@ export const Title: React.FC = () => {
           runtime={title.runtime}
           quality={title.quality}
           rating={title.rating}
+          votes={title.votes}
           releaseDate={title.releaseDate}
           type={type ? type : ""}
+          popularity={title.popularity}
         />
       ) : (
         <></>

@@ -22,9 +22,7 @@ export const LandingBrands: React.FC = () => {
     <div className="landing-brands">
       <div className="landing-brands-container container">
         <div className="landing-brands-header">
-          <h2 className="landing-brands-header-title">
-            Muchos universos por descubrir
-          </h2>
+          <h2 className="landing-title">Muchos universos por descubrir</h2>
         </div>
         <div className="landing-brands-content">
           <div className="landing-brands-content-row">

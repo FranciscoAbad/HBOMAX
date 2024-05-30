@@ -18,6 +18,7 @@
 .landing-brands-content-row {
   display: flex;
   min-height: auto;
+  flex-wrap: wrap;
 }
 
 .landing-brands-content-row-card {
@@ -172,4 +173,7 @@
     grid-template-rows: repeat(4, 1fr);
     gap: 25px;
   }
+}
+
+@media (max-width: 700px) {
 }

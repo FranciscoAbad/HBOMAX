@@ -266,6 +266,11 @@ public class TitleService {
         return TitleDTOMapper.mapToDTOList(titles);
     }
 
+    public List<TitleDTO>  getAllTitlesByOneParam(String param){
+        List<Title> titles=titleRepository.searchMovies(param);
+        return TitleDTOMapper.mapToDTOList(titles);
+    }
+
 
 
 

@@ -2,7 +2,7 @@ import { SVGProps } from "../../utils/GlobalInterfaces";
 
 export default function EditSVG(props: SVGProps) {
   return (
-    <svg width="20" height="20">
+    <svg width="20" height="20" onClick={props.onClick}>
       <path
         d="M10.7971 11.7933L7.5 12.4998L8.20652 9.20274L15.7428 1.6665L18.3333 4.25708L10.7971 11.7933Z"
         stroke="white"

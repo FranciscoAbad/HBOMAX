@@ -44,6 +44,7 @@ public class AuthenticationController {
 
     @ExceptionHandler({EmailAlreadyTakenException.class})
     public ResponseEntity<String> handleEmailTaken(){
+
         return new ResponseEntity<String>("The email you provided is already in use", HttpStatus.CONFLICT);
     }
 
@@ -92,6 +93,14 @@ public class AuthenticationController {
 
         return userService.setPassword(username,password);
     }
+
+    @PutMapping("/update/email")
+    public ApplicationUser updateEmail(@RequestBody LinkedHashMap<String,String> body){
+        String email=body.get("email");
+        String newEmail=body.get("newEmail");
+        return userService.setEmail(email,newEmail);
+    }
+
 
 
 

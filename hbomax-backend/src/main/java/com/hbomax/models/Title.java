@@ -64,6 +64,9 @@ public class Title {
     @Column(name="votes")
     private Integer votes;
 
+    @Column(name="totalScore")
+    private Float totalScore;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="profile_picture", referencedColumnName="image_id")
     private Image posterPicture;
@@ -127,6 +130,7 @@ public class Title {
         this.productionCompanies=new HashSet<>();
         this.distributionCompanies=new HashSet<>();
         this.brands=new HashSet<>();
+        this.totalScore=0F;
     }
 
     public LocalDate getAddedDate() {
@@ -201,6 +205,13 @@ public class Title {
         this.runtime = runtime;
     }
 
+    public Float getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(Float totalScore) {
+        this.totalScore = totalScore;
+    }
 
     public Float getPopularity() {
         return popularity;

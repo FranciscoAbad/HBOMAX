@@ -34,7 +34,7 @@
   width: 50%;
   max-height: 100%;
   height: 100%;
-  background-image: url(https://hbomax-images.warnermediacdn.com/2023-09/doom%20patrol-DSK.jpg?host=wme-hbomax-drupal-prod.s3.amazonaws.com&w=1284);
+  background-image: url(https://hbomax-images.warnermediacdn.com/2023-09/Our%20flag%20means%20death%20s2.jpg?host=wme-hbomax-drupal-prod.s3.amazonaws.com&w=828);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -216,9 +216,12 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .landing-releases-controls {
     max-width: 720px;
+  }
+  .landing-releases-flex-band-card:nth-child(2) {
+    background-image: url(https://hbomax-images.warnermediacdn.com/2023-09/doom%20patrol-DSK.jpg?host=wme-hbomax-drupal-prod.s3.amazonaws.com&w=1284);
   }
 }
 

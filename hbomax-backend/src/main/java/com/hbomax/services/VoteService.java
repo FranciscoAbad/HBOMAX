@@ -33,7 +33,7 @@ public class VoteService {
 
 
 
-    public Vote createVote(Integer rating, Integer titleId, String username) throws UserHasAlreadyMadeAVote{
+    public Vote createVote(Float rating, Integer titleId, String username) throws UserHasAlreadyMadeAVote{
 
 
             Title title=titleRepo.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
@@ -44,19 +44,28 @@ Vote voteExists=voteRepo.findVoteByUserAndTitle(username,titleId).orElse(null);
             }
 
             Vote vote=new Vote();
-            vote.setRating(rating);
             vote.setUserVote(user);
             title.setVotes(title.getVotes()+1);
             vote.setTitle(title);
             vote.setRateDate(LocalDateTime.now());
 
+            title.setTotalScore(title.getTotalScore()+rating);
+            title.setPopularity(title.getTotalScore()/title.getVotes());
+            vote.setRating(rating);
+
+            titleRepo.save(title);
             return voteRepo.save(vote);
 
 
     }
 
-    public Vote findVoteByTitleAndUser(Integer titleId,String username){
-        return voteRepo.findVoteByUserAndTitle(username,titleId).orElse(null);
+    public float findVoteByTitleAndUser(Integer titleId,String username){
+        Vote vote=voteRepo.findVoteByUserAndTitle(username,titleId).orElse(null);
+        if(vote!=null){
+            return vote.getRating();
+        }else{
+            return 0F;
+        }
 
     }
 

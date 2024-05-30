@@ -25,6 +25,7 @@
 }
 .landing-banner-grid-item-second {
   grid-column-start: 2;
+
   margin-top: 32px;
   width: fit-content;
   position: absolute;
@@ -134,5 +135,17 @@
   .landing-banner-grid {
     padding-top: 75vw;
     grid-template-columns: 100%;
+  }
+  .landing-banner-grid-item-second {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    margin-top: 0;
+    position: static;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

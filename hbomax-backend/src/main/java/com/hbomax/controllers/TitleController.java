@@ -1,6 +1,7 @@
 package com.hbomax.controllers;
 
 
+import com.google.common.net.HttpHeaders;
 import com.hbomax.dto.CreateMovieDTO;
 import com.hbomax.dto.SingleTitleDTO;
 import com.hbomax.dto.TitleDTO;
@@ -195,6 +196,14 @@ public class TitleController {
     @GetMapping("title/genre/{genre}/alphabetic")
     public List<TitleDTO> getAllByGenreAndAlphabetic(@PathVariable("genre") String genre){
         return titleService.getAllTitlesByGenreAndAlphabetic(genre);
+    }
+
+
+    @GetMapping("/search/{param}")
+    public List<TitleDTO> searchTitles( @PathVariable("param") String param){
+
+
+        return titleService.getAllTitlesByOneParam(param);
     }
 
 

@@ -24,15 +24,16 @@ public class VoteController {
 
 
     @PostMapping("/title/{titleId}/rating/{rating}")
-   public Vote makeAVote(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable("titleId") Integer titleId, @PathVariable("rating") Integer rating){
+   public Vote makeAVote(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable("titleId") Integer titleId, @PathVariable("rating") float rating){
         String username=tokenService.getUsernameFromToken(token);
         return voteService.createVote(rating,titleId,username);
     }
 
     @GetMapping("/get/title/{titleId}")
-    public Vote getAVoteFromUserAndTitle(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable("titleId") Integer titleId){
+    public float getAVoteFromUserAndTitle(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable("titleId") Integer titleId){
         String username=tokenService.getUsernameFromToken(token);
 
     return voteService.findVoteByTitleAndUser(titleId,username);
     }
+
 }

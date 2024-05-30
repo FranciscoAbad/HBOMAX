@@ -74,5 +74,22 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
     @Query("SELECT t from Title t JOIN t.genres g WHERE g.genre=:genre AND t.seasonNr=0 ORDER BY t.title ASC")
     List<Title> findAllByGenreAlphabetic(@Param("genre") String genre);
 
+    //SEARCH BAR QUERY, (MULTIPLE ATTRIBUTES)
+
+    @Query("SELECT DISTINCT t FROM Title t " +
+            "LEFT JOIN CastInfo ci ON t.titleId = ci.title.titleId " +
+            "LEFT JOIN ci.person p " +
+            "LEFT JOIN t.genres g " +
+            "LEFT JOIN t.countries c " +
+            "WHERE (LOWER(t.title) LIKE LOWER(CONCAT(REPLACE(:param, ' ', '-'), '%')) " +
+            "OR LOWER(g.genre) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
+            "OR LOWER(c.country) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
+            "OR LOWER(p.firstName) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
+            "OR LOWER(p.lastName) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
+            "OR LOWER(CONCAT(p.firstName, ' ', p.lastName)) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')))" +
+              "AND t.type='movie'")
+
+    List<Title> searchMovies(@Param("param") String param);
+
 }
 

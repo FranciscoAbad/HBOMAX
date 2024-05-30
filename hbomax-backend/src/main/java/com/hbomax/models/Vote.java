@@ -14,7 +14,7 @@ public class Vote {
     @Column(name = "vote_id")
     private Integer voteId;
     @Column(name = "rating")
-    private Integer rating;
+    private float rating;
     @ManyToOne
     @JoinColumn(name = "user_vote", referencedColumnName = "user_id")
     private ApplicationUser userVote;
@@ -47,11 +47,12 @@ public class Vote {
         this.voteId = voteId;
     }
 
-    public Integer getRating() {
+
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

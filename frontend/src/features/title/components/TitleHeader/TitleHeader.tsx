@@ -3,6 +3,7 @@ import "./TitleHeader.css";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { removeSlashAndAllToUpperCase } from "../../utils/TitleUtils";
+import { TitleRater } from "../TitleRater/TitleRater";
 
 interface TitleHeaderImageProps {
   imageId: number;
@@ -18,6 +19,8 @@ interface TitleHeaderImageProps {
   rating: string;
   releaseDate: string;
   type: string;
+  votes: number;
+  popularity: number;
 }
 
 export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
@@ -34,6 +37,8 @@ export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
   rating,
   releaseDate,
   type,
+  votes,
+  popularity,
 }) => {
   return (
     <div className="title-header-container">
@@ -75,6 +80,11 @@ export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
             <div className="title-header-content-controlls-add">
               <AddIcon sx={{ width: 30, height: 30 }} />
             </div>
+            <TitleRater
+              titleId={imageId}
+              titlePopularity={popularity}
+              titleVotes={votes}
+            />
           </div>
           <div className="title-header-content-overview">{overview}</div>
         </div>

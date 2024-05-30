@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import exp from "constants";
+
 import { setTextRange } from "typescript";
 
 interface PlanObject {
@@ -49,10 +50,7 @@ interface RegisterUser {
   password: string;
 }
 
-interface UpdatePhone {
-  username: string;
-  phone: string;
-}
+
 
 const initialState: RegisterSliceState = {
   loading: false,

@@ -55,6 +55,7 @@ export const Series: React.FC = () => {
               ? `title/title/type/tv-show/genre/${filter}`
               : `title/title/type/tv-show/${filter}`
           }
+          banner={false}
         />
       )}
     </div>

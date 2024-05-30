@@ -28,7 +28,6 @@
   margin-bottom: 20px;
   font-size: 32px;
   font-weight: 500;
-
   text-align: center;
 }
 
@@ -50,8 +49,7 @@
 
 .landing-planpicker-details-group {
   display: grid;
-  grid-template-columns: 33.33% 33.33% 33.33%;
-  padding-left: 40px;
+  grid-template-columns: 1fr 1fr;
   margin-bottom: 16px;
 }
 
@@ -59,6 +57,7 @@
   margin: 5px 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-weight: 100;
 }
 
@@ -75,6 +74,9 @@
   display: flex;
   margin: 0 auto;
   margin-top: 48px;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
 }
 
 .landing-planpicker-option {
@@ -91,6 +93,7 @@
   padding: 25px;
   margin: 0 20px;
   border-radius: 8px;
+  margin-bottom: 48px;
 }
 
 .default-plan {
@@ -109,7 +112,7 @@
 }
 
 .default-plan::before {
-  display: flex;
+  display: none;
   content: "AHORRA 3 MESES";
   position: absolute;
   width: 215px;
@@ -167,7 +170,7 @@
   border-radius: 68px;
   letter-spacing: 1.4px;
   color: #ffffff;
-  max-width: 337px;
+  max-width: 243px;
   line-height: 46px;
   text-align: center;
   font-size: 15.2px;
@@ -188,9 +191,51 @@
   color: #fff;
 }
 
-@media (max-width: 991px) {
-  .landing-planpicker {
-    background-position: right;
-    background-repeat: no-repeat;
+@media (min-width: 576px) {
+  .landing-planpicker-option-price {
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 60px;
   }
+  .landing-planpicker-option-text {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    line-height: 19px;
+    margin-top: 1rem;
+  }
+  .landing-planpicker-option-button {
+    letter-spacing: 1.4px;
+    max-width: 300px;
+    line-height: 46px;
+    font-size: 15.2px;
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-planpicker-options {
+    flex-direction: row;
+  }
+  .landing-planpicker-option {
+    width: 100%;
+    margin-bottom: 48px;
+  }
+  .landing-planpicker-details-group {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .default-plan::before {
+    display: flex;
+  }
+  .landing-planpicker-option-price {
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 42px;
+  }
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
 }

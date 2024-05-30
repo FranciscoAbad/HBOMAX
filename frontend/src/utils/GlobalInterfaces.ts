@@ -19,6 +19,10 @@ export interface StyledInputProps {
   color?: string;
 }
 
+export interface StyledInputGridProps {
+  banner: boolean;
+}
+
 export interface ValidatedInputState {
   active: boolean;
   valid: boolean;
@@ -39,6 +43,7 @@ export interface SVGProps {
   height: number;
   width: number;
   color?: string;
+  onClick?: () => void;
 }
 
 export interface Profile {
@@ -99,6 +104,7 @@ export interface FullTitle {
   popularity: number;
   rating: string;
   type: string;
+  votes: number;
   posterPicture: Image | null;
   bannerPicture: Image;
   namePicture: Image | null;

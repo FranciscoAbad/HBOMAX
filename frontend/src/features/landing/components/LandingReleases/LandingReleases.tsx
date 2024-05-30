@@ -35,7 +35,7 @@ export const LandingReleases: React.FC = () => {
   };
   return (
     <div className="landing-releases-container">
-      <h2 className="landing-releases-title">
+      <h2 className="landing-title">
         Estrenos que se convertirán en nuevos favoritos.
       </h2>
 
