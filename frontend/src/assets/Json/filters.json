@@ -1,66 +1,82 @@
 [
   {
     "label": "Featured",
-    "filter": "featured"
+    "filter": "featured",
+    "imageLink": ""
   },
   {
     "label": "A-Z",
-    "filter": "alphabetic"
+    "filter": "alphabetic",
+    "imageLink": ""
   },
   {
     "label": "Just Added",
-    "filter": "just-added"
+    "filter": "just-added",
+    "imageLink": ""
   },
   {
     "label": "Popular",
-    "filter": "trending"
+    "filter": "trending",
+    "imageLink": ""
   },
   {
     "label": "Action",
-    "filter": "action"
+    "filter": "action",
+    "imageLink": ""
   },
   {
     "label": "Horror",
-    "filter": "horror"
+    "filter": "horror",
+    "imageLink": ""
   },
   {
     "label": "Animation",
-    "filter": "animation"
+    "filter": "animation",
+    "imageLink": ""
   },
   {
     "label": "Comedy",
-    "filter": "comedy"
+    "filter": "comedy",
+    "imageLink": ""
   },
   {
     "label": "Documentaries",
-    "filter": "documentaries"
+    "filter": "documentaries",
+    "imageLink": ""
   },
   {
     "label": "Drama",
-    "filter": "drama"
+    "filter": "drama",
+    "imageLink": ""
   },
   {
     "label": "Fantasy & Sci-Fi",
-    "filter": "fantasy-and-sci-fi"
+    "filter": "fantasy-and-sci-fi",
+    "imageLink": ""
   },
   {
     "label": "International",
-    "filter": "international"
+    "filter": "international",
+    "imageLink": ""
   },
   {
     "label": "Kids",
-    "filter": "kids"
+    "filter": "kids",
+    "imageLink": ""
   },
   {
     "label": "Local",
-    "filter": "local-productions"
+    "filter": "local-productions",
+    "imageLink": ""
   },
   {
     "label": "Romance",
-    "filter": "romance"
+    "filter": "romance",
+    "imageLink": ""
   },
   {
     "label": "Crime",
-    "filter": "crime"
+    "filter": "crime",
+    "imageLink": ""
   }
 ]

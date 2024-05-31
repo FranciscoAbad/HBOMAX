@@ -150,3 +150,9 @@ export interface TitleDTO {
   poster: Image;
   name: Image;
 }
+
+export interface Genre {
+  genreId: number;
+  genre: string;
+  genrePicture: Image | null;
+}

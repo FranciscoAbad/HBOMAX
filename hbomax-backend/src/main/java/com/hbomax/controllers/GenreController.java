@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/genre")
 @CrossOrigin("*")
@@ -28,5 +30,10 @@ public class GenreController {
     @PostMapping("/add/{genreName}")
     public Genre createGenre(@RequestPart("genrePicture") MultipartFile genrePicture, @PathVariable("genreName") String genreName){
         return genreService.registerGenre(genreName,genrePicture);
+    }
+
+    @GetMapping("/all")
+    public List<Genre> getAllGenres(){
+        return genreService.getAllGenres();
     }
 }

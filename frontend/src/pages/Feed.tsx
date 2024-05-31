@@ -15,6 +15,7 @@ import { FeedTitleSlider } from "../features/feed/components/FeedTitleSlider/Fee
 import { FeedHeaderSlider } from "../features/feed/components/FeedHeaderSlider/FeedHeaderSlider";
 import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 import { FeedTitlesGrid } from "../features/feed/components/FeedGridTitles/FeedTitlesGrid";
+import { FeedGenreSlider } from "../features/feed/components/FeedGenreSlider/components/FeedGenreSlider";
 
 export const Feed: React.FC = () => {
   const state = useSelector((state: RootState) => state.user);
@@ -70,6 +71,7 @@ export const Feed: React.FC = () => {
         }}
         info={false}
       />
+      <FeedGenreSlider />
       <FeedFooter />
     </div>
   );
