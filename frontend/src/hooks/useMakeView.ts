@@ -8,7 +8,7 @@ export const useMakeView = (id: string) => {
   useEffect(() => {
     axios
       .post(
-        `http://localhost:8080/view/add/title/${id}`,
+        `${process.env.REACT_APP_API_URL}/view/add/title/${id}`,
         {},
         {
           headers: {

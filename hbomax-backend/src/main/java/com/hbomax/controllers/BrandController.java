@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/brand")
-@CrossOrigin("*")
 public class BrandController {
 
 

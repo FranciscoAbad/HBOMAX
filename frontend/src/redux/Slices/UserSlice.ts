@@ -33,7 +33,10 @@ export const verifyUsername = createAsyncThunk(
   "user/username",
   async (body: VerifyUserBody, thunkAPI) => {
     try {
-      const req = await axios.post("http://localhost:8080/auth/find", body);
+      const req = await axios.post(
+        `${process.env.REACT_APP_API_URL}/auth/find`,
+        body
+      );
       return req.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -45,11 +48,14 @@ export const getUserByToken = createAsyncThunk(
   "user/get",
   async (token: string, thunkAPI) => {
     try {
-      const req = await axios.get("http://localhost:8080/user/verify", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/user/verify`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       return req.data;
     } catch (e) {
@@ -63,7 +69,7 @@ export const updateEmail = createAsyncThunk(
   async (body: UpdateEmail, thunkApi) => {
     try {
       const req = await axios.put(
-        "http://localhost:8080/auth/update/email",
+        `${process.env.REACT_APP_API_URL}/auth/update/email`,
         body
       );
       return req.data;
@@ -87,7 +93,10 @@ export const loginUser = createAsyncThunk(
   "user/login",
   async (body: LoginBody, thunkApi) => {
     try {
-      const req = await axios.post("http://localhost:8080/auth/login", body);
+      const req = await axios.post(
+        `${process.env.REACT_APP_API_URL}/auth/login`,
+        body
+      );
       return req.data;
     } catch (e) {
       return thunkApi.rejectWithValue(e);

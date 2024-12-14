@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/view")
-@CrossOrigin("*")
 public class ViewController {
 
     private final ViewService viewService;

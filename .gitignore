@@ -37,3 +37,4 @@ build/
 **/StoredCredential
 **/certs/
 **/img
+**/.env

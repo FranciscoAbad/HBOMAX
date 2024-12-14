@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export const makeVote = (id: number, rating: number, token: string) => {
   axios
     .post(
-      `http://localhost:8080/vote/title/${id}/rating/${rating}F`,
+      `${process.env.REACT_APP_API_URL}/vote/title/${id}/rating/${rating}F`,
       {},
       {
         headers: {

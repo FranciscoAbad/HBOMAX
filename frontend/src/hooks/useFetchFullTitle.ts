@@ -7,7 +7,7 @@ export const useFetchFullTitle = (id: string) => {
   const [isFetching, setIsFetching] = useState<boolean>(true);
   useEffect(() => {
     axios
-      .get<FullTitle>(`http://localhost:8080/title/id/${id}`)
+      .get<FullTitle>(`${process.env.REACT_APP_API_URL}/title/id/${id}`)
       .then((response) => {
         setTitle(response.data);
       })

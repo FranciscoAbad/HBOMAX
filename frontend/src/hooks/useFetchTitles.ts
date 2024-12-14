@@ -11,7 +11,7 @@ export const useFetchTitles = (props: UseFetchTitlesProps) => {
   const [isFetchig, setIsFetching] = useState<boolean>(true);
   useEffect(() => {
     axios
-      .get<TitleDTO[]>(`http://localhost:8080/${props.fetchUrl}`)
+      .get<TitleDTO[]>(`${process.env.REACT_APP_API_URL}/${props.fetchUrl}`)
       .then((response) => {
         setData(response.data);
       })

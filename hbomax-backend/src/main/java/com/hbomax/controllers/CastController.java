@@ -23,7 +23,6 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/cast")
-@CrossOrigin("*")
 public class CastController {
 
     private final CastService castService;

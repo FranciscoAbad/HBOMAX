@@ -32,7 +32,7 @@ public class BrandService {
         try{
             Brand brand=new Brand();
             brand.setBrandName(brandName);
-            Image logo=imageService.uploadImage(file,"brand-logo");
+           Image logo=imageService.uploadImage(file,"brand-logo");
             brand.setBrandLogo(logo);
            return brandRepo.save(brand);
         } catch (Exception e){

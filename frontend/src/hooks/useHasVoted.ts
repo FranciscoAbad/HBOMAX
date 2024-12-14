@@ -9,7 +9,7 @@ export const useHasVoted = (id: number) => {
   const token = useSelector((state: RootState) => state.user.token);
   useEffect(() => {
     axios
-      .get<number>(`http://localhost:8080/vote/get/title/${id}`, {
+      .get<number>(`${process.env.REACT_APP_API_URL}/vote/get/title/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

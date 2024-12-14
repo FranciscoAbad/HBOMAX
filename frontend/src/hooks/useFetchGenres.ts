@@ -7,7 +7,7 @@ export const useFetchGenres = () => {
   const [isFetchig, setIsFetching] = useState<boolean>(true);
   useEffect(() => {
     axios
-      .get<Genre[]>(`http://localhost:8080/genre/all`)
+      .get<Genre[]>(`${process.env.REACT_APP_API_URL}/genre/all`)
       .then((response) => {
         setData(response.data);
       })

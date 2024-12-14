@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/title")
-@CrossOrigin("*")
 public class TitleController {
 
     private final TitleService titleService;

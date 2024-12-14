@@ -13,7 +13,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/person")
-@CrossOrigin("*")
 public class PersonController {
 
     private final PersonService personService;

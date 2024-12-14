@@ -50,8 +50,6 @@ interface RegisterUser {
   password: string;
 }
 
-
-
 const initialState: RegisterSliceState = {
   loading: false,
   error: false,
@@ -73,7 +71,10 @@ export const registerUser = createAsyncThunk(
   "register/register",
   async (user: RegisterUser, thunkApi) => {
     try {
-      const req = await axios.post("http://localhost:8080/auth/register", user);
+      const req = await axios.post(
+        `${process.env.REACT_APP_API_URL}/auth/register`,
+        user
+      );
       return await req.data;
     } catch (e) {
       return thunkApi.rejectWithValue(e);
@@ -85,9 +86,12 @@ export const resendEmail = createAsyncThunk(
   "register/resend",
   async (username: string, thunkApi) => {
     try {
-      const req = await axios.post("http://localhost:8080/auth/email/code", {
-        username,
-      });
+      const req = await axios.post(
+        `${process.env.REACT_APP_API_URL}/auth/email/code`,
+        {
+          username,
+        }
+      );
     } catch (e) {
       return thunkApi.rejectWithValue(e);
     }
@@ -99,7 +103,7 @@ export const sendVerification = createAsyncThunk(
   async (body: VerifyCode, thunkApi) => {
     try {
       const req = await axios.post(
-        "http://localhost:8080/auth/email/verify",
+        `${process.env.REACT_APP_API_URL}/auth/email/verify`,
         body
       );
       return req.data;
@@ -114,7 +118,7 @@ export const updatePassword = createAsyncThunk(
   async (body: UpdatePassword, thunkApi) => {
     try {
       const req = await axios.put(
-        "http://localhost:8080/auth/update/password",
+        `${process.env.REACT_APP_API_URL}/auth/update/password`,
         body
       );
       return req.data;

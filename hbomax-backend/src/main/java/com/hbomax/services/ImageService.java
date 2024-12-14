@@ -23,8 +23,7 @@ public class ImageService {
 
 
     private final ImageRepository imageRepository;
-
-    private static final File DIRECTORY = new File("C:\\Users\\pabad\\Documents\\projects\\HBOMax\\hbomax-backend\\img");
+    private static final File DIRECTORY = new File("/home/francisco-abad/Projects/HBOMAX/hbomax-backend/img");
     private static final String URL="http://localhost:8080/images/";
 
     @Autowired
