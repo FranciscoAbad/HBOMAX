@@ -25,7 +25,7 @@ import java.util.List;
 
 @Configuration
 public class MailConfiguration {
-
+/*
     private static final String APPLICATION_NAME="Hbomax";
     private static final JsonFactory JSON_FACTORY= GsonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH="tokens";
@@ -67,4 +67,6 @@ public class MailConfiguration {
             return null;
         }
     }
+
+ */
 }

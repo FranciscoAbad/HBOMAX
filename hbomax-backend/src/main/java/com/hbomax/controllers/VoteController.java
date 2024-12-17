@@ -6,7 +6,6 @@ import com.hbomax.services.TokenService;
 import com.hbomax.services.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/vote")
 public class VoteController {
@@ -20,7 +19,6 @@ public class VoteController {
         this.tokenService = tokenService;
         this.voteService = voteService;
     }
-
 
     @PostMapping("/title/{titleId}/rating/{rating}")
    public Vote makeAVote(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable("titleId") Integer titleId, @PathVariable("rating") float rating){

@@ -90,13 +90,13 @@ public class UserService implements UserDetailsService {
         ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
 
         user.setVerification(generateVerificationNumber());
-
+/*
         try{
             mailService.sendEmail(user.getEmail(),"Your verification code","Here is your verification code: "+ user.getVerification());
         }catch(Exception e){
             throw new EmailFailedToSendException();
         }
-
+*/
         userRepo.save(user);
     }
 

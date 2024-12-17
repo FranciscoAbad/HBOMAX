@@ -21,7 +21,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
-
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
@@ -30,12 +29,12 @@ public class AuthenticationController {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
 
-    private final MailService emailService;
+    //private final MailService emailService;
 
     @Autowired
-    public AuthenticationController(UserService userService,MailService emailService,AuthenticationManager authenticationManager,TokenService tokenService){
+    public AuthenticationController(UserService userService,AuthenticationManager authenticationManager,TokenService tokenService){
         this.userService=userService;
-        this.emailService=emailService;
+      //  this.emailService=emailService;
         this.authenticationManager=authenticationManager;
         this.tokenService=tokenService;
 
@@ -140,11 +139,11 @@ public class AuthenticationController {
     public ResponseEntity<String> retrievePasswordCode(@RequestBody PasswordCodeDTO body) throws EmailFailedToSendException{
         String email=body.getEmail();
         int code= body.getCode();
-        try{
+        /*try{
             emailService.sendEmail(email,"Your password reset code",""+code);
         }catch (Exception e){
             throw new EmailFailedToSendException();
-        }
+        }*/
         return new ResponseEntity<String>("Code sent successfully",HttpStatus.OK);
     }
 

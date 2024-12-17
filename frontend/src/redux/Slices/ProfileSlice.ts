@@ -38,7 +38,7 @@ export const addProfile = createAsyncThunk(
   async (body: AddProfile, thunkApi) => {
     try {
       const req = await axios.post(
-        `http://localhost:8080/user/profile/add/${body.name}/${body.imageId}`,
+        `${process.env.REACT_APP_API_URL}/user/profile/add/${body.name}/${body.imageId}`,
         {},
         {
           headers: {
@@ -58,7 +58,7 @@ export const editProfile = createAsyncThunk(
   async (body: AddProfile, thunkApi) => {
     try {
       const req = await axios.put(
-        `http://localhost:8080/user/profile/edit/${body.name}`,
+        `${process.env.REACT_APP_API_URL}/user/profile/edit/${body.name}`,
         {},
         {
           headers: {
@@ -77,11 +77,14 @@ export const getProfiles = createAsyncThunk(
   "profile/get",
   async (token: string, thunkApi) => {
     try {
-      const req = await axios.get(`http://localhost:8080/user/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/user/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return await req.data;
     } catch (e) {
       return thunkApi.rejectWithValue(e);
@@ -94,7 +97,7 @@ export const updateProfile = createAsyncThunk(
   async (body: UpdateProfile, thunkApi) => {
     try {
       const req = await axios.put(
-        `http://localhost:8080/user/profile/${body.profileId}/image/${body.imageId}/name/${body.profileName}`
+        `${process.env.REACT_APP_API_URL}/user/profile/${body.profileId}/image/${body.imageId}/name/${body.profileName}`
       );
       return await req.data;
     } catch (e) {

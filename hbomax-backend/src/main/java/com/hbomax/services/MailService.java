@@ -15,6 +15,7 @@ import java.util.Properties;
 
 @Service
 public class MailService {
+    /*
     private final Gmail gmail;
 
     @Autowired
@@ -50,5 +51,5 @@ public class MailService {
             e.printStackTrace();
             throw new EmailFailedToSendException();
         }
-    }
+    }*/
 }

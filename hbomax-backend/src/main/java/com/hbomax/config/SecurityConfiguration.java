@@ -58,10 +58,10 @@ public class SecurityConfiguration {
                 .csrf(csrf->csrf.disable())
                 .authorizeRequests(auth->auth
                         .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().permitAll())
+                        .anyRequest().permitAll())/*
                 .oauth2ResourceServer((oauth2) -> oauth2
                         .jwt(Customizer.withDefaults())
-                )
+                )*/
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }

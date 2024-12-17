@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Set;
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
