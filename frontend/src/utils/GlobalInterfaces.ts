@@ -99,7 +99,7 @@ export interface FullTitle {
   episodeNr: number;
   episodeName: string;
   quality: string;
-  runtime: number;
+  runTime: number;
   releaseDate: string;
   popularity: number;
   rating: string;

@@ -63,6 +63,7 @@ export const FeedTitleSlider: React.FC<FeedTitleSliderProps> = ({
         setIsNextButtonVisible(true);
       }
     }
+    console.log(data);
   };
 
   return (

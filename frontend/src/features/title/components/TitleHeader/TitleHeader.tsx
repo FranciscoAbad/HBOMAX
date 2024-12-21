@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./TitleHeader.css";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -40,6 +40,9 @@ export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
   votes,
   popularity,
 }) => {
+  useEffect(() => {
+    console.log(runtime);
+  }, []);
   return (
     <div className="title-header-container">
       <div className="title-header-background">

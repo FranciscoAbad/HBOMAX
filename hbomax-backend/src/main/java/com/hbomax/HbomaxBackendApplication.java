@@ -26,9 +26,9 @@ public class HbomaxBackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo, LenguageRepository lenguageRepo, CompanyRepository companyRepo, TitleService titleService){
+	CommandLineRunner run(RoleRepository roleRepo, UserRepository userRepo, PasswordEncoder passwordEncoder, PersonRepository personRepo, TitleRoleRepository titleRoleRepo, GenreRepository genreRepo, CountryRepository countryRepo, LenguageRepository lenguageRepo, CompanyRepository companyRepo, TitleService titleService, BrandRepository brandRepo){
 		return args ->{
-			System.out.println("---------->"+titleService.getAllTitlesByOneParam("en"));
+			/*System.out.println("---------->"+titleService.getAllTitlesByOneParam("en"));
 
 			Role r =roleRepo.save(new Role(1,"USER"));
 
@@ -121,8 +121,29 @@ public class HbomaxBackendApplication {
 			warnerbros.setCompanyName("warner-bros");
 			companyRepo.save(warnerbros);
 
+			Company universalpictures=new Company();
 
+			universalpictures.setCompanyName("universal-pictures");
+			companyRepo.save(universalpictures);
 
+			Company firebrand=new Company();
+
+			firebrand.setCompanyName("firebrand");
+			companyRepo.save(firebrand);
+
+			Brand hboBrand=new Brand();
+			hboBrand.setBrandName("hbo");
+			brandRepo.save(hboBrand);
+
+			Brand universalPicturesBrand=new Brand();
+			universalPicturesBrand.setBrandName("universal-pictures");
+			brandRepo.save(universalPicturesBrand);
+
+			Brand warnerBrosBrand=new Brand();
+			warnerBrosBrand.setBrandName("warner-bros");
+			brandRepo.save(warnerBrosBrand);
+
+*/
 
 
 		};

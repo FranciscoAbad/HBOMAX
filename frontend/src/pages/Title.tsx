@@ -38,7 +38,7 @@ export const Title: React.FC = () => {
           overview={title.overview}
           imagePath={title.bannerPicture.imageURL}
           namePath={title.namePicture ? title.namePicture.imageURL : ""}
-          runtime={title.runtime}
+          runtime={title.runTime}
           quality={title.quality}
           rating={title.rating}
           votes={title.votes}

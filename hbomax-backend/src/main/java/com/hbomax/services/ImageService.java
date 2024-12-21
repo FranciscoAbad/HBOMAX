@@ -1,12 +1,15 @@
 package com.hbomax.services;
 
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.hbomax.exceptions.UnableToResolvePhotoException;
 import com.hbomax.exceptions.UnabledToSavePhotoException;
 import com.hbomax.models.Image;
 import com.hbomax.repositories.ImageRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -21,18 +25,39 @@ import java.util.Set;
 @Transactional
 public class ImageService {
 
+    @Value("${cloudinary.api.secret}")
+    private String apiSecret;
+    @Value("${cloudinary.api.key}")
+    private String apiKey;
+    @Value("${cloudinary.cloud.name}")
+    private String cloudName;
 
     private final ImageRepository imageRepository;
-    private static final File DIRECTORY = new File("/home/francisco-abad/Projects/HBOMAX/hbomax-backend/img");
-    private static final String URL="http://localhost:8888/images/";
+    private final Cloudinary cloudinary;
+   // private static final File DIRECTORY = new File("/home/francisco-abad/Projects/HBOMAX/hbomax-backend/img");
+    //private static final String URL="http://localhost:8888/images/";
 
     @Autowired
     public ImageService(ImageRepository imageRepository) {
         this.imageRepository = imageRepository;
+        this.cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name",cloudName,
+                "api_key",apiKey,
+                "api_secret",apiSecret
+        ));
     }
+
+
 
     public Image uploadImage(MultipartFile file, String prefix) throws UnabledToSavePhotoException {
         try{
+
+            Map uploadResult=cloudinary.uploader().upload(file.getBytes(),ObjectUtils.asMap("public_id",prefix + "_" + System.currentTimeMillis()));
+            String imageUrl = uploadResult.get("url").toString();
+            String finalPrefix=prefix + System.currentTimeMillis();
+            Image image = new Image(finalPrefix , file.getContentType(), null, imageUrl, prefix);
+            return imageRepository.save(image);
+            /*
             String extension="." + file.getContentType().split("/")[1];
             File img=File.createTempFile(prefix,extension,DIRECTORY);
 
@@ -44,7 +69,7 @@ public class ImageService {
 
             Image saved=imageRepository.save(i);
 
-            return saved;
+            return saved;*/
 
 
         }catch(IOException e){

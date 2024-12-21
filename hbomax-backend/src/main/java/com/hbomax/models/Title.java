@@ -35,7 +35,7 @@ public class Title {
     private String quality;
 
     @Column(name = "runtime")
-    private int runtime;
+    private Integer runtime;
 
     @Column(name = "release_date")
     private LocalDate releaseDate;
@@ -201,7 +201,7 @@ public class Title {
         return runtime;
     }
 
-    public void setRuntime(int runtime) {
+    public void setRuntime(Integer runtime) {
         this.runtime = runtime;
     }
 

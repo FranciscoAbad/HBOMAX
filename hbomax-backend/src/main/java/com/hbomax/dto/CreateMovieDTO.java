@@ -10,7 +10,7 @@ public class CreateMovieDTO {
     private String titleType;
     private Integer season;
     private Integer episode;
-    private int runTime;
+    private Integer runTime;
     private String rating;
     private String overview;
     private String episodeName;
@@ -26,7 +26,7 @@ public class CreateMovieDTO {
     private String genre;
 
 
-    public CreateMovieDTO(String titleName, String titleType, Integer season, Integer episode, int runTime, String rating, String overview, String episodeName, String quality, LocalDate releaseDate, LocalDate addedDate, String producer, String distributor, String brand, String lenguage, String country, String genre) {
+    public CreateMovieDTO(String titleName, String titleType, Integer season, Integer episode, Integer runTime, String rating, String overview, String episodeName, String quality, LocalDate releaseDate, LocalDate addedDate, String producer, String distributor, String brand, String lenguage, String country, String genre) {
         this.titleName = titleName;
         this.titleType = titleType;
         this.season = season;
