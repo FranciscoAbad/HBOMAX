@@ -39,7 +39,7 @@ export const Feed: React.FC = () => {
       <FeedNav />
       <FeedHeaderSlider fetchUrl="title/all/title/trending" />
       <FeedTitleSlider
-        fetchUrl="title/all/title/trending"
+        fetchUrl="title/title/genre/fantasy-and-sci-fi/trending"
         title="Most Popular"
         subTitle=""
         banner={false}
@@ -49,8 +49,8 @@ export const Feed: React.FC = () => {
       />
       <FeedTitleSlider
         fetchUrl="title/title/type/movie/alphabetic"
-        title="A-Z"
-        subTitle="Movies by alphabetic order"
+        title="Continue watching"
+        subTitle=""
         banner={true}
         big={false}
         info={true}
@@ -69,6 +69,38 @@ export const Feed: React.FC = () => {
           imageUrl:
             "https://images.cdn.prd.api.discomax.com/0223/cc000a1ec3f5.png?w=1700&f=webp",
         }}
+        info={false}
+      />
+      <FeedTitleSlider
+        fetchUrl={`title/all/genre/action`}
+        title="Adrenaline Unleashed"
+        subTitle="High-octane action, non-stop thrills"
+        banner={false}
+        big={false}
+        info={false}
+      />
+      <FeedTitleSlider
+        fetchUrl={`title/all/genre/horror`}
+        title="Terrifying Tales Await"
+        subTitle="Dive into a chilling collection of horror"
+        banner={false}
+        big={false}
+        info={false}
+      />
+      <FeedTitleSlider
+        fetchUrl={`title/all/genre/drama`}
+        title="Powerful Stories, Deep Emotions"
+        subTitle="Experience the intensity of drama unfold"
+        banner={false}
+        big={true}
+        info={false}
+      />
+      <FeedTitleSlider
+        fetchUrl={`title/all/genre/romance`}
+        title="Love in Every Frame"
+        subTitle="Heartfelt stories of romance and passion"
+        banner={false}
+        big={false}
         info={false}
       />
       <FeedGenreSlider />

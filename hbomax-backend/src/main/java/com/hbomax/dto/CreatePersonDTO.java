@@ -4,36 +4,26 @@ import java.time.LocalDate;
 
 public class CreatePersonDTO {
 
-    private String firstName;
-    private String lastName;
-    private  String gender;
+    private String fullName;
+    private String gender;
     private LocalDate dob;
-    private  String birthplace;
+    private String birthplace;
     private String bio;
 
-    public CreatePersonDTO(String firstName, String lastName, String gender, LocalDate dob, String birthplace, String bio) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public CreatePersonDTO(String fullName, String gender, LocalDate dob, String birthplace, String bio) {
+        this.fullName = fullName;
         this.gender = gender;
         this.dob = dob;
         this.birthplace = birthplace;
         this.bio = bio;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getGender() {

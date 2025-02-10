@@ -6,6 +6,7 @@ import com.hbomax.exceptions.*;
 import com.hbomax.mappers.TitleDTOMapper;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,9 +43,13 @@ public class TitleService {
         this.brandRepository=brandRepository;
     }
 
+    @Transactional
     public Title registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster,MultipartFile name){
 
+
+
         try {
+
             Title newTitle=new Title();
             newTitle.setTitle(title);
             newTitle.setOverview(overview);
@@ -62,12 +67,15 @@ public class TitleService {
             newTitle.setAddedDate(addedDate);
             newTitle.setViews(0);
             newTitle.setVotes(0);
+            System.out.println("TITLE-->: " +title.toString());
             Image bannerPicture =imageService.uploadImage(banner,"banner");
             Image posterPicture =imageService.uploadImage(poster,"poster");
             Image namePicture=imageService.uploadImage(name,"name");
+            System.out.println("TITLE2-->: " +title.toString());
             newTitle.setBannerPicture(bannerPicture);
             newTitle.setPosterPicture(posterPicture);
             newTitle.setNamePicture(namePicture);
+
 
             return titleRepository.save(newTitle);
         }catch (Exception e){
@@ -75,7 +83,7 @@ public class TitleService {
         }
 
     }
-
+    @Transactional
     public Title registerSerie(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality ,MultipartFile banner){
 
         try {
@@ -105,6 +113,7 @@ public class TitleService {
         }
     }
 
+    @Transactional
     public Title addMovieWithProducerDistributorBrandLenguageCountry(String titleName,Integer season,Integer episode, String producerCompany,String distributorCompany,String brandName,String lenguageName,String countryName,String genreName){
         Title title = titleRepository.findByTitleSeasonAndEpisode(titleName,season,episode).orElseThrow(TitleDoesNotExistException::new);
         Company prodCompany=companyRepository.findByCompanyName(producerCompany).orElseThrow(CompanyDoesNotExistException::new);
@@ -178,7 +187,7 @@ public class TitleService {
         return single;
     }
     public Set<TitleDTO>  getAllTitlesOfPerson(String firstName,String lastName){
-        Set<Title> titles=titleRepository.findTitlesByPerson(firstName,lastName);
+        Set<Title> titles=titleRepository.findTitlesByPerson(firstName);
         return TitleDTOMapper.mapToDTOSet(titles);
     }
 

@@ -53,24 +53,29 @@ public class CastController {
     }
 
 
-    @PostMapping("add/character/{firstName}/{lastName}/serie/{titleName}/{characterName}")
-    public void addCharacterToSerie(@RequestPart("characterPicture") MultipartFile characterPicture,@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("characterName") String characterName,@PathVariable("titleName") String titleName){
-        castService.addCharacterToSerie(titleName,firstName,lastName,characterName,characterPicture);
+    @PostMapping("add/character/picture/{firstName}/{lastName}/serie/{titleName}/{characterName}")
+    public void addCharacterToSerieWithPicture(@RequestPart("characterPicture") MultipartFile characterPicture,@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("characterName") String characterName,@PathVariable("titleName") String titleName){
+        castService.addCharacterToSerieWithPicture(titleName,firstName,lastName,characterName,characterPicture);
     }
 
-    @PostMapping("add/producer/{firstName}/{lastName}/serie/{titleName}/{producerRole}")
-    public void addProducerToSerie(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("producerRole") String producerRole,@PathVariable("titleName") String titleName){
-        castService.addProducerToSerie(titleName,firstName,lastName,producerRole);
+    @PostMapping("add/character/{fullName}/serie/{titleName}/{characterName}")
+    public void addCharacterToSerie(@PathVariable("fullName") String fullName,@PathVariable("characterName") String characterName,@PathVariable("titleName") String titleName){
+        castService.addCharacterToSerie(titleName,fullName,characterName);
     }
 
-    @PostMapping("add/writer/{firstName}/{lastName}/serie/{titleName}/{writerRole}")
-    public void addWriterToSerie(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("writerRole") String writerRole,@PathVariable("titleName") String titleName){
-        castService.addWriterToSerie(titleName,firstName,lastName,writerRole);
+    @PostMapping("add/producer/{fullName}/serie/{titleName}")
+    public void addProducerToSerie(@PathVariable("fullName") String fullName,@PathVariable("titleName") String titleName){
+        castService.addProducerToSerie(titleName,fullName);
     }
 
-    @PostMapping("add/director/{firstName}/{lastName}/serie/{titleName}")
-    public void addWriterToSerie(@PathVariable("firstName") String firstName,@PathVariable("lastName") String lastName,@PathVariable("titleName") String titleName){
-        castService.addDirectorToSerie(titleName,firstName,lastName);
+    @PostMapping("add/writer/{fullName}/serie/{titleName}")
+    public void addWriterToSerie(@PathVariable("fullName") String fullName,@PathVariable("titleName") String titleName){
+        castService.addWriterToSerie(titleName,fullName);
+    }
+
+    @PostMapping("add/director/{fullName}/serie/{titleName}")
+    public void addDirectorToSerie(@PathVariable("fullName") String fullName,@PathVariable("titleName") String titleName){
+        castService.addDirectorToSerie(titleName,fullName);
     }
 
     @GetMapping("/get/images/brand/{brandName}")

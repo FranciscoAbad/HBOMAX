@@ -23,13 +23,20 @@ export const TitleRater: React.FC<TitleRater> = ({
 }) => {
   let hasVoted = useHasVoted(titleId);
   const [rating, setRating] = useState<number>(0);
+  const [showButton, setShowButton] = useState<boolean>(false);
   const [hoverRating, setHoverRating] = useState<number>(0);
   const userToken = useSelector((state: RootState) => state.user.token);
 
-  useEffect(() => {}, [hasVoted]);
+  const handleClickStar = (rating: number) => {
+    setRating(rating);
+    setShowButton(true);
+  };
+
+  useEffect(() => {}, [hasVoted, titlePopularity]);
   console.log(hasVoted);
   const vote = () => {
     makeVote(titleId, rating, userToken);
+    setShowButton(false);
   };
   return (
     <div className="title-rater">
@@ -41,13 +48,13 @@ export const TitleRater: React.FC<TitleRater> = ({
               key={index}
               index={index}
               rating={hasVoted != 0 ? hasVoted : rating}
-              setRating={setRating}
+              setRating={handleClickStar}
               hoverRating={hasVoted != 0 ? hasVoted : hoverRating}
               setHoverRating={setHoverRating}
             />
           ))}
         </div>
-        {rating !== 0 && hasVoted == 0 ? (
+        {rating !== 0 && hasVoted == 0 && showButton ? (
           <div className="title-rater-row-button" onClick={vote}>
             <CheckCircleIcon />
           </div>

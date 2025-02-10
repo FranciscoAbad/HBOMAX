@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import "./LandingNav.css";
 import Hbomax from "../../../../assets/hbomax-med.svg";
+import { useNavigate } from "react-router-dom";
 
 export const LandingNav: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -34,8 +36,20 @@ export const LandingNav: React.FC = () => {
         <img src={Hbomax} className="landing-nav-logo-img" />
       </div>
       <div className="landing-nav-group">
-        <div className="landing-nav-group-button">ACCOUNT</div>
-        <div className="landing-nav-group-button landing-nav-group-button-stream">
+        <div
+          className="landing-nav-group-button"
+          onClick={() => {
+            navigate("/signin");
+          }}
+        >
+          ACCOUNT
+        </div>
+        <div
+          className="landing-nav-group-button landing-nav-group-button-stream"
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
           STREAM NOW
         </div>
       </div>

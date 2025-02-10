@@ -119,8 +119,7 @@ export interface TitleRole {
 
 export interface Person {
   personId: number;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   gender: string;
   dob: string;
   birthplace: string;
@@ -146,6 +145,7 @@ export interface TitleDTO {
   episodeName: string;
   runtime: number;
   rating: string;
+  overview: string;
   banner: Image;
   poster: Image;
   name: Image;

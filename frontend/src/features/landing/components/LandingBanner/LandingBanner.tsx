@@ -3,8 +3,11 @@ import React from "react";
 import "./LandingBanner.css";
 import Hbomax from "../../../../assets/hbomax-med.svg";
 import { useFetchFullTitle } from "../../../../hooks/useFetchFullTitle";
+import { useNavigate } from "react-router-dom";
 
 export const LandingBanner: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="landing-banner-container">
       <div className="landing-banner-grid">
@@ -22,7 +25,12 @@ export const LandingBanner: React.FC = () => {
           <h3 className="landing-banner-grid-item-price">$699,00/mes</h3>
         </div>
         <div className="landing-banner-grid-item">
-          <div className="landing-banner-grid-item-button">
+          <div
+            className="landing-banner-grid-item-button"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
             SUSCRÍBETE AHORA
           </div>
         </div>

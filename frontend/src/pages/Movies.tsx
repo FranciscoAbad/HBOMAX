@@ -35,20 +35,28 @@ export const Movies: React.FC = () => {
             info={false}
           />
           <FeedTitleSlider
-            fetchUrl={`title/title/type/movie/just-added`}
-            title="Just added"
-            subTitle=""
-            banner={true}
-            big={true}
+            fetchUrl={`title/all/genre/action`}
+            title="Adrenaline Unleashed"
+            subTitle="High-octane action, non-stop thrills"
+            banner={false}
+            big={false}
             info={false}
           />
           <FeedTitleSlider
-            fetchUrl={`title/title/type/movie/just-added`}
-            title="Trending"
-            subTitle=""
+            fetchUrl={`title/all/genre/horror`}
+            title="Terrifying Tales Await"
+            subTitle="Dive into a chilling collection of horror"
+            banner={false}
+            big={false}
+            info={false}
+          />
+          <FeedTitleSlider
+            fetchUrl={`title/all/genre/drama`}
+            title="Powerful Stories, Deep Emotions"
+            subTitle="Experience the intensity of drama unfold"
             banner={false}
             big={true}
-            info={true}
+            info={false}
           />
         </>
       ) : (

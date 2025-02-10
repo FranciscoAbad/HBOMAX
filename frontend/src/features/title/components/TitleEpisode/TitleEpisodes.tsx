@@ -20,7 +20,7 @@ export const TitleEpisodes: React.FC<TitleEpisodesProps> = ({ title }) => {
     const countSeasons = async () => {
       try {
         const response = await axios.get<number>(
-          `http://localhost:8080/title/title/${title}/seasons`
+          `http://localhost:8888/title/title/${title}/seasons`
         );
 
         setSeasonsNr(response.data);
@@ -35,7 +35,7 @@ export const TitleEpisodes: React.FC<TitleEpisodesProps> = ({ title }) => {
     const fetchInfo = async () => {
       try {
         const response = await axios.get<TitleDTO[]>(
-          `http://localhost:8080/title/all/title/${title}/season/${season}`
+          `http://localhost:8888/title/all/title/${title}/season/${season}`
         );
 
         setEpisodes(response.data);

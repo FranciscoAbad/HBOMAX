@@ -2,9 +2,14 @@ package com.hbomax.controllers;
 
 
 import com.hbomax.dto.CreatePersonDTO;
+import com.hbomax.exceptions.InvalidNameException;
+import com.hbomax.exceptions.UnableToResolvePhotoException;
+import com.hbomax.exceptions.UnabledToSavePhotoException;
 import com.hbomax.models.Person;
 import com.hbomax.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
@@ -20,9 +25,15 @@ public class PersonController {
         this.personService = personService;
     }
 
+
+    @ExceptionHandler({InvalidNameException.class})
+    ResponseEntity<String> handleInvalidNameException(){
+        return new ResponseEntity<String>("The name you've provided is invalid", HttpStatus.NOT_ACCEPTABLE);
+    }
+
     @PostMapping("/add")
-    public Person createPerson(@RequestBody CreatePersonDTO body){
-    return personService.registerPerson(body.getFirstName(), body.getLastName(), body.getBirthplace(), body.getBio(), body.getGender(), body.getDob());
+    public Person createPerson(@RequestBody CreatePersonDTO body) throws InvalidNameException{
+    return personService.registerPerson(body.getFullName(), body.getBirthplace(), body.getBio(), body.getGender(), body.getDob());
     }
 
     @GetMapping("/all/{titleName}")

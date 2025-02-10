@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Cast } from "../../../../utils/GlobalInterfaces";
 import "./TitlePersons.css";
-import { firstLetterToUpperCase, formatName } from "../../utils/TitleUtils";
+import {
+  firstLetterToUpperCase,
+  firstLettesToUpperCaseAndReplace,
+  formatName,
+} from "../../utils/TitleUtils";
 
 interface TitlePersonsProps {
   cast: Cast[];
@@ -30,11 +34,10 @@ export const TitlePersons: React.FC<TitlePersonsProps> = ({ cast, rating }) => {
               actors.map((item) => (
                 <div className="title-persons-group-row" key={item.castInfoId}>
                   <p className="title-persons-group-row-role">
-                    {formatName(item.characterName)}
+                    {firstLettesToUpperCaseAndReplace(item?.characterName)}
                   </p>
                   <p className="title-persons-group-row-name">
-                    {firstLetterToUpperCase(item.person.firstName)}{" "}
-                    {firstLetterToUpperCase(item.person.lastName)}
+                    {firstLettesToUpperCaseAndReplace(item.person.fullName)}
                   </p>
                 </div>
               ))}
@@ -49,8 +52,7 @@ export const TitlePersons: React.FC<TitlePersonsProps> = ({ cast, rating }) => {
               <div className="title-persons-group-row" key={item.castInfoId}>
                 <p className="title-persons-group-row-role">Director</p>
                 <p className="title-persons-group-row-name">
-                  {firstLetterToUpperCase(item.person.firstName)}{" "}
-                  {firstLetterToUpperCase(item.person.lastName)}
+                  {firstLettesToUpperCaseAndReplace(item.person.fullName)}
                 </p>
               </div>
             ))}
@@ -67,11 +69,21 @@ export const TitlePersons: React.FC<TitlePersonsProps> = ({ cast, rating }) => {
             {writers.map((item) => (
               <div className="title-persons-group-row" key={item.castInfoId}>
                 <p className="title-persons-group-row-role">
-                  {firstLetterToUpperCase(item.writerRole)}
+                  {firstLettesToUpperCaseAndReplace(item.person.fullName)}
                 </p>
-                <p className="title-persons-group-row-name">
-                  {firstLetterToUpperCase(item.person.firstName)}{" "}
-                  {firstLetterToUpperCase(item.person.lastName)}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
+        {producers && producers.length > 0 ? (
+          <div className="title-persons-group">
+            <h3 className="title-persons-group-title">Producers</h3>
+            {producers.map((item) => (
+              <div className="title-persons-group-row" key={item.castInfoId}>
+                <p className="title-persons-group-row-role">
+                  {firstLettesToUpperCaseAndReplace(item.person.fullName)}
                 </p>
               </div>
             ))}

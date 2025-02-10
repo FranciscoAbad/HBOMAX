@@ -12,6 +12,7 @@ import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 import { useFetchFullTitle } from "../hooks/useFetchFullTitle";
 import { useMakeView } from "../hooks/useMakeView";
 import { TitleSharp } from "@mui/icons-material";
+import { useFetchCast } from "../hooks/useFetchCast";
 
 interface Title {
   id: number;
@@ -21,7 +22,8 @@ export const Title: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
   const { title, isFetching } = useFetchFullTitle(id ? id : "");
   useMakeView(id ? id : "");
-  const [cast, setCast] = useState<Cast[]>([]);
+  const fetchUrl = `cast/get/all/${title?.title}/${title?.seasonNr}/${title?.episodeNr}`;
+  const { cast, isFetchingCast } = useFetchCast({ fetchUrl });
 
   useEffect(() => {}, [id]);
 

@@ -13,8 +13,8 @@ public interface PersonRepository extends JpaRepository<Person,Integer> {
 
     Optional<Person> findByPersonId(Integer personId);
 
-    @Query("SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName")
-    Optional<Person> findByFirstNameAndLastName(@Param("firstName") String firstName, @Param("lastName") String lastName);
+    @Query("SELECT p FROM Person p WHERE p.fullName = :fullName")
+    Optional<Person> findByFullName(@Param("fullName") String fullName);
 
     @Query("SELECT c.person FROM CastInfo c WHERE c.title.title=:titleName")
     Set<Person> findByTitleName(@Param("titleName") String titleName);

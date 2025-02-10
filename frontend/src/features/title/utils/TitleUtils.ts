@@ -24,20 +24,21 @@ export function removeSlashAndAllToUpperCase(input: string) {
 }
 
 export function firstLettesToUpperCaseAndReplace(input: string) {
-  // Dividir la cadena en palabras usando guiones como delimitadores
-  const strings = input.split("-");
+  if (input.includes("-")) {
+    const strings = input.split("-");
 
-  const upperCaseStrings = strings.map((item) => {
-    // Asegurar que la palabra no esté vacía
-    if (item.length > 0) {
-      return item.charAt(0).toUpperCase() + item.slice(1);
-    } else {
-      return "";
-    }
-  });
+    const upperCaseStrings = strings.map((item) => {
+      if (item.length > 0) {
+        return item.charAt(0).toUpperCase() + item.slice(1);
+      } else {
+        return "";
+      }
+    });
 
-  // Unir las palabras capitalizadas en una cadena
-  const newString = upperCaseStrings.join(" ");
+    const newString = upperCaseStrings.join(" ");
 
-  return newString;
+    return newString;
+  } else {
+    return firstLetterToUpperCase(input);
+  }
 }

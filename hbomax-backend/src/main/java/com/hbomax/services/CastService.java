@@ -41,10 +41,10 @@ public class CastService {
     }
 
 
-    public void addCharacterToSerie(String titleName,String firstName, String lastName,String characterName,MultipartFile file){
+    public void addCharacterToSerieWithPicture(String titleName,String firstName, String lastName,String characterName,MultipartFile file){
         try{
        List<Title> title=titleRepo.findAllByTitle(titleName);
-       Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+       Person person = personRepo.findByFullName(firstName).orElseThrow(PersonDoesNotExistException::new);
        TitleRole role=roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
 
        Image characterPicture=imageService.uploadImage(file,"character");
@@ -67,10 +67,34 @@ public class CastService {
         }
     }
 
-    public void addWriterToSerie(String titleName,String firstName, String lastName,String writerRole){
+    public void addCharacterToSerie(String titleName,String fullName,String characterName){
         try{
             List<Title> title=titleRepo.findAllByTitle(titleName);
-            Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+            Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
+            TitleRole role=roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
+
+
+
+
+            for(int i=0; i<title.size();i++){
+
+                CastInfo cast=new CastInfo();
+                cast.setCharacter(characterName);
+                cast.setTitle(title.get(i));
+                cast.setPerson(person);
+                cast.setRole(role);
+                castInfoRepo.save(cast);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addWriterToSerie(String titleName,String fullName){
+        try{
+            List<Title> title=titleRepo.findAllByTitle(titleName);
+            Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
             TitleRole role=roleRepo.findByRole("writer").orElseThrow(RoleDoesNotExistException::new);
 
 
@@ -80,7 +104,6 @@ public class CastService {
             for(int i=0; i<title.size();i++){
 
                 CastInfo cast=new CastInfo();
-                cast.setWriterRole(writerRole);
                 cast.setTitle(title.get(i));
                 cast.setPerson(person);
                 cast.setRole(role);
@@ -92,16 +115,15 @@ public class CastService {
         }
     }
 
-    public void addProducerToSerie(String titleName,String firstName, String lastName,String producerRole){
+    public void addProducerToSerie(String titleName,String fullName){
         try{
             List<Title> title=titleRepo.findAllByTitle(titleName);
-            Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+            Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
             TitleRole role=roleRepo.findByRole("producer").orElseThrow(RoleDoesNotExistException::new);
 
 
             for(int i=0; i<title.size();i++){
                 CastInfo cast=new CastInfo();
-                cast.setProducerRole(producerRole);
                 cast.setTitle(title.get(i));
                 cast.setPerson(person);
                 cast.setRole(role);
@@ -112,10 +134,10 @@ public class CastService {
         }
     }
 
-    public void addDirectorToSerie(String titleName,String firstName, String lastName){
+    public void addDirectorToSerie(String titleName,String fullName){
         try{
             List<Title> title=titleRepo.findAllByTitle(titleName);
-            Person person = personRepo.findByFirstNameAndLastName(firstName, lastName).orElseThrow(PersonDoesNotExistException::new);
+            Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
             TitleRole role=roleRepo.findByRole("director").orElseThrow(RoleDoesNotExistException::new);
 
 

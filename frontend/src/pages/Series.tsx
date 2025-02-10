@@ -32,20 +32,36 @@ export const Series: React.FC = () => {
             info={false}
           />
           <FeedTitleSlider
-            fetchUrl={`title/title/type/tv-show/just-added`}
-            title="Just added"
-            subTitle=""
-            banner={true}
+            fetchUrl={`title/title/type/tv-show/genre/drama`}
+            title="Compelling Tales, Deep Emotions"
+            subTitle="Powerful stories that keep you hooked"
+            banner={false}
+            big={false}
+            info={false}
+          />
+          <FeedTitleSlider
+            fetchUrl={`title/title/type/tv-show/genre/animation`}
+            title="Worlds of Imagination"
+            subTitle="Dive into captivating animated adventures"
+            banner={false}
+            big={false}
+            info={false}
+          />
+          <FeedTitleSlider
+            fetchUrl={`title/title/type/tv-show/genre/crime`}
+            title="Crimes, Clues, and Conspiracies"
+            subTitle="Gripping crime shows that keep you guessing"
+            banner={false}
             big={true}
             info={false}
           />
           <FeedTitleSlider
-            fetchUrl={`title/title/type/tv-show/just-added`}
-            title="Trending"
-            subTitle=""
+            fetchUrl={`title/title/type/tv-show/genre/action`}
+            title="Unstoppable Adventures"
+            subTitle="Explosive action and thrilling stories await"
             banner={false}
-            big={true}
-            info={true}
+            big={false}
+            info={false}
           />
         </>
       ) : (

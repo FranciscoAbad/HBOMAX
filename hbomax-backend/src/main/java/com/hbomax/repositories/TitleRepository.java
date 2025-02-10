@@ -28,8 +28,8 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
 
    @Query("SELECT DISTINCT t.seasonNr FROM Title t WHERE t.type = 'episode' AND t.title = :titleName")
    List<Integer> findSeasonsByTitle(@Param("titleName") String titleName);
-    @Query("SELECT c.title from CastInfo c WHERE c.person.firstName=:firstName AND c.person.lastName=:lastName")
-    Set<Title> findTitlesByPerson(@Param("firstName") String firstName,@Param("lastName") String lastName);
+    @Query("SELECT c.title from CastInfo c WHERE c.person.fullName=:fullName")
+    Set<Title> findTitlesByPerson(@Param("fullName") String fullName);
 
     @Query("SELECT t from Title t JOIN t.genres g WHERE g.genre=:genreName AND t.seasonNr=0")
     Set<Title> findTitlesByGenre(@Param("genreName") String genreName);
@@ -84,11 +84,8 @@ public interface TitleRepository extends JpaRepository<Title,Integer>  {
             "WHERE (LOWER(t.title) LIKE LOWER(CONCAT(REPLACE(:param, ' ', '-'), '%')) " +
             "OR LOWER(g.genre) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
             "OR LOWER(c.country) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
-            "OR LOWER(p.firstName) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
-            "OR LOWER(p.lastName) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')) " +
-            "OR LOWER(CONCAT(p.firstName, ' ', p.lastName)) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')))" +
+            "OR LOWER(p.fullName) LIKE LOWER(CONCAT('%', REPLACE(:param, ' ', '-'), '%')))" +
               "AND t.type='movie'")
-
     List<Title> searchMovies(@Param("param") String param);
 
 }

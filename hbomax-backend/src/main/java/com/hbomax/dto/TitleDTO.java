@@ -20,13 +20,15 @@ public class TitleDTO {
 
     private String rating;
 
+    private String overview;
+
     private Image banner;
 
     private Image poster;
 
     private Image name;
 
-    public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, Image banner, Image poster, Image name) {
+    public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, String overview, Image banner, Image poster, Image name) {
         this.titleId = titleId;
         this.title = title;
         this.brandName = brandName;
@@ -35,9 +37,18 @@ public class TitleDTO {
         this.episodeName = episodeName;
         this.runtime = runtime;
         this.rating = rating;
+        this.overview = overview;
         this.banner = banner;
         this.poster = poster;
         this.name = name;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public Integer getTitleId() {

@@ -15,11 +15,8 @@ public class Person {
     @Column(name="person_id")
     private Integer personId;
 
-    @Column(name="firstName")
-    private String firstName;
-
-    @Column(name="lastName")
-    private String lastName;
+    @Column(name="full_name")
+    private String fullName;
 
     @Column(name="gender")
     private String gender;
@@ -40,10 +37,9 @@ public class Person {
 
     }
 
-    public Person(Integer personId, String firstName, String lastName, String gender, LocalDate dob, String birthplace, String bio) {
+    public Person(Integer personId, String fullName, String gender, LocalDate dob, String birthplace, String bio) {
         this.personId = personId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fullName = fullName;
         this.gender = gender;
         this.dob = dob;
         this.birthplace = birthplace;
@@ -58,20 +54,12 @@ public class Person {
         this.personId = personId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getGender() {

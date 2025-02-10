@@ -1,6 +1,7 @@
 package com.hbomax.services;
 
 
+import com.hbomax.exceptions.InvalidNameException;
 import com.hbomax.models.Person;
 import com.hbomax.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,12 @@ public class PersonService {
         this.personRepo = personRepo;
     }
 
-    public Person registerPerson(String firstName, String lastName, String birthPlace, String bio, String gender, LocalDate dob){
+    public Person registerPerson(String fullName, String birthPlace, String bio, String gender, LocalDate dob) throws InvalidNameException {
+
+
 
         Person person=new Person();
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
+        person.setFullName(fullName);
         person.setBirthplace(birthPlace);
         person.setBio(bio);
         person.setGender(gender);

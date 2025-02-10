@@ -145,7 +145,7 @@ export const FeedSideBar: React.FC<FeedSideBarProps> = ({
             </div>
             <div
               className="feed-side-bar-genres-column-button"
-              onClick={() => navigate("/genre/fantasy-&-sci-fi")}
+              onClick={() => navigate("/genre/fantasy-and-sci-fi")}
             >
               Fantasy & Sci-Fi
             </div>

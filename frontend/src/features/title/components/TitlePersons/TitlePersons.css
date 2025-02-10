@@ -1,7 +1,6 @@
 .title-persons {
   display: flex;
   margin-left: 28px;
-  width: 100%;
   margin-top: 20px;
   flex-direction: column;
   position: relative;

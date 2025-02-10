@@ -19,7 +19,7 @@ export const FeedHeaderSliderItem: React.FC<FeedHeaderSliderItemProps> = ({
         />
         <h4 className="feed-header-slider-content-card-info">NEW RELEASE</h4>
         <p className="feed-header-slider-content-card-overview">
-          Look for these new movie that doesn't exist in the real world.
+          {item.overview}
         </p>
         <div className="feed-header-slider-content-card-buttons">
           <div className="feed-header-slider-content-card-buttons-play">

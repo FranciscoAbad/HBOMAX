@@ -25,12 +25,6 @@ import java.util.Set;
 @Transactional
 public class ImageService {
 
-    @Value("${cloudinary.api.secret}")
-    private String apiSecret;
-    @Value("${cloudinary.api.key}")
-    private String apiKey;
-    @Value("${cloudinary.cloud.name}")
-    private String cloudName;
 
     private final ImageRepository imageRepository;
     private final Cloudinary cloudinary;
@@ -38,12 +32,12 @@ public class ImageService {
     //private static final String URL="http://localhost:8888/images/";
 
     @Autowired
-    public ImageService(ImageRepository imageRepository) {
+    public ImageService(ImageRepository imageRepository) {;
         this.imageRepository = imageRepository;
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name",cloudName,
-                "api_key",apiKey,
-                "api_secret",apiSecret
+                "cloud_name","drd2r15di",
+                "api_key","564121342791343",
+                "api_secret","4fSLR1roDfKRzSmOnwrjslGC7m8"
         ));
     }
 
