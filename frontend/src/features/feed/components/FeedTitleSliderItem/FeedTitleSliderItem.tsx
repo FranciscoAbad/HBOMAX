@@ -5,7 +5,10 @@ import { TitleDTO } from "../../../../utils/GlobalInterfaces";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { useNavigate } from "react-router-dom";
-import { firstLettesToUpperCaseAndReplace } from "../../../title/utils/TitleUtils";
+import {
+  firstLettesToUpperCaseAndReplace,
+  getYear,
+} from "../../../title/utils/TitleUtils";
 
 interface FeedTitleSliderItemProps {
   item: TitleDTO;
@@ -43,7 +46,9 @@ export const FeedTitleSliderItem: React.FC<FeedTitleSliderItemProps> = ({
           <p className="feed-title-slide-info-name">
             {firstLettesToUpperCaseAndReplace(item.title)}
           </p>
-          <p className="feed-title-slide-info-rate">{item.rating}</p>
+          <p className="feed-title-slide-info-rate">
+            <span>{item.rating}</span> <span>{getYear(item.releaseDate)}</span>
+          </p>
         </div>
       ) : (
         <></>

@@ -1,0 +1,68 @@
+[
+  {
+    "id": 0,
+    "label": "Action",
+    "filter": "action",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739211262/genre/thysyqkiflegr7tslruy.webp"
+  },
+  {
+    "id": 1,
+    "label": "Horror",
+    "filter": "horror",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210976/genre/jvxzuqd28e9qbqsg3uy6.webp"
+  },
+  {
+    "id": 2,
+    "label": "Animation",
+    "filter": "animation",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739211262/genre/zqyr9cztcgi0g9ov8vnu.webp"
+  },
+  {
+    "id": 3,
+    "label": "Comedy",
+    "filter": "comedy",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210714/genre/r16ohmge57t7yyvcqreo.webp"
+  },
+  {
+    "id": 4,
+    "label": "Documentaries",
+    "filter": "documentaries",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210975/genre/twzg3a087a1bgf7spjye.webp"
+  },
+  {
+    "id": 5,
+    "label": "Drama",
+    "filter": "drama",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210975/genre/buu7pbzsyima1qroaebt.webp"
+  },
+  {
+    "id": 6,
+    "label": "Fantasy & Sci-Fi",
+    "filter": "fantasy-and-sci-fi",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210976/genre/pyvhzavxx5lcx8bwkh5n.webp"
+  },
+  {
+    "id": 7,
+    "label": "Adventure",
+    "filter": "adventure",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210981/genre/gnwbfnkih8b3cpk5s25r.webp"
+  },
+  {
+    "id": 8,
+    "label": "Kids",
+    "filter": "kids",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210976/genre/zjqixpxo2weve8yjhcrx.webp"
+  },
+  {
+    "id": 9,
+    "label": "Romance",
+    "filter": "romance",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210976/genre/jvxzuqd28e9qbqsg3uy6.webp"
+  },
+  {
+    "id": 10,
+    "label": "Crime",
+    "filter": "crime",
+    "imageLink": "https://res.cloudinary.com/drd2r15di/image/upload/v1739210975/genre/pxilse6rcxxcmpckt9bn.webp"
+  }
+]

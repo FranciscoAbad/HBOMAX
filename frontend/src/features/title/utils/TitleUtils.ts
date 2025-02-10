@@ -1,13 +1,11 @@
 export function formatName(input: string) {
   const [firstName, lastName] = input.split("-");
 
-  // Capitalize the first letter of each name
   const formattedFirstName =
     firstName.charAt(0).toUpperCase() + firstName.slice(1);
   const formattedLastName =
     lastName.charAt(0).toUpperCase() + lastName.slice(1);
 
-  // Join the names with a blank space
   const formattedName = `${formattedFirstName} ${formattedLastName}`;
 
   return formattedName;
@@ -41,4 +39,12 @@ export function firstLettesToUpperCaseAndReplace(input: string) {
   } else {
     return firstLetterToUpperCase(input);
   }
+}
+
+export function getYear(dateString: string): number {
+  return parseInt(dateString.split("-")[0], 10);
+}
+
+export function replacePipesWithSpaces(text: string): string {
+  return text.replace(/\|/g, " ");
 }

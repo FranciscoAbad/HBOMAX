@@ -146,6 +146,7 @@ export interface TitleDTO {
   runtime: number;
   rating: string;
   overview: string;
+  releaseDate: string;
   banner: Image;
   poster: Image;
   name: Image;

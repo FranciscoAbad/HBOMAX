@@ -1,0 +1,194 @@
+.feed-title-hero-background {
+  width: 200%;
+  position: absolute;
+  left: -100%;
+  z-index: 0;
+}
+
+.feed-title-hero-background-image {
+  width: 100%;
+  height: auto;
+}
+
+.feed-title-hero-container {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+  height: 100vw;
+  overflow: hidden;
+}
+
+.feed-title-hero {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgb(0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.8) 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.feed-title-hero-content {
+  width: 84%;
+  padding: 24px;
+  display: flex;
+  position: relative;
+  z-index: 3;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.feed-title-hero-content-image > img {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.feed-title-hero-content-details {
+  margin-bottom: 8px;
+  justify-content: center;
+  display: flex;
+}
+
+.feed-title-hero-content-details > span {
+  font-size: 12px;
+}
+
+.feed-title-hero-content-details > span:last-child {
+  margin-left: 12px;
+}
+
+.feed-title-hero-content-overview {
+  font-size: 14px;
+  text-align: center;
+  line-height: 18px;
+}
+
+.feed-title-hero-content-buttons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.feed-title-hero-content-buttons-watch {
+  padding: 9px 24px;
+  display: flex;
+  background-color: rgba(134, 151, 206, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  justify-content: center;
+  text-decoration: none;
+}
+.feed-title-hero-content-buttons-watch:hover {
+  background-color: rgba(134, 151, 206, 0.6);
+  transition: all 0.5s;
+}
+
+.feed-title-hero-content-buttons-info {
+  margin-left: 12px;
+  padding: 11px 11px;
+  display: flex;
+  background-color: rgba(134, 151, 206, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  justify-content: center;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 600px) {
+  .feed-title-hero-content {
+    width: 65%;
+  }
+}
+@media screen and (min-width: 800px) {
+  .feed-title-hero-content {
+    padding-left: 36px;
+  }
+  .feed-title-hero-container {
+    height: 48vh;
+  }
+  .feed-title-hero-background {
+    width: 90%;
+    position: absolute;
+    left: 10%;
+    z-index: 0;
+  }
+
+  .feed-title-hero {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: flex-start;
+    background: linear-gradient(
+      90deg,
+      rgb(0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.98) 30%,
+      rgba(0, 0, 0, 0) 70%
+    );
+    height: 100%;
+  }
+  .feed-title-hero-content {
+    width: 38%;
+    padding: 0 24px;
+    display: flex;
+    position: relative;
+    z-index: 3;
+    flex-direction: column;
+    justify-content: left;
+  }
+
+  .feed-title-hero-content-details {
+    justify-content: flex-start;
+  }
+
+  .feed-title-hero-content-details > span {
+    font-size: 16px;
+  }
+  .feed-title-hero-content-overview {
+    font-size: 20px;
+    line-height: 22px;
+    text-align: left;
+  }
+
+  .feed-title-hero-content-buttons {
+    justify-content: flex-start;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .feed-title-hero-content {
+    padding-left: 48px;
+  }
+  .feed-title-hero-container {
+    height: 53vh;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .feed-title-hero-content {
+    padding-left: 60px;
+  }
+  .feed-title-hero-container {
+    height: 58vh;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .feed-title-slider {
+    padding-left: 60px;
+  }
+}

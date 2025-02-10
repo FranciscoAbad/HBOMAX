@@ -25,6 +25,7 @@ public class TitleDTOMapper {
                 title.getRuntime(),
                 title.getRating(),
                 title.getOverview(),
+                title.getReleaseDate(),
                 title.getBannerPicture(),
                 title.getPosterPicture(),
                 title.getNamePicture()

@@ -1,6 +1,10 @@
 package com.hbomax.dto;
 
 import com.hbomax.models.Image;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 public class TitleDTO {
 
@@ -22,13 +26,15 @@ public class TitleDTO {
 
     private String overview;
 
+    private LocalDate releaseDate;
+
     private Image banner;
 
     private Image poster;
 
     private Image name;
 
-    public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, String overview, Image banner, Image poster, Image name) {
+    public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, String overview, LocalDate releaseDate, Image banner, Image poster, Image name) {
         this.titleId = titleId;
         this.title = title;
         this.brandName = brandName;
@@ -38,17 +44,10 @@ public class TitleDTO {
         this.runtime = runtime;
         this.rating = rating;
         this.overview = overview;
+        this.releaseDate = releaseDate;
         this.banner = banner;
         this.poster = poster;
         this.name = name;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
     }
 
     public Integer getTitleId() {
@@ -113,6 +112,22 @@ public class TitleDTO {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public Image getBanner() {

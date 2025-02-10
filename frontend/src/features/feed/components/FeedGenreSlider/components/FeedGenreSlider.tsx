@@ -13,6 +13,7 @@ import { determineBreakPoints } from "../../../utils/DetermineBreakPoints";
 import { useNavigate } from "react-router-dom";
 import { FeedGenreItem } from "./FeedGenreItem";
 import { useFetchGenres } from "../../../../../hooks/useFetchGenres";
+import genres from "../../../../../assets/Json/genresSlider.json";
 
 interface SliderTitleSide {
   title: string;
@@ -75,8 +76,8 @@ export const FeedGenreSlider: React.FC = () => {
           </div>
         </div>
 
-        {data.map((item) => (
-          <SwiperSlide key={item.genreId}>
+        {genres.map((item) => (
+          <SwiperSlide key={item.id}>
             <FeedGenreItem item={item} />
           </SwiperSlide>
         ))}

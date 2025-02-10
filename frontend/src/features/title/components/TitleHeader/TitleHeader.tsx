@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import "./TitleHeader.css";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { removeSlashAndAllToUpperCase } from "../../utils/TitleUtils";
+import {
+  getYear,
+  removeSlashAndAllToUpperCase,
+  replacePipesWithSpaces,
+} from "../../utils/TitleUtils";
 import { TitleRater } from "../TitleRater/TitleRater";
 
 interface TitleHeaderImageProps {
@@ -75,6 +79,7 @@ export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
             <span>{runtime} MIN</span>
             <span>{rating}</span>
             <span> {quality}</span>
+            <span>{getYear(releaseDate)}</span>
           </h4>
           <div className="title-header-content-controlls">
             <div className="title-header-content-controlls-play">
@@ -89,7 +94,9 @@ export const TitleHeader: React.FC<TitleHeaderImageProps> = ({
               titleVotes={votes}
             />
           </div>
-          <div className="title-header-content-overview">{overview}</div>
+          <div className="title-header-content-overview">
+            {replacePipesWithSpaces(overview)}
+          </div>
         </div>
       </div>
     </div>
