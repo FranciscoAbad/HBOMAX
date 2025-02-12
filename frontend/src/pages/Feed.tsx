@@ -40,7 +40,7 @@ export const Feed: React.FC = () => {
       <FeedNav />
       <FeedHeaderSlider fetchUrl="title/all/title/trending" />
       <FeedTitleSlider
-        fetchUrl="title/title/genre/fantasy-and-sci-fi/trending"
+        fetchUrl="title/all/genre/drama"
         title="Most Popular"
         subTitle=""
         banner={false}

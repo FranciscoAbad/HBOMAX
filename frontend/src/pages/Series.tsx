@@ -7,6 +7,8 @@ import { FeedTitleSlider } from "../features/feed/components/FeedTitleSlider/Fee
 import { filterItsGenre } from "../features/feed/components/FeedContentFilter/utils/determineFetchUrl";
 import { FeedTitlesGrid } from "../features/feed/components/FeedGridTitles/FeedTitlesGrid";
 import types from "../assets/Json/filters.json";
+import { FeedTitleHero } from "../features/feed/components/FeedTitleHero/FeedTitleHero";
+import { FeedGenreSlider } from "../features/feed/components/FeedGenreSlider/components/FeedGenreSlider";
 
 interface FilterTypes {
   label: string;
@@ -55,6 +57,8 @@ export const Series: React.FC = () => {
             big={true}
             info={false}
           />
+          <FeedTitleHero fetchUrl={`title/all/genre/drama`} />
+
           <FeedTitleSlider
             fetchUrl={`title/title/type/tv-show/genre/action`}
             title="Unstoppable Adventures"
@@ -63,6 +67,7 @@ export const Series: React.FC = () => {
             big={false}
             info={false}
           />
+          <FeedGenreSlider />
         </>
       ) : (
         <FeedTitlesGrid

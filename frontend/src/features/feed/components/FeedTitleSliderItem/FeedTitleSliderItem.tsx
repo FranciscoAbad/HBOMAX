@@ -31,7 +31,10 @@ export const FeedTitleSliderItem: React.FC<FeedTitleSliderItemProps> = ({
         }}
         className="feed-title-slide-content"
       >
-        <img src={banner ? item.banner.imageURL : item.poster.imageURL} />
+        <img
+          src={banner ? item.banner.imageURL : item.poster.imageURL}
+          loading="lazy"
+        />
         <div className="feed-title-slide-content-controlls">
           <div className="feed-title-slide-content-controlls-button">
             <PlayArrowIcon sx={{ width: 25, height: 25 }} />

@@ -48,3 +48,11 @@ export function getYear(dateString: string): number {
 export function replacePipesWithSpaces(text: string): string {
   return text.replace(/\|/g, " ");
 }
+export function optimizeCloudinaryUrl(url: string): string {
+  if (!url.includes("res.cloudinary.com")) return url;
+
+  const parts = url.split("/upload/");
+  if (parts.length !== 2) return url;
+
+  return `${parts[0]}/upload/w_auto,dpr_auto,q_auto,f_auto/${parts[1]}`;
+}
