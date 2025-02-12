@@ -17,6 +17,10 @@ public class Collection {
     @Column(name="collection_name")
     private String collectionName;
 
+
+    @Column(name="collection_description")
+    private String collectionDescription;
+
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="card_picture",referencedColumnName = "image_id")
     private Image cardPicture;
@@ -30,24 +34,32 @@ public class Collection {
     @JoinColumn(name="name_picture",referencedColumnName = "image_id")
     private Image namePicture;
 
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="hero_picture",referencedColumnName = "image_id")
+    private Image heroPicture;
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="title_collection_junction",
             joinColumns ={@JoinColumn(name = "collection_id")},
             inverseJoinColumns = {@JoinColumn(name="title_id")})
-    Set<Genre> collectionTitles;
+    Set<Title> collectionTitles;
 
 
     public Collection() {
         this.collectionTitles=new HashSet<>();
     }
 
-    public Collection(Set<Genre> collectionTitles, Image namePicture, Image bannerPicture, Image cardPicture, String collectionName, Integer collectionId) {
-        this.collectionTitles = collectionTitles;
-        this.namePicture = namePicture;
-        this.bannerPicture = bannerPicture;
-        this.cardPicture = cardPicture;
-        this.collectionName = collectionName;
+    public Collection(Integer collectionId, String collectionName, String collectionDescription, Image cardPicture, Image bannerPicture, Image namePicture, Image heroPicture, Set<Title> collectionTitles) {
         this.collectionId = collectionId;
+        this.collectionName = collectionName;
+        this.collectionDescription = collectionDescription;
+        this.cardPicture = cardPicture;
+        this.bannerPicture = bannerPicture;
+        this.namePicture = namePicture;
+        this.heroPicture = heroPicture;
+        this.collectionTitles = collectionTitles;
     }
 
     public Integer getCollectionId() {
@@ -60,6 +72,14 @@ public class Collection {
 
     public String getCollectionName() {
         return collectionName;
+    }
+
+    public String getCollectionDescription() {
+        return collectionDescription;
+    }
+
+    public void setCollectionDescription(String collectionDescription) {
+        this.collectionDescription = collectionDescription;
     }
 
     public void setCollectionName(String collectionName) {
@@ -82,10 +102,6 @@ public class Collection {
         this.bannerPicture = bannerPicture;
     }
 
-    public Set<Genre> getCollectionTitles() {
-        return collectionTitles;
-    }
-
     public Image getNamePicture() {
         return namePicture;
     }
@@ -94,7 +110,19 @@ public class Collection {
         this.namePicture = namePicture;
     }
 
-    public void setCollectionTitles(Set<Genre> collectionTitles) {
+    public Set<Title> getCollectionTitles() {
+        return collectionTitles;
+    }
+
+    public void setCollectionTitles(Set<Title> collectionTitles) {
         this.collectionTitles = collectionTitles;
+    }
+
+    public Image getHeroPicture() {
+        return heroPicture;
+    }
+
+    public void setHeroPicture(Image heroPicture) {
+        this.heroPicture = heroPicture;
     }
 }
