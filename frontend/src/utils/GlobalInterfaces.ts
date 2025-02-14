@@ -157,3 +157,14 @@ export interface Genre {
   genre: string;
   genrePicture: Image | null;
 }
+
+export interface Collection {
+  collectionId: number;
+  collectionName: string;
+  collectionDescription: string;
+  cardPicture: Image;
+  bannerPicture: Image;
+  namePicture: Image;
+  heroPicture: Image;
+  collectionTitles: TitleDTO[];
+}

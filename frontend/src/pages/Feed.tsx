@@ -17,6 +17,7 @@ import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 import { FeedTitlesGrid } from "../features/feed/components/FeedGridTitles/FeedTitlesGrid";
 import { FeedGenreSlider } from "../features/feed/components/FeedGenreSlider/components/FeedGenreSlider";
 import { FeedTitleHero } from "../features/feed/components/FeedTitleHero/FeedTitleHero";
+import { FeedCollectionTitleSlider } from "../features/feed/components/FeedCollectionSlider/FeedCollectionTitleSlider";
 
 export const Feed: React.FC = () => {
   const state = useSelector((state: RootState) => state.user);
@@ -85,6 +86,13 @@ export const Feed: React.FC = () => {
         fetchUrl={`title/all/genre/horror`}
         title="Terrifying Tales Await"
         subTitle="Dive into a chilling collection of horror"
+        banner={false}
+        big={false}
+        info={false}
+      />
+      <FeedCollectionTitleSlider
+        fetchUrl="harry-potter"
+        subTitle="For those who believe in magic."
         banner={false}
         big={false}
         info={false}

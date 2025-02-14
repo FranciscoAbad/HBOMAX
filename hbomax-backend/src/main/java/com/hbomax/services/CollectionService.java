@@ -1,8 +1,10 @@
 package com.hbomax.services;
 
 
+import com.hbomax.dto.CollectionDTO;
 import com.hbomax.exceptions.UnableToCreateCollectionException;
 import com.hbomax.exceptions.UnabledToSavePhotoException;
+import com.hbomax.mappers.CollectionDTOMapper;
 import com.hbomax.models.Collection;
 import com.hbomax.models.Image;
 import com.hbomax.repositories.CollectionRepository;
@@ -54,9 +56,9 @@ public class CollectionService {
     }
 
 
-    public Collection getCollectionByName(String collectionName){
+    public CollectionDTO getCollectionByName(String collectionName){
         Collection collection=collectionRepository.findByCollectionName(collectionName).orElseThrow(RuntimeException::new);
-        return collection;
+        return CollectionDTOMapper.mapToDTO(collection);
     }
 
 }

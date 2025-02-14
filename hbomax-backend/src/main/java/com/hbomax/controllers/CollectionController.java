@@ -1,6 +1,7 @@
 package com.hbomax.controllers;
 
 
+import com.hbomax.dto.CollectionDTO;
 import com.hbomax.exceptions.UnableToResolvePhotoException;
 import com.hbomax.exceptions.UnabledToSavePhotoException;
 import com.hbomax.models.Collection;
@@ -29,4 +30,10 @@ public class CollectionController {
     public Collection createCollection(@RequestPart("cardPicture") MultipartFile cardPicture,@RequestPart("bannerPicture") MultipartFile bannerPicture,@RequestPart("namePicture") MultipartFile namePicture, @PathVariable("collectionName") String collectionName) {
         return collectionService.createCollection(collectionName,cardPicture,bannerPicture,namePicture);
     }
+
+    @GetMapping("/get/{collectionName}")
+    public CollectionDTO getCollection(@PathVariable("collectionName") String collectionName){
+        return collectionService.getCollectionByName(collectionName);
+    }
 }
+
