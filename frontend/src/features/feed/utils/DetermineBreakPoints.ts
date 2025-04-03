@@ -6,6 +6,11 @@ export const determineBreakPoints = (
   if (banner) {
     if (big) {
       return {
+        0: {
+          slidesPerView: 1.12,
+          slidesPerGroup: 1,
+          spaceBetween: 0,
+        },
         596: {
           slidesPerView: 1.12,
           slidesPerGroup: 1,
@@ -24,6 +29,11 @@ export const determineBreakPoints = (
       };
     } else {
       return {
+        0: {
+          slidesPerView: 2.12,
+          slidesPerGroup: 2,
+          spaceBetween: 0,
+        },
         596: {
           slidesPerView: 3.12,
           slidesPerGroup: 3,
@@ -43,6 +53,11 @@ export const determineBreakPoints = (
     }
   } else if (big) {
     return {
+      0: {
+        slidesPerView: 2.12,
+        slidesPerGroup: 2,
+        spaceBetween: 0,
+      },
       596: {
         slidesPerView: 3.12,
         slidesPerGroup: 3,
@@ -84,9 +99,14 @@ export const determineBreakPoints = (
     };
   } else {
     return {
+      0: {
+        slidesPerView: 4.12,
+        slidesPerGroup: 4,
+        spaceBetween: 0,
+      },
       596: {
-        slidesPerView: 6.12,
-        slidesPerGroup: 6,
+        slidesPerView: 5.12,
+        slidesPerGroup: 5,
         spaceBetween: 0,
       },
       1096: {

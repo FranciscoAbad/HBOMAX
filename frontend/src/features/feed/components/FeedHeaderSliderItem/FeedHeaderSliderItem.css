@@ -3,13 +3,16 @@
 }
 
 .feed-header-slide-content-image-hide {
+  position: relative;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   overflow: hidden;
 }
 
 .feed-header-slide-content-image-hide > img {
-  width: 100%;
+  position: absolute;
+  width: 200%;
+  left: -100%;
 }
 
 .feed-header-slider-gradient-one {
@@ -151,16 +154,15 @@
   position: absolute;
   z-index: 12;
   left: 0;
-  width: 31%;
-  bottom: 24px;
+  width: 50%;
+  bottom: 20%;
   margin-bottom: 20px;
-  margin-left: 60px;
+  margin-left: 28px;
 }
 
 .feed-header-slider-content-card-info {
   margin-top: 12px;
   color: rgb(255, 255, 255);
-
   font-weight: 600;
   font-style: normal;
   font-size: 14px;
@@ -171,12 +173,12 @@
   color: rgb(255, 255, 255);
   font-weight: 400;
   font-style: normal;
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 0.5px;
-  line-height: 24px;
+  line-height: 19px;
 }
 .feed-header-slider-content-card-buttons {
-  margin: 32px 0;
+  margin: 8px 0;
   display: flex;
   align-items: center;
 }
@@ -216,4 +218,79 @@
 .feed-header-slider-content-card-buttons-more:hover {
   border-color: rgb(117, 69, 232);
   background-color: rgba(15, 15, 15, 0.98);
+}
+
+.feed-header-slider-content-card-overview {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 19px;
+}
+@media screen and (min-width: 650px) {
+  .feed-header-slide-content-image-hide > img {
+    width: 150%;
+    left: -50%;
+  }
+  .feed-header-slider-content-card {
+    bottom: 16%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .feed-header-slider-content-card {
+    margin-left: 36px;
+  }
+  .feed-title-slider-header {
+    margin: 0 36px 12px 36px;
+  }
+  .feed-header-slider-content-card {
+    bottom: 12%;
+    width: 31%;
+  }
+
+  .feed-header-slide-content-image-hide > img {
+    width: 100%;
+    left: 0;
+  }
+  .feed-header-slider-gradient-one {
+    height: 52vw;
+  }
+  .feed-header-slider-gradient-two {
+    height: 52vw;
+  }
+  .feed-header-slider-gradient-three {
+    height: 52vw;
+  }
+  .feed-header-slider-gradient-four {
+    height: 52vw;
+  }
+  .feed-header-slider-gradient-five {
+    height: 52vw;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .feed-header-slider-content-card {
+    margin-left: 48px;
+  }
+
+  .feed-header-slider-content-card-overview {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .feed-header-slider-content-card-buttons {
+    margin: 28px 0;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .feed-header-slider-content-card {
+    margin-left: 60px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .feed-title-slider {
+    padding-left: 60px;
+  }
 }

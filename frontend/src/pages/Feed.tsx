@@ -57,22 +57,7 @@ export const Feed: React.FC = () => {
         big={false}
         info={true}
       />
-      <FeedTitleSlider
-        fetchUrl="title/all/title/trending"
-        title=""
-        subTitle=""
-        banner={false}
-        big={false}
-        sideSlide={{
-          title: "Trending Now",
-          subTitle:
-            "The most-watched movies and series in argentina in te past few days. Don't miss out!",
-          buttonLabel: "BROWSE MORE",
-          imageUrl:
-            "https://images.cdn.prd.api.discomax.com/0223/cc000a1ec3f5.png?w=1700&f=webp",
-        }}
-        info={false}
-      />
+
       <FeedTitleSlider
         fetchUrl={`title/all/genre/action`}
         title="Adrenaline Unleashed"

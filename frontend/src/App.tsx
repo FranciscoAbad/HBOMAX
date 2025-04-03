@@ -23,7 +23,6 @@ import { useCheckToken } from "./components/AuthWrapper/checkToken";
 import { AccountEditEmail } from "./pages/AccountEditEmail";
 import { AccountEditPassword } from "./pages/AccountEditPassword";
 import { AccountEditName } from "./pages/AccountEditName";
-import { TitleRater } from "./features/title/components/TitleRater/TitleRater";
 import { Search } from "./pages/Search";
 
 const theme: Theme = {

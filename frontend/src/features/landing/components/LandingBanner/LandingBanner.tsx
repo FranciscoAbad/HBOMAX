@@ -17,8 +17,8 @@ export const LandingBanner: React.FC = () => {
         </div>
         <div className="landing-banner-grid-item">
           <h2 className="landing-banner-grid-item-title">
-            No importa qué te guste, en HBO Max <br />
-            tienes todo y más.
+            No matter what you like, on HBO Max <br /> you have everything and
+            more.
           </h2>
         </div>
         <div className="landing-banner-grid-item">
@@ -31,7 +31,7 @@ export const LandingBanner: React.FC = () => {
               navigate("/signup");
             }}
           >
-            SUSCRÍBETE AHORA
+            SUBSCRIBE NOW
           </div>
         </div>
         <div className="landing-banner-grid-item-second">
@@ -41,7 +41,7 @@ export const LandingBanner: React.FC = () => {
             className="landing-banner-grid-item-second-image"
           />
           <h3 className="landing-banner-grid-item-second-text">
-            DISPONIBLE AHORA
+            AVAILABLE NOW
           </h3>
         </div>
         <></>

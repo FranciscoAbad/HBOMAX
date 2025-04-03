@@ -9,6 +9,7 @@ import { FeedTitlesGrid } from "../features/feed/components/FeedGridTitles/FeedT
 import types from "../assets/Json/filters.json";
 import { FeedTitleHero } from "../features/feed/components/FeedTitleHero/FeedTitleHero";
 import { FeedGenreSlider } from "../features/feed/components/FeedGenreSlider/components/FeedGenreSlider";
+import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 
 interface FilterTypes {
   label: string;
@@ -24,7 +25,16 @@ export const Movies: React.FC = () => {
   return (
     <div className="feed-filter">
       <FeedNav title={"Movies"} />
+
       <FeedHeaderSlider fetchUrl={`title/title/type/movie/trending`} />
+      <FeedTitleSlider
+        fetchUrl={`title/title/type/movie/trending`}
+        title="Trending"
+        subTitle=""
+        banner={false}
+        big={false}
+        info={false}
+      />
       <FeedContentFilterNav changeValue={setFilter} types={types} />
       {filter === "featured" ? (
         <>
@@ -73,6 +83,7 @@ export const Movies: React.FC = () => {
           banner={false}
         />
       )}
+      <FeedFooter />
     </div>
   );
 };

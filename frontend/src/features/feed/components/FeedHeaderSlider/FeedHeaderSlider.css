@@ -1,6 +1,7 @@
 .feed-header-slider-container {
-  background: black;
+  background-color: white;
   padding-bottom: 20px;
+  height: 70vh;
 }
 
 .feed-header-slide-content {
@@ -11,6 +12,7 @@
 
 .feed-header-slider {
   position: relative;
+  height: 70vh;
 }
 
 .feed-header-slide-content > img {
@@ -160,25 +162,20 @@
 .hide {
   display: none;
 }
-@media screen and (min-width: 500px) {
-  .feed-header-slider {
-    height: 55vw;
+
+@media screen and (min-width: 800px) {
+  .feed-header-slider-container {
+    background: black;
+    padding-bottom: 20px;
+    height: auto;
   }
-  @media screen and (min-width: 500px) and (max-height: 620px) {
-    .feed-header-slider {
-      height: 72vh;
-    }
+  .feed-header-slider {
+    height: 45vw;
   }
 }
 
 @media screen and (min-width: 1320px) {
-  .feed-header-slider {
-    height: 80vh;
-  }
 }
 
 @media screen and (min-width: 1799px) {
-  .feed-header-slider {
-    height: 88vh;
-  }
 }

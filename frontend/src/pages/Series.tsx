@@ -9,6 +9,7 @@ import { FeedTitlesGrid } from "../features/feed/components/FeedGridTitles/FeedT
 import types from "../assets/Json/filters.json";
 import { FeedTitleHero } from "../features/feed/components/FeedTitleHero/FeedTitleHero";
 import { FeedGenreSlider } from "../features/feed/components/FeedGenreSlider/components/FeedGenreSlider";
+import { FeedFooter } from "../features/feed/components/FeedFooter/FeedFooter";
 
 interface FilterTypes {
   label: string;
@@ -79,6 +80,7 @@ export const Series: React.FC = () => {
           banner={false}
         />
       )}
+      <FeedFooter />
     </div>
   );
 };
