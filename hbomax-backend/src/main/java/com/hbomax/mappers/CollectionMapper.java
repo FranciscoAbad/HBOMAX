@@ -1,18 +1,21 @@
 package com.hbomax.mappers;
 
-import com.hbomax.dto.CastInfoDTO;
-import com.hbomax.dto.CollectionDTO;
-import com.hbomax.models.CastInfo;
+import com.hbomax.dto.CollectionResponse;
 import com.hbomax.models.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+@Service
+public class CollectionMapper {
+    private final TitleMapper titleMapper;
 
-public class CollectionDTOMapper {
+    @Autowired
+    public CollectionMapper(TitleMapper titleMapper) {
+        this.titleMapper = titleMapper;
+    }
 
-    public static CollectionDTO mapToDTO(Collection collection) {
-        return new CollectionDTO(
+    public CollectionResponse fromCollection(Collection collection) {
+        return new CollectionResponse(
                 collection.getCollectionId(),
                 collection.getCollectionName(),
                 collection.getCollectionDescription(),
@@ -20,7 +23,7 @@ public class CollectionDTOMapper {
                 collection.getBannerPicture(),
                 collection.getNamePicture(),
                 collection.getHeroPicture(),
-                TitleDTOMapper.mapToDTOSet(collection.getCollectionTitles())
+               titleMapper.mapToPreviewSet(collection.getCollectionTitles())
         );
     }
 }

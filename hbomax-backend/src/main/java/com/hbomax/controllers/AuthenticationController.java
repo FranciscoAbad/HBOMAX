@@ -1,7 +1,10 @@
 package com.hbomax.controllers;
 
+import com.hbomax.dto.ApplicationUserResponse;
 import com.hbomax.dto.PasswordCodeDTO;
 import com.hbomax.exceptions.*;
+import com.hbomax.mappers.ApplicationUserMapper;
+import com.hbomax.mappers.CastInfoMapper;
 import com.hbomax.models.ApplicationUser;
 import com.hbomax.models.LoginResponse;
 import com.hbomax.models.RegistrationObject;
@@ -29,15 +32,11 @@ public class AuthenticationController {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
 
-    //private final MailService emailService;
-
     @Autowired
-    public AuthenticationController(UserService userService,AuthenticationManager authenticationManager,TokenService tokenService){
-        this.userService=userService;
-      //  this.emailService=emailService;
-        this.authenticationManager=authenticationManager;
-        this.tokenService=tokenService;
-
+    public AuthenticationController(UserService userService, TokenService tokenService, AuthenticationManager authenticationManager, ApplicationUserMapper applicationUserMapper) {
+        this.userService = userService;
+        this.tokenService = tokenService;
+        this.authenticationManager = authenticationManager;
     }
 
     @ExceptionHandler({EmailAlreadyTakenException.class})
@@ -48,10 +47,8 @@ public class AuthenticationController {
 
     // go to http://localhost:8080/auth/register
     @PostMapping("/register")
-    public ApplicationUser registerUser(@RequestBody RegistrationObject ro){
-
+    public ApplicationUserResponse registerUser(@RequestBody RegistrationObject ro){
         return userService.registerUser(ro);
-
     }
 
     @ExceptionHandler({UserDoesNotExistException.class})
@@ -76,16 +73,16 @@ public class AuthenticationController {
     public ResponseEntity<String> handleIncorrectVerificationCode(){
         return new ResponseEntity<String>("The code you provided did not match the verification code",HttpStatus.CONFLICT);
     }
+
     @PostMapping("/email/verify")
-    public ApplicationUser verifyEmail(@RequestBody LinkedHashMap<String,String> body){
+    public ApplicationUserResponse verifyEmail(@RequestBody LinkedHashMap<String,String> body){
         Long code=Long.parseLong(body.get("code"));
         String username=body.get("username");
-
         return userService.verifyEmail(username,code);
     }
 
     @PutMapping("/update/password")
-    public ApplicationUser updatePassword(@RequestBody LinkedHashMap<String,String> body){
+    public ApplicationUserResponse updatePassword(@RequestBody LinkedHashMap<String,String> body){
         String username=body.get("username");
         String password=body.get("password");
 
@@ -93,7 +90,7 @@ public class AuthenticationController {
     }
 
     @PutMapping("/update/email")
-    public ApplicationUser updateEmail(@RequestBody LinkedHashMap<String,String> body){
+    public ApplicationUserResponse updateEmail(@RequestBody LinkedHashMap<String,String> body){
         String email=body.get("email");
         String newEmail=body.get("newEmail");
         return userService.setEmail(email,newEmail);

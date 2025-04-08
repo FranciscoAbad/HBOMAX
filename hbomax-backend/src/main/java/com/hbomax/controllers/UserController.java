@@ -1,6 +1,8 @@
 package com.hbomax.controllers;
 
 import com.google.common.net.HttpHeaders;
+import com.hbomax.dto.ApplicationUserResponse;
+import com.hbomax.dto.ProfileResponse;
 import com.hbomax.models.ApplicationUser;
 import com.hbomax.models.Profile;
 import com.hbomax.services.ProfileService;
@@ -28,27 +30,26 @@ public class UserController {
 
 
 
-
     @GetMapping("/verify")
-    public ApplicationUser verifyIdentity(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+    public ApplicationUserResponse verifyIdentity(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         String username = tokenService.getUsernameFromToken(token);
         return userService.getUserByUsername(username);
     }
 
     @PostMapping("/profile/add/{profileName}/{imageId}")
-    public Profile addProfileToUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable("profileName") String profileName,@PathVariable("imageId") Long imageId){
+    public ProfileResponse addProfileToUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable("profileName") String profileName,@PathVariable("imageId") Long imageId){
         String username=tokenService.getUsernameFromToken(token);
         return profileService.createProfile(username,profileName,imageId);
     }
 
     @GetMapping("/profile")
-    public Set<Profile> getProfilesByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
+    public Set<ProfileResponse> getProfilesByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
         String username=tokenService.getUsernameFromToken(token);
         return profileService.getAllProfilesByUsername(username);
     }
 
     @PutMapping("/profile/{profileId}/image/{imageId}/name/{profileName}")
-    public Profile setProfilePicture(@PathVariable("profileId") Integer profileId,@PathVariable("imageId") Long imageId,@PathVariable("profileName") String profileName){
+    public ProfileResponse setProfilePicture(@PathVariable("profileId") Integer profileId, @PathVariable("imageId") Long imageId, @PathVariable("profileName") String profileName){
         return profileService.setProfilePictureAndName(profileId,imageId,profileName);
     }
 

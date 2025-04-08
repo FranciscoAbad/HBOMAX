@@ -1,10 +1,9 @@
 package com.hbomax.services;
 
 
-import com.hbomax.dto.CollectionDTO;
+import com.hbomax.dto.CollectionResponse;
 import com.hbomax.exceptions.UnableToCreateCollectionException;
-import com.hbomax.exceptions.UnabledToSavePhotoException;
-import com.hbomax.mappers.CollectionDTOMapper;
+import com.hbomax.mappers.CollectionMapper;
 import com.hbomax.models.Collection;
 import com.hbomax.models.Image;
 import com.hbomax.repositories.CollectionRepository;
@@ -14,14 +13,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CollectionService {
-
+    private final CollectionMapper collectionMapper;
     private final CollectionRepository collectionRepository;
     private final ImageService imageService;
 
     @Autowired
-    public CollectionService(CollectionRepository collectionRepository, ImageService imageService) {
+    public CollectionService(CollectionRepository collectionRepository, ImageService imageService, CollectionMapper collectionMapper) {
         this.collectionRepository = collectionRepository;
         this.imageService = imageService;
+        this.collectionMapper = collectionMapper;
     }
 
     public Collection createCollection(String collectionName, MultipartFile cardPicture, MultipartFile bannerPicture, MultipartFile namePicture)  {
@@ -35,7 +35,6 @@ public class CollectionService {
             Image card=imageService.uploadImage(cardPicture,"collectionCard");
             Image banner=imageService.uploadImage(bannerPicture,"collectionBanner");
             Image name=imageService.uploadImage(namePicture,"collectionName");
-
 
 
 
@@ -56,9 +55,9 @@ public class CollectionService {
     }
 
 
-    public CollectionDTO getCollectionByName(String collectionName){
+    public CollectionResponse getCollectionByName(String collectionName){
         Collection collection=collectionRepository.findByCollectionName(collectionName).orElseThrow(RuntimeException::new);
-        return CollectionDTOMapper.mapToDTO(collection);
+        return collectionMapper.fromCollection(collection);
     }
 
 }

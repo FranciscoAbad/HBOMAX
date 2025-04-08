@@ -1,5 +1,6 @@
 package com.hbomax.controllers;
 
+import com.hbomax.dto.BrandResponse;
 import com.hbomax.models.Brand;
 import com.hbomax.models.Genre;
 import com.hbomax.services.BrandService;
@@ -20,7 +21,7 @@ public class BrandController {
     }
 
     @PostMapping("/add/{brandName}")
-    public Brand createBrand(@RequestPart("brandLogo") MultipartFile brandLogo, @PathVariable("brandName") String brandName){
+    public BrandResponse createBrand(@RequestPart("brandLogo") MultipartFile brandLogo, @PathVariable("brandName") String brandName){
         return brandService.createBrand(brandName,brandLogo);
     }
 }

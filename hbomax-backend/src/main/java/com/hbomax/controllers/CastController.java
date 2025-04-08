@@ -1,24 +1,17 @@
 package com.hbomax.controllers;
 
 
-import com.hbomax.dto.AddToTitleDTO;
-import com.hbomax.dto.CastInfoDTO;
-import com.hbomax.dto.CreateMovieDTO;
+import com.hbomax.dto.CastInfoResponse;
 import com.hbomax.exceptions.*;
-import com.hbomax.models.CastInfo;
 import com.hbomax.models.Image;
-import com.hbomax.models.Person;
-import com.hbomax.models.Title;
 import com.hbomax.services.CastService;
 import com.hbomax.services.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.util.*;
 @RestController
 @RequestMapping("/cast")
@@ -84,7 +77,7 @@ public class CastController {
     }
 
     @GetMapping("/get/all/{titleName}/{seasonNr}/{episodeNr}")
-    public Set<CastInfoDTO> getAllCastByTitleSeasonAndEpisode(@PathVariable("titleName") String titleName, @PathVariable("seasonNr") Integer seasonNr,@PathVariable("episodeNr") Integer episodeNr ){
+    public Set<CastInfoResponse> getAllCastByTitleSeasonAndEpisode(@PathVariable("titleName") String titleName, @PathVariable("seasonNr") Integer seasonNr, @PathVariable("episodeNr") Integer episodeNr ){
         return castService.getAllCastInfoOfTitleSeasonAndEpisode(titleName,seasonNr,episodeNr);
     }
 

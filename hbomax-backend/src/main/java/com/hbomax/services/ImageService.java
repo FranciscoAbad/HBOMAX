@@ -3,8 +3,10 @@ package com.hbomax.services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.hbomax.dto.ImageResponse;
 import com.hbomax.exceptions.UnableToResolvePhotoException;
 import com.hbomax.exceptions.UnabledToSavePhotoException;
+import com.hbomax.mappers.ImageMapper;
 import com.hbomax.models.Image;
 import com.hbomax.repositories.ImageRepository;
 import jakarta.transaction.Transactional;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -27,13 +30,15 @@ public class ImageService {
 
 
     private final ImageRepository imageRepository;
+    private final ImageMapper imageMapper;
     private final Cloudinary cloudinary;
    // private static final File DIRECTORY = new File("/home/francisco-abad/Projects/HBOMAX/hbomax-backend/img");
     //private static final String URL="http://localhost:8888/images/";
 
     @Autowired
-    public ImageService(ImageRepository imageRepository) {;
+    public ImageService(ImageRepository imageRepository,ImageMapper imageMapper) {;
         this.imageRepository = imageRepository;
+        this.imageMapper = imageMapper;
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name","drd2r15di",
                 "api_key","564121342791343",
@@ -91,8 +96,8 @@ public class ImageService {
         return image.getImageType();
     }
 
-    public Set<Image> getAllImagesByPrefix(String prefix){
-       return imageRepository.getAllImagesByPrefix(prefix);
+    public Set<ImageResponse> getAllImagesByPrefix(String prefix){
+       return imageRepository.getAllImagesByPrefix(prefix).stream().map(imageMapper::fromImage).collect(Collectors.toSet());
     }
 
 

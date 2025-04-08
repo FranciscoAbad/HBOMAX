@@ -1,26 +1,21 @@
 package com.hbomax.mappers;
 
-import com.hbomax.dto.CastInfoDTO;
+import com.hbomax.dto.CastInfoResponse;
 import com.hbomax.models.CastInfo;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.stream.Collectors;
+@Service
 public class CastInfoMapper {
 
-    public static Set<CastInfoDTO> mapToDTOSet(Set<CastInfo> castInfoSet) {
-        Set<CastInfoDTO> castInfoDTOSet = new HashSet<>();
-
-        for (CastInfo castInfo : castInfoSet) {
-            CastInfoDTO castInfoDTO = mapToDTO(castInfo);
-            castInfoDTOSet.add(castInfoDTO);
-        }
-
-        return castInfoDTOSet;
+    public  Set<CastInfoResponse> mapTocCastInfoResponseSet(Set<CastInfo> castInfoSet) {
+        return castInfoSet.stream().map(this::fromCast).collect(Collectors.toSet());
     }
 
-    public static CastInfoDTO mapToDTO(CastInfo castInfo) {
-        return new CastInfoDTO(
+    public CastInfoResponse fromCast(CastInfo castInfo) {
+        return new CastInfoResponse(
                 castInfo.getCastId(),
                 castInfo.getPerson(),
                 castInfo.getRole(),

@@ -1,6 +1,7 @@
 package com.hbomax.controllers;
 
 
+import com.hbomax.dto.GenreResponse;
 import com.hbomax.models.Genre;
 import com.hbomax.services.GenreService;
 import com.hbomax.services.ImageService;
@@ -17,21 +18,19 @@ public class GenreController {
 
     private final GenreService genreService;
 
-
     @Autowired
     public GenreController(GenreService genreService) {
         this.genreService = genreService;
 
     }
 
-
     @PostMapping("/add/{genreName}")
-    public Genre createGenre(@RequestPart("genrePicture") MultipartFile genrePicture, @PathVariable("genreName") String genreName){
+    public GenreResponse createGenre(@RequestPart("genrePicture") MultipartFile genrePicture, @PathVariable("genreName") String genreName){
         return genreService.registerGenre(genreName,genrePicture);
     }
 
     @GetMapping("/all")
-    public List<Genre> getAllGenres(){
+    public List<GenreResponse> getAllGenres(){
         return genreService.getAllGenres();
     }
 }

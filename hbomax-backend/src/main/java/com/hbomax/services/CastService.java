@@ -1,11 +1,10 @@
 package com.hbomax.services;
 
-import com.hbomax.dto.CastInfoDTO;
+import com.hbomax.dto.CastInfoResponse;
 import com.hbomax.exceptions.*;
 import com.hbomax.mappers.CastInfoMapper;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,17 +19,14 @@ public class CastService {
     private final PersonRepository personRepo;
     private final TitleRoleRepository roleRepo;
     private final CastInfoRepository castInfoRepo;
-
     private final CompanyRepository companyRepo;
-
     private final BrandRepository brandRepo;
-
     private final ImageService imageService;
-
+    private final CastInfoMapper castInfoMapper;
 
     @Autowired
 
-    public CastService(TitleRepository titleRepo, PersonRepository personRepo, TitleRoleRepository roleRepo, CastInfoRepository castInfoRepo,CompanyRepository companyRepo,BrandRepository brandRepo,ImageService imageService) {
+    public CastService(TitleRepository titleRepo, PersonRepository personRepo, TitleRoleRepository roleRepo, CastInfoRepository castInfoRepo,CompanyRepository companyRepo,BrandRepository brandRepo,ImageService imageService,CastInfoMapper castInfoMapper) {
         this.titleRepo = titleRepo;
         this.personRepo = personRepo;
         this.roleRepo = roleRepo;
@@ -38,6 +34,7 @@ public class CastService {
         this.companyRepo=companyRepo;
         this.brandRepo=brandRepo;
         this.imageService=imageService;
+        this.castInfoMapper=castInfoMapper;
     }
 
 
@@ -158,9 +155,9 @@ public class CastService {
         return castInfoRepo.findCharacterPicturesByBrandName(brandName);
     }
 
-    public Set<CastInfoDTO> getAllCastInfoOfTitleSeasonAndEpisode(String titleName,Integer seasonNr,Integer episodeNr){
+    public Set<CastInfoResponse> getAllCastInfoOfTitleSeasonAndEpisode(String titleName, Integer seasonNr, Integer episodeNr){
        Set<CastInfo> castInfo =castInfoRepo.findCastInfoByTitleSeasonAndEpisode(titleName,seasonNr,episodeNr);
-       return CastInfoMapper.mapToDTOSet(castInfo);
+       return castInfoMapper.mapTocCastInfoResponseSet(castInfo);
     }
 
 

@@ -1,9 +1,11 @@
 package com.hbomax.services;
 
+import com.hbomax.dto.ApplicationUserResponse;
 import com.hbomax.exceptions.EmailAlreadyTakenException;
 import com.hbomax.exceptions.EmailFailedToSendException;
 import com.hbomax.exceptions.IncorrectVerificationCodeException;
 import com.hbomax.exceptions.UserDoesNotExistException;
+import com.hbomax.mappers.ApplicationUserMapper;
 import com.hbomax.models.ApplicationUser;
 import com.hbomax.models.RegistrationObject;
 import com.hbomax.models.Role;
@@ -28,21 +30,22 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
     private final RoleRepository roleRepo;
     private final MailService mailService;
-
-//    private final ImageService imageService;
-
+    private final ApplicationUserMapper applicationUserMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepo, RoleRepository roleRepo,MailService mailService,PasswordEncoder passwordEncoder){
-        this.userRepo=userRepo;
-        this.roleRepo=roleRepo;
-        this.mailService=mailService;
-        this.passwordEncoder=passwordEncoder;
+    public UserService(UserRepository userRepo, RoleRepository roleRepo, MailService mailService, ApplicationUserMapper applicationUserMapper, PasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
+        this.mailService = mailService;
+        this.applicationUserMapper = applicationUserMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public ApplicationUser getUserByUsername(String username){
-        return userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
+
+
+    public ApplicationUserResponse getUserByUsername(String username){
+        return applicationUserMapper.fromApplicationUser(userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new));
     }
 
     public ApplicationUser updateUser(ApplicationUser user){
@@ -52,7 +55,7 @@ public class UserService implements UserDetailsService {
             throw new EmailAlreadyTakenException();
         }
     }
-    public ApplicationUser registerUser(RegistrationObject ro){
+    public ApplicationUserResponse registerUser(RegistrationObject ro){
 
         ApplicationUser user= new ApplicationUser();
         user.setFirstName(ro.getFirstName());
@@ -79,7 +82,7 @@ public class UserService implements UserDetailsService {
         user.setAuthorities(roles);
 
         try{
-            return userRepo.save(user);
+            return applicationUserMapper.fromApplicationUser(userRepo.save(user));
         }catch (Exception e){
             throw new EmailAlreadyTakenException();
         }
@@ -100,32 +103,32 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
-    public ApplicationUser verifyEmail(String username,Long code){
+    public ApplicationUserResponse verifyEmail(String username,Long code){
         ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
 
         if(code.equals(user.getVerification())){
             user.setEnabled(true);
             user.setVerification(null);
-            return userRepo.save(user);
+            return applicationUserMapper.fromApplicationUser(userRepo.save(user));
         }else{
             throw new IncorrectVerificationCodeException();
         }
     }
 
-    public ApplicationUser setPassword(String username, String password){
+    public ApplicationUserResponse setPassword(String username, String password){
         ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
         String encodedPassword=passwordEncoder.encode(password);
         user.setPassword(encodedPassword);
-        return userRepo.save(user);
+        return applicationUserMapper.fromApplicationUser(userRepo.save(user));
     }
 
-    public ApplicationUser setEmail(String email, String newEmail){
+    public ApplicationUserResponse setEmail(String email, String newEmail){
         ApplicationUser user=userRepo.findByEmail(email).orElseThrow(UserDoesNotExistException::new);
 
         user.setEmail(newEmail);
 
         try{
-            return userRepo.save(user);
+            return applicationUserMapper.fromApplicationUser(userRepo.save(user));
         }catch (Exception e){
             throw new EmailAlreadyTakenException();
         }

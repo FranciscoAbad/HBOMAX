@@ -6,12 +6,9 @@ public class RegistrationObject {
     private String firstName;
     private String lastName;
     private String email;
-
     private String password;
 
-
     public RegistrationObject() {
-
     }
 
     public RegistrationObject(String firstName, String lastName, String email,String password) {

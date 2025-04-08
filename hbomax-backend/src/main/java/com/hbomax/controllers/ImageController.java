@@ -1,5 +1,6 @@
 package com.hbomax.controllers;
 
+import com.hbomax.dto.ImageResponse;
 import com.hbomax.exceptions.UnableToResolvePhotoException;
 import com.hbomax.exceptions.UnabledToSavePhotoException;
 import com.hbomax.models.Image;
@@ -33,7 +34,7 @@ public class ImageController {
 
 
     @GetMapping("/all/{prefix}")
-    public Set<Image> getAllImagesFromType(@PathVariable String prefix){
+    public Set<ImageResponse> getAllImagesFromType(@PathVariable String prefix){
         return imageService.getAllImagesByPrefix(prefix);
     }
 

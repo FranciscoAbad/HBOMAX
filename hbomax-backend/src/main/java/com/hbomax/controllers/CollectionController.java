@@ -1,14 +1,10 @@
 package com.hbomax.controllers;
 
 
-import com.hbomax.dto.CollectionDTO;
-import com.hbomax.exceptions.UnableToResolvePhotoException;
-import com.hbomax.exceptions.UnabledToSavePhotoException;
+import com.hbomax.dto.CollectionResponse;
 import com.hbomax.models.Collection;
 import com.hbomax.services.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,7 +28,7 @@ public class CollectionController {
     }
 
     @GetMapping("/get/{collectionName}")
-    public CollectionDTO getCollection(@PathVariable("collectionName") String collectionName){
+    public CollectionResponse getCollection(@PathVariable("collectionName") String collectionName){
         return collectionService.getCollectionByName(collectionName);
     }
 }

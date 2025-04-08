@@ -1,7 +1,7 @@
 package com.hbomax.controllers;
 
 import com.google.common.net.HttpHeaders;
-import com.hbomax.models.Vote;
+import com.hbomax.dto.VoteResponse;
 import com.hbomax.services.TokenService;
 import com.hbomax.services.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class VoteController {
     }
 
     @PostMapping("/title/{titleId}/rating/{rating}")
-   public Vote makeAVote(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable("titleId") Integer titleId, @PathVariable("rating") float rating){
+   public VoteResponse makeAVote(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable("titleId") Integer titleId, @PathVariable("rating") float rating){
         String username=tokenService.getUsernameFromToken(token);
         return voteService.createVote(rating,titleId,username);
     }
