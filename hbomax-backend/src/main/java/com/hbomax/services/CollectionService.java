@@ -24,39 +24,37 @@ public class CollectionService {
         this.collectionMapper = collectionMapper;
     }
 
-    public Collection createCollection(String collectionName, MultipartFile cardPicture, MultipartFile bannerPicture, MultipartFile namePicture)  {
+    public Collection createCollection(String collectionName, MultipartFile cardPicture, MultipartFile bannerPicture, MultipartFile namePicture) {
 
-        if(collectionRepository.findByCollectionName(collectionName).isPresent()){
+        if (collectionRepository.findByCollectionName(collectionName).isPresent()) {
             throw new RuntimeException("Unable to create collection, duplicated collection name");
         }
 
-        try{
+        try {
 
-            Image card=imageService.uploadImage(cardPicture,"collectionCard");
-            Image banner=imageService.uploadImage(bannerPicture,"collectionBanner");
-            Image name=imageService.uploadImage(namePicture,"collectionName");
+            Image card = imageService.uploadImage(cardPicture, "collectionCard");
+            Image banner = imageService.uploadImage(bannerPicture, "collectionBanner");
+            Image name = imageService.uploadImage(namePicture, "collectionName");
 
 
-
-            Collection collection=new Collection();
-        collection.setCollectionName(collectionName);
-        collection.setCardPicture(card);
-        collection.setBannerPicture(banner);
-        collection.setNamePicture(name);
-
+            Collection collection = new Collection();
+            collection.setCollectionName(collectionName);
+            collection.setCardPicture(card);
+            collection.setBannerPicture(banner);
+            collection.setNamePicture(name);
 
 
             collectionRepository.save(collection);
-            return  collection;
-       } catch (Exception e) {
-           throw new UnableToCreateCollectionException();
-       }
+            return collection;
+        } catch (Exception e) {
+            throw new UnableToCreateCollectionException();
+        }
 
     }
 
 
-    public CollectionResponse getCollectionByName(String collectionName){
-        Collection collection=collectionRepository.findByCollectionName(collectionName).orElseThrow(RuntimeException::new);
+    public CollectionResponse getCollectionByName(String collectionName) {
+        Collection collection = collectionRepository.findByCollectionName(collectionName).orElseThrow(RuntimeException::new);
         return collectionMapper.fromCollection(collection);
     }
 

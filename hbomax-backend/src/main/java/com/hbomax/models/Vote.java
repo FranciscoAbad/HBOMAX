@@ -3,10 +3,9 @@ package com.hbomax.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-@Table(name="vote")
+@Table(name = "vote")
 public class Vote {
 
     @Id

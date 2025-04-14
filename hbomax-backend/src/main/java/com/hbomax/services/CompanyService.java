@@ -19,9 +19,9 @@ public class CompanyService {
         this.companyMapper = companyMapper;
     }
 
-    public CompanyResponse createCompany(String companyName){
-    Company company=new Company();
-    company.setCompanyName(companyName);
-    return companyMapper.fromCompany(companyRepo.save(company));
+    public CompanyResponse createCompany(String companyName) {
+        Company company = new Company();
+        company.setCompanyName(companyName);
+        return companyMapper.fromCompany(companyRepo.save(company));
     }
 }

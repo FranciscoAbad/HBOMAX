@@ -16,10 +16,10 @@ public class LenguageService {
         this.lenguageRepo = lenguageRepo;
     }
 
-    public Lenguage registerLenguage(String lenguage){
-        Lenguage newLenguage=new Lenguage();
+    public Lenguage registerLenguage(String lenguage) {
+        Lenguage newLenguage = new Lenguage();
         newLenguage.setLenguage(lenguage);
-       return lenguageRepo.save(newLenguage);
+        return lenguageRepo.save(newLenguage);
     }
 
 

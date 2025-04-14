@@ -32,41 +32,40 @@ public class VoteService {
         this.voteMapper = voteMapper;
     }
 
-    public VoteResponse createVote(Float rating, Integer titleId, String username) throws UserHasAlreadyMadeAVote{
+    public VoteResponse createVote(Float rating, Integer titleId, String username) throws UserHasAlreadyMadeAVote {
 
 
-            Title title=titleRepo.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
-            ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
-            Vote voteExists=voteRepo.findVoteByUserAndTitle(username,titleId).orElse(null);
-            if(voteExists!=null){
-                throw new UserHasAlreadyMadeAVote();
-            }
+        Title title = titleRepo.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
+        ApplicationUser user = userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
+        Vote voteExists = voteRepo.findVoteByUserAndTitle(username, titleId).orElse(null);
+        if (voteExists != null) {
+            throw new UserHasAlreadyMadeAVote();
+        }
 
-            Vote vote=new Vote();
-            vote.setUserVote(user);
-            title.setVotes(title.getVotes()+1);
-            vote.setTitle(title);
-            vote.setRateDate(LocalDateTime.now());
-            title.setTotalScore(title.getTotalScore()+rating);
-            title.setPopularity(title.getTotalScore()/title.getVotes());
-            vote.setRating(rating);
+        Vote vote = new Vote();
+        vote.setUserVote(user);
+        title.setVotes(title.getVotes() + 1);
+        vote.setTitle(title);
+        vote.setRateDate(LocalDateTime.now());
+        title.setTotalScore(title.getTotalScore() + rating);
+        title.setPopularity(title.getTotalScore() / title.getVotes());
+        vote.setRating(rating);
 
-            titleRepo.save(title);
-            return voteMapper.fromVote(voteRepo.save(vote));
+        titleRepo.save(title);
+        return voteMapper.fromVote(voteRepo.save(vote));
 
 
     }
 
-    public float findVoteByTitleAndUser(Integer titleId,String username){
-        Vote vote=voteRepo.findVoteByUserAndTitle(username,titleId).orElse(null);
-        if(vote!=null){
+    public float findVoteByTitleAndUser(Integer titleId, String username) {
+        Vote vote = voteRepo.findVoteByUserAndTitle(username, titleId).orElse(null);
+        if (vote != null) {
             return vote.getRating();
-        }else{
+        } else {
             return 0F;
         }
 
     }
-
 
 
 }

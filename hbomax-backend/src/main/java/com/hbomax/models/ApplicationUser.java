@@ -4,12 +4,11 @@ package com.hbomax.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class ApplicationUser {
 
     @Id
@@ -33,8 +32,8 @@ public class ApplicationUser {
     @JsonIgnore
     private String password;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private Set<Profile> profiles;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -56,7 +55,7 @@ public class ApplicationUser {
     public ApplicationUser() {
         this.authorities = new HashSet<>();
         this.enabled = false;
-        this.profiles=new HashSet<>();
+        this.profiles = new HashSet<>();
     }
 
     public Set<Profile> getProfiles() {

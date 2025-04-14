@@ -1,7 +1,5 @@
 package com.hbomax.dto;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.time.LocalDate;
 
 public class CreateMovieDTO {
@@ -16,7 +14,6 @@ public class CreateMovieDTO {
     private String episodeName;
     private String quality;
     private LocalDate releaseDate;
-
     private LocalDate addedDate;
     private String producer;
     private String distributor;

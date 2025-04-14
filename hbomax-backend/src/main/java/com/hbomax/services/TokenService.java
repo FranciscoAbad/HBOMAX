@@ -13,40 +13,39 @@ import java.util.stream.Collectors;
 @Service
 public class TokenService {
 
-    private JwtEncoder jwtEncoder;
-    private JwtDecoder jwtDecoder;
-
+    private final JwtEncoder jwtEncoder;
+    private final JwtDecoder jwtDecoder;
 
 
     @Autowired
-    public TokenService(JwtEncoder jwtEncoder,JwtDecoder jwtDecoder){
-        this.jwtDecoder=jwtDecoder;
-        this.jwtEncoder=jwtEncoder;
+    public TokenService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder) {
+        this.jwtDecoder = jwtDecoder;
+        this.jwtEncoder = jwtEncoder;
     }
 
-    public String generateToken(Authentication auth){
-        Instant now= Instant.now();
+    public String generateToken(Authentication auth) {
+        Instant now = Instant.now();
 
-        String scope=auth.getAuthorities().stream()
+        String scope = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
 
-        JwtClaimsSet claims= JwtClaimsSet.builder()
+        JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
                 .subject(auth.getName())
-                .claim("scope",scope)
+                .claim("scope", scope)
                 .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
     }
 
-    public String getUsernameFromToken(String token){
-        if(!token.substring(0,6).equals("Bearer")) throw new InvalidBearerTokenException("Token is not a bearer token");
-        String strippedToken=token.substring(7);
-        Jwt decoded= jwtDecoder.decode(strippedToken);
-        String username=decoded.getSubject();
+    public String getUsernameFromToken(String token) {
+        if (!token.startsWith("Bearer")) throw new InvalidBearerTokenException("Token is not a bearer token");
+        String strippedToken = token.substring(7);
+        Jwt decoded = jwtDecoder.decode(strippedToken);
+        String username = decoded.getSubject();
 
         return username;
     }

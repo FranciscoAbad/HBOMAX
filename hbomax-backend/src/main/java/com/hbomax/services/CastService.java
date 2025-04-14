@@ -1,7 +1,8 @@
 package com.hbomax.services;
 
 import com.hbomax.dto.CastInfoResponse;
-import com.hbomax.exceptions.*;
+import com.hbomax.exceptions.PersonDoesNotExistException;
+import com.hbomax.exceptions.RoleDoesNotExistException;
 import com.hbomax.mappers.CastInfoMapper;
 import com.hbomax.models.*;
 import com.hbomax.repositories.*;
@@ -26,56 +27,53 @@ public class CastService {
 
     @Autowired
 
-    public CastService(TitleRepository titleRepo, PersonRepository personRepo, TitleRoleRepository roleRepo, CastInfoRepository castInfoRepo,CompanyRepository companyRepo,BrandRepository brandRepo,ImageService imageService,CastInfoMapper castInfoMapper) {
+    public CastService(TitleRepository titleRepo, PersonRepository personRepo, TitleRoleRepository roleRepo, CastInfoRepository castInfoRepo, CompanyRepository companyRepo, BrandRepository brandRepo, ImageService imageService, CastInfoMapper castInfoMapper) {
         this.titleRepo = titleRepo;
         this.personRepo = personRepo;
         this.roleRepo = roleRepo;
         this.castInfoRepo = castInfoRepo;
-        this.companyRepo=companyRepo;
-        this.brandRepo=brandRepo;
-        this.imageService=imageService;
-        this.castInfoMapper=castInfoMapper;
+        this.companyRepo = companyRepo;
+        this.brandRepo = brandRepo;
+        this.imageService = imageService;
+        this.castInfoMapper = castInfoMapper;
     }
 
 
-    public void addCharacterToSerieWithPicture(String titleName,String firstName, String lastName,String characterName,MultipartFile file){
-        try{
-       List<Title> title=titleRepo.findAllByTitle(titleName);
-       Person person = personRepo.findByFullName(firstName).orElseThrow(PersonDoesNotExistException::new);
-       TitleRole role=roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
+    public void addCharacterToSerieWithPicture(String titleName, String firstName, String lastName, String characterName, MultipartFile file) {
+        try {
+            List<Title> title = titleRepo.findAllByTitle(titleName);
+            Person person = personRepo.findByFullName(firstName).orElseThrow(PersonDoesNotExistException::new);
+            TitleRole role = roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
 
-       Image characterPicture=imageService.uploadImage(file,"character");
+            Image characterPicture = imageService.uploadImage(file, "character");
 
 
+            for (int i = 0; i < title.size(); i++) {
 
-       for(int i=0; i<title.size();i++){
+                CastInfo cast = new CastInfo();
+                cast.setCharacter(characterName);
+                cast.setTitle(title.get(i));
+                cast.setPerson(person);
+                cast.setCharacterPicture(characterPicture);
+                cast.setRole(role);
+                castInfoRepo.save(cast);
 
-          CastInfo cast=new CastInfo();
-          cast.setCharacter(characterName);
-          cast.setTitle(title.get(i));
-          cast.setPerson(person);
-          cast.setCharacterPicture(characterPicture);
-          cast.setRole(role);
-          castInfoRepo.save(cast);
-
-       }
-        }catch (Exception e){
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void addCharacterToSerie(String titleName,String fullName,String characterName){
-        try{
-            List<Title> title=titleRepo.findAllByTitle(titleName);
+    public void addCharacterToSerie(String titleName, String fullName, String characterName) {
+        try {
+            List<Title> title = titleRepo.findAllByTitle(titleName);
             Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
-            TitleRole role=roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
+            TitleRole role = roleRepo.findByRole("actor").orElseThrow(RoleDoesNotExistException::new);
 
 
+            for (int i = 0; i < title.size(); i++) {
 
-
-            for(int i=0; i<title.size();i++){
-
-                CastInfo cast=new CastInfo();
+                CastInfo cast = new CastInfo();
                 cast.setCharacter(characterName);
                 cast.setTitle(title.get(i));
                 cast.setPerson(person);
@@ -83,83 +81,79 @@ public class CastService {
                 castInfoRepo.save(cast);
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void addWriterToSerie(String titleName,String fullName){
-        try{
-            List<Title> title=titleRepo.findAllByTitle(titleName);
+    public void addWriterToSerie(String titleName, String fullName) {
+        try {
+            List<Title> title = titleRepo.findAllByTitle(titleName);
             Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
-            TitleRole role=roleRepo.findByRole("writer").orElseThrow(RoleDoesNotExistException::new);
+            TitleRole role = roleRepo.findByRole("writer").orElseThrow(RoleDoesNotExistException::new);
 
 
+            for (int i = 0; i < title.size(); i++) {
 
-
-
-            for(int i=0; i<title.size();i++){
-
-                CastInfo cast=new CastInfo();
+                CastInfo cast = new CastInfo();
                 cast.setTitle(title.get(i));
                 cast.setPerson(person);
                 cast.setRole(role);
                 castInfoRepo.save(cast);
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void addProducerToSerie(String titleName,String fullName){
-        try{
-            List<Title> title=titleRepo.findAllByTitle(titleName);
+    public void addProducerToSerie(String titleName, String fullName) {
+        try {
+            List<Title> title = titleRepo.findAllByTitle(titleName);
             Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
-            TitleRole role=roleRepo.findByRole("producer").orElseThrow(RoleDoesNotExistException::new);
+            TitleRole role = roleRepo.findByRole("producer").orElseThrow(RoleDoesNotExistException::new);
 
 
-            for(int i=0; i<title.size();i++){
-                CastInfo cast=new CastInfo();
+            for (int i = 0; i < title.size(); i++) {
+                CastInfo cast = new CastInfo();
                 cast.setTitle(title.get(i));
                 cast.setPerson(person);
                 cast.setRole(role);
                 castInfoRepo.save(cast);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void addDirectorToSerie(String titleName,String fullName){
-        try{
-            List<Title> title=titleRepo.findAllByTitle(titleName);
+    public void addDirectorToSerie(String titleName, String fullName) {
+        try {
+            List<Title> title = titleRepo.findAllByTitle(titleName);
             Person person = personRepo.findByFullName(fullName).orElseThrow(PersonDoesNotExistException::new);
-            TitleRole role=roleRepo.findByRole("director").orElseThrow(RoleDoesNotExistException::new);
+            TitleRole role = roleRepo.findByRole("director").orElseThrow(RoleDoesNotExistException::new);
 
 
-            for(int i=0; i<title.size();i++){
-                CastInfo cast=new CastInfo();
+            for (int i = 0; i < title.size(); i++) {
+                CastInfo cast = new CastInfo();
                 cast.setTitle(title.get(i));
                 cast.setPerson(person);
                 cast.setRole(role);
                 castInfoRepo.save(cast);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public Set<Image> getAllCharacterPicturesByBrand(String brandName){
+    public Set<Image> getAllCharacterPicturesByBrand(String brandName) {
         return castInfoRepo.findCharacterPicturesByBrandName(brandName);
     }
 
-    public Set<CastInfoResponse> getAllCastInfoOfTitleSeasonAndEpisode(String titleName, Integer seasonNr, Integer episodeNr){
-       Set<CastInfo> castInfo =castInfoRepo.findCastInfoByTitleSeasonAndEpisode(titleName,seasonNr,episodeNr);
-       return castInfoMapper.mapTocCastInfoResponseSet(castInfo);
+    public Set<CastInfoResponse> getAllCastInfoOfTitleSeasonAndEpisode(String titleName, Integer seasonNr, Integer episodeNr) {
+        Set<CastInfo> castInfo = castInfoRepo.findCastInfoByTitleSeasonAndEpisode(titleName, seasonNr, episodeNr);
+        return castInfoMapper.mapTocCastInfoResponseSet(castInfo);
     }
-
 
 
 }

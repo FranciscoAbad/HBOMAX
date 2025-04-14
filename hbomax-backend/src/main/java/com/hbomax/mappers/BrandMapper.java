@@ -14,13 +14,13 @@ public class BrandMapper {
         this.imageMapper = imageMapper;
     }
 
-    public BrandResponse fromBrand(Brand brand){
+    public BrandResponse fromBrand(Brand brand) {
         return new BrandResponse(
                 brand.getBrandId(),
                 brand.getBrandName(),
                 brand.getBrandLogo() != null
-                    ? imageMapper.fromImage(brand.getBrandLogo())
-                    : null
+                        ? imageMapper.fromImage(brand.getBrandLogo())
+                        : null
         );
     }
 }

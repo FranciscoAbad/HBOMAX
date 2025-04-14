@@ -1,14 +1,13 @@
 package com.hbomax.models;
 
 import jakarta.persistence.*;
-import org.checkerframework.checker.signature.qual.Identifier;
 
 @Entity
 @Table(name = "country")
 public class Country {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "country_id")
 
     private Integer countryId;

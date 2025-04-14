@@ -1,9 +1,7 @@
 package com.hbomax.mappers;
 
 import com.hbomax.dto.ImageResponse;
-import com.hbomax.dto.ProfileResponse;
 import com.hbomax.models.Image;
-import com.hbomax.models.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +14,6 @@ public class ImageMapper {
                 image.getImagePath(),
                 image.getImageURL(),
                 image.getImagePrefix()
-                );
+        );
     }
 }

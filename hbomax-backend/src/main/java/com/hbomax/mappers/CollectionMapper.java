@@ -23,7 +23,7 @@ public class CollectionMapper {
                 collection.getBannerPicture(),
                 collection.getNamePicture(),
                 collection.getHeroPicture(),
-               titleMapper.mapToPreviewSet(collection.getCollectionTitles())
+                titleMapper.mapToPreviewSet(collection.getCollectionTitles())
         );
     }
 }

@@ -7,15 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="profile")
+@Table(name = "profile")
 
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="profile_id")
+    @Column(name = "profile_id")
     private Integer profileId;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
 
@@ -29,13 +29,12 @@ public class Profile {
     private Set<Title> titles;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="profile_picture", referencedColumnName="image_id")
+    @JoinColumn(name = "profile_picture", referencedColumnName = "image_id")
     private Image profilePicture;
 
 
-
     public Profile() {
-        this.titles=new HashSet<>();
+        this.titles = new HashSet<>();
     }
 
     public Integer getProfileId() {

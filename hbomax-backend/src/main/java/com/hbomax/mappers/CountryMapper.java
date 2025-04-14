@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CountryMapper {
-    public CountryResponse fromCountry(Country country){
+    public CountryResponse fromCountry(Country country) {
         return new CountryResponse(
                 country.getCountryId(),
                 country.getCountry()

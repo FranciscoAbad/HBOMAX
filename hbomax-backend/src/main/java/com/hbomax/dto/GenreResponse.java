@@ -6,5 +6,5 @@ public record GenreResponse(
         int id,
         String genre,
         Image genrePicture
-){
+) {
 }

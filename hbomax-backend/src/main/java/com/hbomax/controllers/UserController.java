@@ -3,17 +3,14 @@ package com.hbomax.controllers;
 import com.google.common.net.HttpHeaders;
 import com.hbomax.dto.ApplicationUserResponse;
 import com.hbomax.dto.ProfileResponse;
-import com.hbomax.models.ApplicationUser;
-import com.hbomax.models.Profile;
 import com.hbomax.services.ProfileService;
 import com.hbomax.services.TokenService;
 import com.hbomax.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Set;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -29,7 +26,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/verify")
     public ApplicationUserResponse verifyIdentity(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         String username = tokenService.getUsernameFromToken(token);
@@ -37,25 +33,21 @@ public class UserController {
     }
 
     @PostMapping("/profile/add/{profileName}/{imageId}")
-    public ProfileResponse addProfileToUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,@PathVariable("profileName") String profileName,@PathVariable("imageId") Long imageId){
-        String username=tokenService.getUsernameFromToken(token);
-        return profileService.createProfile(username,profileName,imageId);
+    public ProfileResponse addProfileToUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable("profileName") String profileName, @PathVariable("imageId") Long imageId) {
+        String username = tokenService.getUsernameFromToken(token);
+        return profileService.createProfile(username, profileName, imageId);
     }
 
     @GetMapping("/profile")
-    public Set<ProfileResponse> getProfilesByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
-        String username=tokenService.getUsernameFromToken(token);
+    public Set<ProfileResponse> getProfilesByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        String username = tokenService.getUsernameFromToken(token);
         return profileService.getAllProfilesByUsername(username);
     }
 
     @PutMapping("/profile/{profileId}/image/{imageId}/name/{profileName}")
-    public ProfileResponse setProfilePicture(@PathVariable("profileId") Integer profileId, @PathVariable("imageId") Long imageId, @PathVariable("profileName") String profileName){
-        return profileService.setProfilePictureAndName(profileId,imageId,profileName);
+    public ProfileResponse setProfilePicture(@PathVariable("profileId") Integer profileId, @PathVariable("imageId") Long imageId, @PathVariable("profileName") String profileName) {
+        return profileService.setProfilePictureAndName(profileId, imageId, profileName);
     }
-
-
-
-
 
 
 }

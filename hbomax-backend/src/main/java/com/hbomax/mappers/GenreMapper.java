@@ -14,7 +14,7 @@ public class GenreMapper {
         this.imageMapper = imageMapper;
     }
 
-    public GenreResponse fromGenre(Genre genre){
+    public GenreResponse fromGenre(Genre genre) {
         return new GenreResponse(
                 genre.getId(),
                 genre.getGenre(),

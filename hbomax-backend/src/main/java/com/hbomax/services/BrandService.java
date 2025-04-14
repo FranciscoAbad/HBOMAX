@@ -17,6 +17,7 @@ public class BrandService {
     private final BrandRepository brandRepo;
     private final ImageService imageService;
     private final BrandMapper brandMapper;
+
     @Autowired
 
     public BrandService(BrandRepository brandRepo, ImageService imageService, BrandMapper brandMapper) {
@@ -26,18 +27,15 @@ public class BrandService {
     }
 
 
+    public BrandResponse createBrand(String brandName, MultipartFile file) {
 
-
-
-    public BrandResponse createBrand(String brandName, MultipartFile file){
-
-        try{
-            Brand brand=new Brand();
+        try {
+            Brand brand = new Brand();
             brand.setBrandName(brandName);
-           Image logo=imageService.uploadImage(file,"brand-logo");
+            Image logo = imageService.uploadImage(file, "brand-logo");
             brand.setBrandLogo(logo);
-           return brandMapper.fromBrand(brandRepo.save(brand));
-        } catch (Exception e){
+            return brandMapper.fromBrand(brandRepo.save(brand));
+        } catch (Exception e) {
             throw new UnableToCreateBrandException();
         }
     }

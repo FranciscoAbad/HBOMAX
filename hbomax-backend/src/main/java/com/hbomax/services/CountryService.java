@@ -20,8 +20,8 @@ public class CountryService {
         this.countryMapper = countryMapper;
     }
 
-    public CountryResponse registerCountry(String country){
-        Country newCountry=new Country();
+    public CountryResponse registerCountry(String country) {
+        Country newCountry = new Country();
         newCountry.setCountry(country);
         return countryMapper.fromCountry(countryRepo.save(newCountry));
     }

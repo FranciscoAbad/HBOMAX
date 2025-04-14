@@ -1,10 +1,10 @@
 package com.hbomax.exceptions;
 
-public class UserDoesNotExistException extends RuntimeException{
+public class UserDoesNotExistException extends RuntimeException {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-    public UserDoesNotExistException(){
+    public UserDoesNotExistException() {
         super("The user you are looking for does not exist");
     }
 }

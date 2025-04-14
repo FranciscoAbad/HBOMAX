@@ -2,7 +2,6 @@ package com.hbomax.services;
 
 import com.hbomax.dto.ApplicationUserResponse;
 import com.hbomax.exceptions.EmailAlreadyTakenException;
-import com.hbomax.exceptions.EmailFailedToSendException;
 import com.hbomax.exceptions.IncorrectVerificationCodeException;
 import com.hbomax.exceptions.UserDoesNotExistException;
 import com.hbomax.mappers.ApplicationUserMapper;
@@ -43,54 +42,54 @@ public class UserService implements UserDetailsService {
     }
 
 
-
-    public ApplicationUserResponse getUserByUsername(String username){
+    public ApplicationUserResponse getUserByUsername(String username) {
         return applicationUserMapper.fromApplicationUser(userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new));
     }
 
-    public ApplicationUser updateUser(ApplicationUser user){
-        try{
+    public ApplicationUser updateUser(ApplicationUser user) {
+        try {
             return userRepo.save(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new EmailAlreadyTakenException();
         }
     }
-    public ApplicationUserResponse registerUser(RegistrationObject ro){
 
-        ApplicationUser user= new ApplicationUser();
+    public ApplicationUserResponse registerUser(RegistrationObject ro) {
+
+        ApplicationUser user = new ApplicationUser();
         user.setFirstName(ro.getFirstName());
         user.setLastName(ro.getLastName());
         user.setEmail(ro.getEmail());
         user.setPassword(passwordEncoder.encode(ro.getPassword()));
 
-        String name= user.getFirstName()+user.getLastName();
+        String name = user.getFirstName() + user.getLastName();
 
-        boolean nameTaken=true;
-        String tempName="";
-        while(nameTaken){
-            tempName=generateUsername(name);
+        boolean nameTaken = true;
+        String tempName = "";
+        while (nameTaken) {
+            tempName = generateUsername(name);
 
-            if(userRepo.findByUsername(tempName).isEmpty()){
-                nameTaken=false;
+            if (userRepo.findByUsername(tempName).isEmpty()) {
+                nameTaken = false;
             }
         }
 
         user.setUsername(tempName);
 
-        Set<Role> roles=user.getAuthorities();
+        Set<Role> roles = user.getAuthorities();
         roles.add(roleRepo.findByAuthority("USER").get());
         user.setAuthorities(roles);
 
-        try{
+        try {
             return applicationUserMapper.fromApplicationUser(userRepo.save(user));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new EmailAlreadyTakenException();
         }
 
     }
 
-    public void generateEmailVerification(String username){
-        ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
+    public void generateEmailVerification(String username) {
+        ApplicationUser user = userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
 
         user.setVerification(generateVerificationNumber());
 /*
@@ -103,69 +102,67 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
-    public ApplicationUserResponse verifyEmail(String username,Long code){
-        ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
+    public ApplicationUserResponse verifyEmail(String username, Long code) {
+        ApplicationUser user = userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
 
-        if(code.equals(user.getVerification())){
+        if (code.equals(user.getVerification())) {
             user.setEnabled(true);
             user.setVerification(null);
             return applicationUserMapper.fromApplicationUser(userRepo.save(user));
-        }else{
+        } else {
             throw new IncorrectVerificationCodeException();
         }
     }
 
-    public ApplicationUserResponse setPassword(String username, String password){
-        ApplicationUser user=userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
-        String encodedPassword=passwordEncoder.encode(password);
+    public ApplicationUserResponse setPassword(String username, String password) {
+        ApplicationUser user = userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
+        String encodedPassword = passwordEncoder.encode(password);
         user.setPassword(encodedPassword);
         return applicationUserMapper.fromApplicationUser(userRepo.save(user));
     }
 
-    public ApplicationUserResponse setEmail(String email, String newEmail){
-        ApplicationUser user=userRepo.findByEmail(email).orElseThrow(UserDoesNotExistException::new);
+    public ApplicationUserResponse setEmail(String email, String newEmail) {
+        ApplicationUser user = userRepo.findByEmail(email).orElseThrow(UserDoesNotExistException::new);
 
         user.setEmail(newEmail);
 
-        try{
+        try {
             return applicationUserMapper.fromApplicationUser(userRepo.save(user));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new EmailAlreadyTakenException();
         }
 
     }
 
 
-
-    private String generateUsername(String name){
-        long generatedNumber=(long) Math.floor(Math.random()*1_000_000_000);
-        return name+generatedNumber;
+    private String generateUsername(String name) {
+        long generatedNumber = (long) Math.floor(Math.random() * 1_000_000_000);
+        return name + generatedNumber;
     }
 
-    private Long generateVerificationNumber(){
+    private Long generateVerificationNumber() {
 
-        return (long) Math.floor(Math.random()*100_000_000);
+        return (long) Math.floor(Math.random() * 100_000_000);
 
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         ApplicationUser u = userRepo.findByUsername(username)
-                .orElseThrow(()->new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        Set<GrantedAuthority> authorities =u.getAuthorities()
+        Set<GrantedAuthority> authorities = u.getAuthorities()
                 .stream()
-                .map(role->new SimpleGrantedAuthority(role.getAuthority()))
+                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toSet());
-        UserDetails ud=new User(u.getUsername(),u.getPassword(),authorities);
+        UserDetails ud = new User(u.getUsername(), u.getPassword(), authorities);
 
         return ud;
     }
 
 
-
-    public String verifyUsername(String email){
-        ApplicationUser user=userRepo.findByUsername(email)
+    public String verifyUsername(String email) {
+        ApplicationUser user = userRepo.findByUsername(email)
                 .orElseThrow(UserDoesNotExistException::new);
         return user.getUsername();
 

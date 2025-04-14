@@ -11,10 +11,8 @@ import com.hbomax.models.Image;
 import com.hbomax.repositories.ImageRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -32,29 +30,28 @@ public class ImageService {
     private final ImageRepository imageRepository;
     private final ImageMapper imageMapper;
     private final Cloudinary cloudinary;
-   // private static final File DIRECTORY = new File("/home/francisco-abad/Projects/HBOMAX/hbomax-backend/img");
+    // private static final File DIRECTORY = new File("/home/francisco-abad/Projects/HBOMAX/hbomax-backend/img");
     //private static final String URL="http://localhost:8888/images/";
 
     @Autowired
-    public ImageService(ImageRepository imageRepository,ImageMapper imageMapper) {;
+    public ImageService(ImageRepository imageRepository, ImageMapper imageMapper) {
         this.imageRepository = imageRepository;
         this.imageMapper = imageMapper;
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name","drd2r15di",
-                "api_key","564121342791343",
-                "api_secret","4fSLR1roDfKRzSmOnwrjslGC7m8"
+                "cloud_name", "drd2r15di",
+                "api_key", "564121342791343",
+                "api_secret", "4fSLR1roDfKRzSmOnwrjslGC7m8"
         ));
     }
 
 
-
     public Image uploadImage(MultipartFile file, String prefix) throws UnabledToSavePhotoException {
-        try{
+        try {
 
-            Map uploadResult=cloudinary.uploader().upload(file.getBytes(),ObjectUtils.asMap("public_id",prefix + "_" + System.currentTimeMillis()));
+            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("public_id", prefix + "_" + System.currentTimeMillis()));
             String imageUrl = uploadResult.get("url").toString();
-            String finalPrefix=prefix + System.currentTimeMillis();
-            Image image = new Image(finalPrefix , file.getContentType(), null, imageUrl, prefix);
+            String finalPrefix = prefix + System.currentTimeMillis();
+            Image image = new Image(finalPrefix, file.getContentType(), null, imageUrl, prefix);
             return imageRepository.save(image);
             /*
             String extension="." + file.getContentType().split("/")[1];
@@ -71,33 +68,33 @@ public class ImageService {
             return saved;*/
 
 
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new UnabledToSavePhotoException();
         }
     }
 
     public byte[] downloadImage(String filename) throws UnableToResolvePhotoException {
-        try{
-            Image image=imageRepository.findImageByImageName(filename).get();
+        try {
+            Image image = imageRepository.findImageByImageName(filename).get();
 
-            String filePath=image.getImagePath();
+            String filePath = image.getImagePath();
 
-            byte[] imageBytes= Files.readAllBytes(new File(filePath).toPath());
+            byte[] imageBytes = Files.readAllBytes(new File(filePath).toPath());
 
             return imageBytes;
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new UnableToResolvePhotoException();
         }
     }
 
-    public String getImageType(String fileName){
-        Image image=imageRepository.findImageByImageName(fileName).get();
+    public String getImageType(String fileName) {
+        Image image = imageRepository.findImageByImageName(fileName).get();
 
         return image.getImageType();
     }
 
-    public Set<ImageResponse> getAllImagesByPrefix(String prefix){
-       return imageRepository.getAllImagesByPrefix(prefix).stream().map(imageMapper::fromImage).collect(Collectors.toSet());
+    public Set<ImageResponse> getAllImagesByPrefix(String prefix) {
+        return imageRepository.getAllImagesByPrefix(prefix).stream().map(imageMapper::fromImage).collect(Collectors.toSet());
     }
 
 

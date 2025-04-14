@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -25,23 +24,22 @@ public class PersonService {
     public Person registerPerson(String fullName, String birthPlace, String bio, String gender, LocalDate dob) throws InvalidNameException {
 
 
-
-        Person person=new Person();
+        Person person = new Person();
         person.setFullName(fullName);
         person.setBirthplace(birthPlace);
         person.setBio(bio);
         person.setGender(gender);
         person.setDob(dob);
 
-       return personRepo.save(person);
+        return personRepo.save(person);
     }
 
-    public Set<Person> getAllFromTitle(String titleName){
+    public Set<Person> getAllFromTitle(String titleName) {
         return personRepo.findByTitleName(titleName);
     }
 
-    public Set<Person> getAllFromRoleAndTitle(String titleName,String role){
-        return personRepo.findByTitleNameAndRole(titleName,role);
+    public Set<Person> getAllFromRoleAndTitle(String titleName, String role) {
+        return personRepo.findByTitleNameAndRole(titleName, role);
     }
 
 

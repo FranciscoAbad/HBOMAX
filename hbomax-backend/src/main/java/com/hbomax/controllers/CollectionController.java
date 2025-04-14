@@ -15,7 +15,6 @@ public class CollectionController {
     private final CollectionService collectionService;
 
 
-
     @Autowired
     public CollectionController(CollectionService collectionService) {
         this.collectionService = collectionService;
@@ -23,12 +22,12 @@ public class CollectionController {
 
 
     @PostMapping("/create/{collectionName}")
-    public Collection createCollection(@RequestPart("cardPicture") MultipartFile cardPicture,@RequestPart("bannerPicture") MultipartFile bannerPicture,@RequestPart("namePicture") MultipartFile namePicture, @PathVariable("collectionName") String collectionName) {
-        return collectionService.createCollection(collectionName,cardPicture,bannerPicture,namePicture);
+    public Collection createCollection(@RequestPart("cardPicture") MultipartFile cardPicture, @RequestPart("bannerPicture") MultipartFile bannerPicture, @RequestPart("namePicture") MultipartFile namePicture, @PathVariable("collectionName") String collectionName) {
+        return collectionService.createCollection(collectionName, cardPicture, bannerPicture, namePicture);
     }
 
     @GetMapping("/get/{collectionName}")
-    public CollectionResponse getCollection(@PathVariable("collectionName") String collectionName){
+    public CollectionResponse getCollection(@PathVariable("collectionName") String collectionName) {
         return collectionService.getCollectionByName(collectionName);
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CompanyMapper {
-    public CompanyResponse fromCompany(Company company){
+    public CompanyResponse fromCompany(Company company) {
         return new CompanyResponse(
                 company.getCompanyId(),
                 company.getCompanyName()

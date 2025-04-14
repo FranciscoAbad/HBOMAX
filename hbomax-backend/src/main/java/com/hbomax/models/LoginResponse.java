@@ -8,7 +8,7 @@ public class LoginResponse {
     private ApplicationUserResponse user;
 
 
-    public LoginResponse(){
+    public LoginResponse() {
         super();
     }
 

@@ -1,6 +1,5 @@
 package com.hbomax.mappers;
 
-import com.hbomax.dto.TitleDTO;
 import com.hbomax.dto.TitlePreview;
 import com.hbomax.dto.TitleResponse;
 import com.hbomax.models.Brand;
@@ -25,7 +24,7 @@ public class TitleMapper {
         this.genreMapper = genreMapper;
     }
 
-    public TitleResponse fromTitle(Title title){
+    public TitleResponse fromTitle(Title title) {
         return new TitleResponse(
                 title.getTitleId(),
                 title.getTitle(),
@@ -41,13 +40,13 @@ public class TitleMapper {
                 title.getType(),
                 title.getViews(),
                 title.getVotes(),
-                title.getPosterPicture()!=null
+                title.getPosterPicture() != null
                         ? imageMapper.fromImage(title.getPosterPicture())
                         : null,
-                title.getBannerPicture()!=null
+                title.getBannerPicture() != null
                         ? imageMapper.fromImage(title.getBannerPicture())
                         : null,
-                title.getNamePicture()!=null
+                title.getNamePicture() != null
                         ? imageMapper.fromImage(title.getNamePicture())
                         : null,
                 title.getGenres().stream().map(genreMapper::fromGenre).collect(Collectors.toSet()),

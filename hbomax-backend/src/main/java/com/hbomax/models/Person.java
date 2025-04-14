@@ -3,36 +3,32 @@ package com.hbomax.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name="person")
+@Table(name = "person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="person_id")
+    @Column(name = "person_id")
     private Integer personId;
 
-    @Column(name="full_name")
+    @Column(name = "full_name")
     private String fullName;
 
-    @Column(name="gender")
+    @Column(name = "gender")
     private String gender;
 
-    @Column(name="dob")
+    @Column(name = "dob")
     private LocalDate dob;
 
-    @Column(name="birthplace")
+    @Column(name = "birthplace")
     private String birthplace;
 
-    @Column(name="bio")
+    @Column(name = "bio")
     private String bio;
 
 
-
-    public Person(){
+    public Person() {
         super();
 
     }

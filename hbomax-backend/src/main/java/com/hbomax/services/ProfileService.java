@@ -33,12 +33,12 @@ public class ProfileService {
         this.imageRepo = imageRepo;
     }
 
-    public ProfileResponse createProfile(String userName, String profileName, Long imageId){
-        ApplicationUser user=userRepo.findByUsername(userName).orElseThrow(UserDoesNotExistException::new);
-        Profile profile=new Profile();
+    public ProfileResponse createProfile(String userName, String profileName, Long imageId) {
+        ApplicationUser user = userRepo.findByUsername(userName).orElseThrow(UserDoesNotExistException::new);
+        Profile profile = new Profile();
         profile.setName(profileName);
-        if(imageId!=-1){
-            Image image=imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
+        if (imageId != -1) {
+            Image image = imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
             profile.setProfilePicture(image);
         }
         user.getProfiles().add(profile);
@@ -48,21 +48,21 @@ public class ProfileService {
         return profileMapper.fromProfile(profile);
     }
 
-    public Set<ProfileResponse> getAllProfilesByUsername(String username){
-       ApplicationUser user= userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
+    public Set<ProfileResponse> getAllProfilesByUsername(String username) {
+        ApplicationUser user = userRepo.findByUsername(username).orElseThrow(UserDoesNotExistException::new);
 
-       return user.getProfiles().stream().map(profileMapper::fromProfile).collect(Collectors.toSet());
+        return user.getProfiles().stream().map(profileMapper::fromProfile).collect(Collectors.toSet());
     }
 
-    public ProfileResponse setProfilePictureAndName(Integer profileId,Long imageId,String profileName){
-        Profile profile=profileRepo.findByProfileId(profileId).orElseThrow(ProfileDoesNotExistException::new);
-        if(imageId!=-1){
-            Image image=imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
+    public ProfileResponse setProfilePictureAndName(Integer profileId, Long imageId, String profileName) {
+        Profile profile = profileRepo.findByProfileId(profileId).orElseThrow(ProfileDoesNotExistException::new);
+        if (imageId != -1) {
+            Image image = imageRepo.findById(imageId).orElseThrow(ImageDoesNotExistException::new);
             profile.setProfilePicture(image);
         }
         profile.setName(profileName);
 
-       return profileMapper.fromProfile(profileRepo.save(profile));
+        return profileMapper.fromProfile(profileRepo.save(profile));
     }
 
 }

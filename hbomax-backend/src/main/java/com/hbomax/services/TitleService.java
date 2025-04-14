@@ -30,28 +30,27 @@ public class TitleService {
     private final TitleMapper titleMapper;
 
 
-
     private final BrandRepository brandRepository;
+
     @Autowired
-    public TitleService(TitleRepository titleRepository, GenreRepository genreRepository, CountryRepository countryRepository, LenguageRepository lenguageRepository, ImageService imageService,CompanyRepository companyRepository,BrandRepository brandRepository,TitleMapper titleMapper) {
+    public TitleService(TitleRepository titleRepository, GenreRepository genreRepository, CountryRepository countryRepository, LenguageRepository lenguageRepository, ImageService imageService, CompanyRepository companyRepository, BrandRepository brandRepository, TitleMapper titleMapper) {
         this.titleRepository = titleRepository;
         this.genreRepository = genreRepository;
         this.countryRepository = countryRepository;
         this.lenguageRepository = lenguageRepository;
         this.imageService = imageService;
-        this.companyRepository=companyRepository;
-        this.brandRepository=brandRepository;
-        this.titleMapper=titleMapper;
+        this.companyRepository = companyRepository;
+        this.brandRepository = brandRepository;
+        this.titleMapper = titleMapper;
     }
 
     @Transactional
-    public TitleResponse registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality  ,MultipartFile banner, MultipartFile poster,MultipartFile name){
-
+    public TitleResponse registerTitle(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, LocalDate addedDate, Float popularity, Integer budget, Integer revenue, String titleType, String rating, String episodeName, String quality, MultipartFile banner, MultipartFile poster, MultipartFile name) {
 
 
         try {
 
-            Title newTitle=new Title();
+            Title newTitle = new Title();
             newTitle.setTitle(title);
             newTitle.setOverview(overview);
             newTitle.setSeasonNr(seasonNr);
@@ -68,25 +67,26 @@ public class TitleService {
             newTitle.setAddedDate(addedDate);
             newTitle.setViews(0);
             newTitle.setVotes(0);
-            Image bannerPicture =imageService.uploadImage(banner,"banner");
-            Image posterPicture =imageService.uploadImage(poster,"poster");
-            Image namePicture=imageService.uploadImage(name,"name");
+            Image bannerPicture = imageService.uploadImage(banner, "banner");
+            Image posterPicture = imageService.uploadImage(poster, "poster");
+            Image namePicture = imageService.uploadImage(name, "name");
             newTitle.setBannerPicture(bannerPicture);
             newTitle.setPosterPicture(posterPicture);
             newTitle.setNamePicture(namePicture);
 
 
             return titleMapper.fromTitle(titleRepository.save(newTitle));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new UnableToCreateTitleException();
         }
 
     }
+
     @Transactional
-    public TitleResponse registerSerie(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate,LocalDate addedDate, Float popularity, Integer budget, Integer revenue,String titleType,String rating,String episodeName,String quality ,MultipartFile banner){
+    public TitleResponse registerSerie(String title, String overview, int seasonNr, int episodeNr, int runtime, LocalDate releaseDate, LocalDate addedDate, Float popularity, Integer budget, Integer revenue, String titleType, String rating, String episodeName, String quality, MultipartFile banner) {
 
         try {
-            Title newTitle=new Title();
+            Title newTitle = new Title();
             newTitle.setTitle(title);
             newTitle.setOverview(overview);
             newTitle.setSeasonNr(seasonNr);
@@ -103,25 +103,24 @@ public class TitleService {
             newTitle.setAddedDate(addedDate);
             newTitle.setViews(0);
             newTitle.setVotes(0);
-            Image bannerPicture =imageService.uploadImage(banner,"banner");
+            Image bannerPicture = imageService.uploadImage(banner, "banner");
             newTitle.setBannerPicture(bannerPicture);
 
             return titleMapper.fromTitle(titleRepository.save(newTitle));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new UnableToCreateTitleException();
         }
     }
 
     @Transactional
-    public TitleResponse addMovieWithProducerDistributorBrandLenguageCountry(String titleName,Integer season,Integer episode, String producerCompany,String distributorCompany,String brandName,String lenguageName,String countryName,String genreName){
-        Title title = titleRepository.findByTitleSeasonAndEpisode(titleName,season,episode).orElseThrow(TitleDoesNotExistException::new);
-        Company prodCompany=companyRepository.findByCompanyName(producerCompany).orElseThrow(CompanyDoesNotExistException::new);
-        Company distCompany=companyRepository.findByCompanyName(distributorCompany).orElseThrow(CompanyDoesNotExistException::new);
-        Brand brand=brandRepository.findByBrandName(brandName).orElseThrow(BrandDoesNotExistException::new);
-        Lenguage lenguage=lenguageRepository.findByLenguage(lenguageName).orElseThrow(LenguageDoesNotExistException::new);
-        Country country=countryRepository.findByCountry(countryName).orElseThrow(CountryDoesNotExistException::new);
-        Genre genre=genreRepository.findByGenre(genreName).orElseThrow(GenreDoesNotExistException::new);
-
+    public TitleResponse addMovieWithProducerDistributorBrandLenguageCountry(String titleName, Integer season, Integer episode, String producerCompany, String distributorCompany, String brandName, String lenguageName, String countryName, String genreName) {
+        Title title = titleRepository.findByTitleSeasonAndEpisode(titleName, season, episode).orElseThrow(TitleDoesNotExistException::new);
+        Company prodCompany = companyRepository.findByCompanyName(producerCompany).orElseThrow(CompanyDoesNotExistException::new);
+        Company distCompany = companyRepository.findByCompanyName(distributorCompany).orElseThrow(CompanyDoesNotExistException::new);
+        Brand brand = brandRepository.findByBrandName(brandName).orElseThrow(BrandDoesNotExistException::new);
+        Lenguage lenguage = lenguageRepository.findByLenguage(lenguageName).orElseThrow(LenguageDoesNotExistException::new);
+        Country country = countryRepository.findByCountry(countryName).orElseThrow(CountryDoesNotExistException::new);
+        Genre genre = genreRepository.findByGenre(genreName).orElseThrow(GenreDoesNotExistException::new);
 
         title.getProductionCompanies().add(prodCompany);
         title.getDistributionCompanies().add(distCompany);
@@ -134,25 +133,25 @@ public class TitleService {
 
     }
 
-    public TitleResponse addGenreToTitle(String genre,String title){
+    public TitleResponse addGenreToTitle(String genre, String title) {
 
-        Title auxTitle=titleRepository.findByTitle(title).orElseThrow(TitleDoesNotExistException::new);
-        Genre auxGenre=genreRepository.findByGenre(genre).orElseThrow(CountryDoesNotExistException::new);
-    auxTitle.getGenres().add(auxGenre);
+        Title auxTitle = titleRepository.findByTitle(title).orElseThrow(TitleDoesNotExistException::new);
+        Genre auxGenre = genreRepository.findByGenre(genre).orElseThrow(CountryDoesNotExistException::new);
+        auxTitle.getGenres().add(auxGenre);
 
         return titleMapper.fromTitle(titleRepository.save(auxTitle));
     }
 
-    public TitleResponse addCountryToTitle(String country,String title){
+    public TitleResponse addCountryToTitle(String country, String title) {
 
-        Title auxTitle=titleRepository.findByTitle(title).orElseThrow(TitleDoesNotExistException::new);
-        Country auxCountry=countryRepository.findByCountry(country).orElseThrow(GenreDoesNotExistException::new);
+        Title auxTitle = titleRepository.findByTitle(title).orElseThrow(TitleDoesNotExistException::new);
+        Country auxCountry = countryRepository.findByCountry(country).orElseThrow(GenreDoesNotExistException::new);
         auxTitle.getCountries().add(auxCountry);
 
         return titleMapper.fromTitle(titleRepository.save(auxTitle));
     }
 
-    public TitleResponse addLenguageToTitle(String lenguage,String title) {
+    public TitleResponse addLenguageToTitle(String lenguage, String title) {
         Title auxTitle = titleRepository.findByTitle(title).orElseThrow(TitleDoesNotExistException::new);
         Lenguage auxLenguage = lenguageRepository.findByLenguage(lenguage).orElseThrow(LenguageDoesNotExistException::new);
         auxTitle.getLenguages().add(auxLenguage);
@@ -160,125 +159,124 @@ public class TitleService {
         return titleMapper.fromTitle(titleRepository.save(auxTitle));
     }
 
-    public TitleResponse addCompanyToTitleAsProducer(String companyName,String titleName){
+    public TitleResponse addCompanyToTitleAsProducer(String companyName, String titleName) {
         Title auxTitle = titleRepository.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
-        Company auxCompany=companyRepository.findByCompanyName(companyName).orElseThrow(CompanyDoesNotExistException::new);
+        Company auxCompany = companyRepository.findByCompanyName(companyName).orElseThrow(CompanyDoesNotExistException::new);
 
         auxTitle.getProductionCompanies().add(auxCompany);
         return titleMapper.fromTitle(titleRepository.save(auxTitle));
     }
 
-    public TitleResponse addCompanyToTitleAsDistributor(String companyName,String titleName){
+    public TitleResponse addCompanyToTitleAsDistributor(String companyName, String titleName) {
         Title auxTitle = titleRepository.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new);
-        Company auxCompany=companyRepository.findByCompanyName(companyName).orElseThrow(CompanyDoesNotExistException::new);
+        Company auxCompany = companyRepository.findByCompanyName(companyName).orElseThrow(CompanyDoesNotExistException::new);
 
         auxTitle.getDistributionCompanies().add(auxCompany);
         return titleMapper.fromTitle(titleRepository.save(auxTitle));
     }
 
-    public TitleResponse retrieveTitle(String titleName){
+    public TitleResponse retrieveTitle(String titleName) {
         return titleMapper.fromTitle(titleRepository.findByTitle(titleName).orElseThrow(TitleDoesNotExistException::new));
     }
 
     public TitleResponse getMovieById(Integer titleId) {
-        Title title=titleRepository.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
+        Title title = titleRepository.findById(titleId).orElseThrow(TitleDoesNotExistException::new);
         return titleMapper.fromTitle(title);
     }
-    public Set<TitlePreview>  getAllTitlesOfPerson(String firstName, String lastName){
-        Set<Title> titles=titleRepository.findTitlesByPerson(firstName);
+
+    public Set<TitlePreview> getAllTitlesOfPerson(String firstName, String lastName) {
+        Set<Title> titles = titleRepository.findTitlesByPerson(firstName);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public Set<TitlePreview> getAllTitlesOfGenre(String genreName){
-        Set<Title> titles= titleRepository.findTitlesByGenre(genreName);
+    public Set<TitlePreview> getAllTitlesOfGenre(String genreName) {
+        Set<Title> titles = titleRepository.findTitlesByGenre(genreName);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public Set<TitlePreview>  getAllTitlesOfCountry(String countryName) {
-        Set<Title> titles=titleRepository.findTitlesByCountry(countryName);
+    public Set<TitlePreview> getAllTitlesOfCountry(String countryName) {
+        Set<Title> titles = titleRepository.findTitlesByCountry(countryName);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public Set<TitlePreview> getAllTitlesOfLenguage(String lenguageName){
-        Set<Title> titles=titleRepository.findTitlesByLenguage(lenguageName);
+    public Set<TitlePreview> getAllTitlesOfLenguage(String lenguageName) {
+        Set<Title> titles = titleRepository.findTitlesByLenguage(lenguageName);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public Set<TitlePreview> getAllTitlesOfProductor(String  companyName){
-        Set<Title> titles=titleRepository.findTitlesByProductor(companyName);
+    public Set<TitlePreview> getAllTitlesOfProductor(String companyName) {
+        Set<Title> titles = titleRepository.findTitlesByProductor(companyName);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public Set<TitlePreview> getTiltesRecentlyAdded(){
-        LocalDate currentDate=LocalDate.now();
-        currentDate=currentDate.minusMonths(1);
-        Set<Title> titles=titleRepository.findByRecentlyAdded(currentDate);
+    public Set<TitlePreview> getTiltesRecentlyAdded() {
+        LocalDate currentDate = LocalDate.now();
+        currentDate = currentDate.minusMonths(1);
+        Set<Title> titles = titleRepository.findByRecentlyAdded(currentDate);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public Set<TitlePreview> getTitlesByTitleAndSeason(String title,Integer season){
-        Set<Title> titles=titleRepository.findByTitleSeason(title,season);
+    public Set<TitlePreview> getTitlesByTitleAndSeason(String title, Integer season) {
+        Set<Title> titles = titleRepository.findByTitleSeason(title, season);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public List<TitlePreview> getMostPopularTitles(){
-       List<Title> titles=titleRepository.findAllBySeasonNrOrderByViewsDesc(0);
-       return titleMapper.mapToPreviewList(titles.stream().limit(10).collect(Collectors.toList()));
+    public List<TitlePreview> getMostPopularTitles() {
+        List<Title> titles = titleRepository.findAllBySeasonNrOrderByViewsDesc(0);
+        return titleMapper.mapToPreviewList(titles.stream().limit(10).collect(Collectors.toList()));
     }
 
-    public Integer countSeries(String title){
+    public Integer countSeries(String title) {
         return titleRepository.findSeasonsByTitle(title).size();
     }
 
     // TWO PARAMS FILTERS
 
-    public Set<TitlePreview> getAllTitlesByTypeAndPopularity(String type){
-        Set<Title> titles=titleRepository.findAllBySeasonNrTypeOrderByViewsDesc(0,type);
+    public Set<TitlePreview> getAllTitlesByTypeAndPopularity(String type) {
+        Set<Title> titles = titleRepository.findAllBySeasonNrTypeOrderByViewsDesc(0, type);
         return titleMapper.mapToPreviewSet(titles.stream().limit(10).collect(Collectors.toSet()));
     }
 
-    public Set<TitlePreview>  getAllTitlesByTypeAndGenre(String type,String genre){
-        Set<Title> titles=titleRepository.findAllByTypeGenre(type,genre);
+    public Set<TitlePreview> getAllTitlesByTypeAndGenre(String type, String genre) {
+        Set<Title> titles = titleRepository.findAllByTypeGenre(type, genre);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public List<TitlePreview>  getAllTitlesByTypeAndRecentlyAdded(String type){
-        LocalDate currentDate=LocalDate.now();
-        currentDate=currentDate.minusMonths(1);
-      List<Title> titles=titleRepository.findByRecentlyAddedAndType(type,currentDate);
+    public List<TitlePreview> getAllTitlesByTypeAndRecentlyAdded(String type) {
+        LocalDate currentDate = LocalDate.now();
+        currentDate = currentDate.minusMonths(1);
+        List<Title> titles = titleRepository.findByRecentlyAddedAndType(type, currentDate);
         return titleMapper.mapToPreviewList(titles);
     }
 
-    public List<TitlePreview>  getAllTitlesByTypeAndAlphabetic(String type){
-        List<Title> titles=titleRepository.findAllByTypeAlphabetic(type);
+    public List<TitlePreview> getAllTitlesByTypeAndAlphabetic(String type) {
+        List<Title> titles = titleRepository.findAllByTypeAlphabetic(type);
         return titleMapper.mapToPreviewList(titles);
     }
 
     // TWO PARAMS FILTERS
 
-    public Set<TitlePreview> getAllTitlesByGenreAndPopularity(String genre){
-        Set<Title> titles=titleRepository.findAllBySeasonNrGenreOrderByViewsDesc(genre);
+    public Set<TitlePreview> getAllTitlesByGenreAndPopularity(String genre) {
+        Set<Title> titles = titleRepository.findAllBySeasonNrGenreOrderByViewsDesc(genre);
         return titleMapper.mapToPreviewSet(titles);
     }
 
-    public List<TitlePreview>  getAllTitlesByGenreAndRecentlyAdded(String genre){
-        LocalDate currentDate=LocalDate.now();
-        currentDate=currentDate.minusMonths(1);
-        List<Title> titles=titleRepository.findByRecentlyAddedAndGenre(genre,currentDate);
+    public List<TitlePreview> getAllTitlesByGenreAndRecentlyAdded(String genre) {
+        LocalDate currentDate = LocalDate.now();
+        currentDate = currentDate.minusMonths(1);
+        List<Title> titles = titleRepository.findByRecentlyAddedAndGenre(genre, currentDate);
         return titleMapper.mapToPreviewList(titles);
     }
 
-    public List<TitlePreview>  getAllTitlesByGenreAndAlphabetic(String genre){
-        List<Title> titles=titleRepository.findAllByGenreAlphabetic(genre);
+    public List<TitlePreview> getAllTitlesByGenreAndAlphabetic(String genre) {
+        List<Title> titles = titleRepository.findAllByGenreAlphabetic(genre);
         return titleMapper.mapToPreviewList(titles);
     }
 
-    public List<TitlePreview>  getAllTitlesByOneParam(String param){
-        List<Title> titles=titleRepository.searchMovies(param);
+    public List<TitlePreview> getAllTitlesByOneParam(String param) {
+        List<Title> titles = titleRepository.searchMovies(param);
         return titleMapper.mapToPreviewList(titles);
     }
-
-
 
 
 }

@@ -1,17 +1,6 @@
 package com.hbomax.services;
 
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.Message;
-import com.hbomax.exceptions.EmailFailedToSendException;
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayOutputStream;
-import java.util.Properties;
 
 @Service
 public class MailService {

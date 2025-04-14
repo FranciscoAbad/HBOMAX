@@ -6,11 +6,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="view")
+@Table(name = "view")
 public class View {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="view_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "view_id")
     private Integer viewId;
 
     @ManyToOne

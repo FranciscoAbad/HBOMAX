@@ -4,7 +4,7 @@ public class PasswordCodeDTO {
     private int code;
     private String email;
 
-    public PasswordCodeDTO(){
+    public PasswordCodeDTO() {
         super();
     }
 

@@ -3,13 +3,13 @@ package com.hbomax.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="title_role")
+@Table(name = "title_role")
 public class TitleRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="role_id")
+    @Column(name = "role_id")
     private Integer roleId;
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 
     public TitleRole(Integer roleId, String role) {
@@ -17,7 +17,7 @@ public class TitleRole {
         this.role = role;
     }
 
-    public TitleRole(){
+    public TitleRole() {
         super();
     }
 

@@ -1,13 +1,10 @@
 package com.hbomax.mappers;
 
 import com.hbomax.dto.ProfileResponse;
-import com.hbomax.dto.RoleResponse;
 import com.hbomax.models.Profile;
-import com.hbomax.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
 @Service
 public class ProfileMapper {
     private final ImageMapper imageMapper;
@@ -19,8 +16,8 @@ public class ProfileMapper {
 
     public ProfileResponse fromProfile(Profile profile) {
         return new ProfileResponse(
-               profile.getProfileId(),
-               profile.getName(),
+                profile.getProfileId(),
+                profile.getName(),
                 profile.getProfilePicture() != null
                         ? imageMapper.fromImage(profile.getProfilePicture())
                         : null

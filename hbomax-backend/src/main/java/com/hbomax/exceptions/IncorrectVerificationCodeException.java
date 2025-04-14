@@ -1,10 +1,10 @@
 package com.hbomax.exceptions;
 
-public class IncorrectVerificationCodeException extends RuntimeException{
+public class IncorrectVerificationCodeException extends RuntimeException {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-    public IncorrectVerificationCodeException(){
+    public IncorrectVerificationCodeException() {
         super("The code you passed did not match the user verification code");
     }
 }

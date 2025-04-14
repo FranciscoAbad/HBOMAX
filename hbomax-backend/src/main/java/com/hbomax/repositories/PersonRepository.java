@@ -5,11 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface PersonRepository extends JpaRepository<Person,Integer> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     Optional<Person> findByPersonId(Integer personId);
 
@@ -20,5 +19,5 @@ public interface PersonRepository extends JpaRepository<Person,Integer> {
     Set<Person> findByTitleName(@Param("titleName") String titleName);
 
     @Query("SELECT c.person FROM CastInfo c WHERE c.title.title=:titleName AND c.role.role=:role")
-            Set<Person> findByTitleNameAndRole(@Param("titleName")String titleName,@Param("role") String role);
+    Set<Person> findByTitleNameAndRole(@Param("titleName") String titleName, @Param("role") String role);
 }
