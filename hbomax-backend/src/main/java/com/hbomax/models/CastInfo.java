@@ -3,11 +3,11 @@ package com.hbomax.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="cast_info")
+@Table(name = "cast_info")
 public class CastInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="cast_id")
+    @Column(name = "cast_id")
     private Integer castId;
 
     @ManyToOne
@@ -22,17 +22,17 @@ public class CastInfo {
     @JoinColumn(name = "role_id")
     private TitleRole role;
 
-    @Column(name="character")
+    @Column(name = "character")
     private String character;
 
     @ManyToOne
     @JoinColumn(name = "character_picture", referencedColumnName = "image_id")
     private Image characterPicture;
 
-    @Column(name="writer_role")
+    @Column(name = "writer_role")
     private String writerRole;
 
-    @Column(name="producer_role")
+    @Column(name = "producer_role")
     private String producerRole;
 
 

@@ -14,7 +14,7 @@ public class Brand {
     private String brandName;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="brand_logo", referencedColumnName="image_id")
+    @JoinColumn(name = "brand_logo", referencedColumnName = "image_id")
     private Image brandLogo;
 
     public Brand(Integer brandId, String brandName, Image brandLogo) {

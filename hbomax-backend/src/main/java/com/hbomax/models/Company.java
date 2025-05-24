@@ -2,9 +2,6 @@ package com.hbomax.models;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Table(name = "company")
 public class Company {
@@ -13,9 +10,8 @@ public class Company {
     @Column(name = "company_id")
     private Integer companyId;
 
-    @Column(name="company_name")
+    @Column(name = "company_name")
     private String companyName;
-
 
 
     public Company() {

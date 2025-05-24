@@ -4,132 +4,103 @@ package com.hbomax.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="title")
+@Table(name = "title")
 public class Title {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "title_genre_junction",
+            joinColumns = {@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")})
+    Set<Genre> genres;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "title_country_junction",
+            joinColumns = {@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name = "country_id")})
+    Set<Country> countries;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "title_lenguage_junction",
+            joinColumns = {@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name = "lenguage_id")})
+    Set<Lenguage> lenguages;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "production",
+            joinColumns = {@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name = "company_id")}
+    )
+    Set<Company> productionCompanies;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "distribution",
+            joinColumns = {@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name = "company_id")}
+    )
+    Set<Company> distributionCompanies;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "title_brand_junction",
+            joinColumns = {@JoinColumn(name = "title_id")},
+            inverseJoinColumns = {@JoinColumn(name = "brand_id")}
+    )
+    Set<Brand> brands;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "title_id")
     private Integer titleId;
-
     @Column(name = "title")
     private String title;
-
     @Column(name = "overview")
     private String overview;
-
     @Column(name = "season_nr")
     private int seasonNr;
-
     @Column(name = "episode_nr")
     private int episodeNr;
-
-    @Column(name="episode_name")
+    @Column(name = "episode_name")
     private String episodeName;
-
-    @Column(name="quality")
+    @Column(name = "quality")
     private String quality;
-
     @Column(name = "runtime")
     private Integer runtime;
-
     @Column(name = "release_date")
     private LocalDate releaseDate;
-
     @Column(name = "added_date")
     private LocalDate addedDate;
-
     @Column(name = "popularity")
     private Float popularity;
-
     @Column(name = "budget")
     private Integer budget;
-
     @Column(name = "revenue")
     private Integer revenue;
-
-    @Column(name="rating")
+    @Column(name = "rating")
     private String rating;
-
-    @Column(name="type")
+    @Column(name = "type")
     private String type;
-
-    @Column(name="views")
+    @Column(name = "views")
     private Integer views;
-
-    @Column(name="votes")
+    @Column(name = "votes")
     private Integer votes;
-
-    @Column(name="totalScore")
+    @Column(name = "totalScore")
     private Float totalScore;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="profile_picture", referencedColumnName="image_id")
+    @JoinColumn(name = "profile_picture", referencedColumnName = "image_id")
     private Image posterPicture;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="banner_picture", referencedColumnName="image_id")
+    @JoinColumn(name = "banner_picture", referencedColumnName = "image_id")
     private Image bannerPicture;
-
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="name_picture",referencedColumnName = "image_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_picture", referencedColumnName = "image_id")
     private Image namePicture;
-
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="title_genre_junction",
-    joinColumns ={@JoinColumn(name = "title_id")},
-    inverseJoinColumns = {@JoinColumn(name="genre_id")})
-    Set<Genre> genres;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="title_country_junction",
-            joinColumns ={@JoinColumn(name = "title_id")},
-            inverseJoinColumns = {@JoinColumn(name="country_id")})
-    Set<Country> countries;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="title_lenguage_junction",
-            joinColumns ={@JoinColumn(name = "title_id")},
-            inverseJoinColumns = {@JoinColumn(name="lenguage_id")})
-    Set<Lenguage> lenguages;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="production",
-            joinColumns = {@JoinColumn(name="title_id")},
-            inverseJoinColumns = {@JoinColumn(name="company_id")}
-    )
-    Set<Company> productionCompanies;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="distribution",
-            joinColumns = {@JoinColumn(name="title_id")},
-            inverseJoinColumns = {@JoinColumn(name="company_id")}
-    )
-    Set<Company> distributionCompanies;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="title_brand_junction",
-            joinColumns = {@JoinColumn(name="title_id")},
-            inverseJoinColumns = {@JoinColumn(name="brand_id")}
-    )
-    Set<Brand> brands;
-
 
 
     public Title() {
         super();
-        this.genres=new HashSet<>();
-        this.countries=new HashSet<>();
-        this.lenguages=new HashSet<>();
-        this.productionCompanies=new HashSet<>();
-        this.distributionCompanies=new HashSet<>();
-        this.brands=new HashSet<>();
-        this.totalScore=0F;
+        this.genres = new HashSet<>();
+        this.countries = new HashSet<>();
+        this.lenguages = new HashSet<>();
+        this.productionCompanies = new HashSet<>();
+        this.distributionCompanies = new HashSet<>();
+        this.brands = new HashSet<>();
+        this.totalScore = 0F;
     }
 
     public LocalDate getAddedDate() {
@@ -323,9 +294,11 @@ public class Title {
     public void setQuality(String quality) {
         this.quality = quality;
     }
+
     public Image getNamePicture() {
         return namePicture;
     }
+
     public void setNamePicture(Image namePicture) {
         this.namePicture = namePicture;
     }

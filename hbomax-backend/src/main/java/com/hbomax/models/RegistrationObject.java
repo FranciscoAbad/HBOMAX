@@ -1,24 +1,20 @@
 package com.hbomax.models;
 
 
-
 public class RegistrationObject {
     private String firstName;
     private String lastName;
     private String email;
-
     private String password;
 
-
     public RegistrationObject() {
-
     }
 
-    public RegistrationObject(String firstName, String lastName, String email,String password) {
+    public RegistrationObject(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password=password;
+        this.password = password;
     }
 
     public String getFirstName() {

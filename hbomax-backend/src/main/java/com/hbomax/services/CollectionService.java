@@ -1,10 +1,9 @@
 package com.hbomax.services;
 
 
-import com.hbomax.dto.CollectionDTO;
+import com.hbomax.dto.CollectionResponse;
 import com.hbomax.exceptions.UnableToCreateCollectionException;
-import com.hbomax.exceptions.UnabledToSavePhotoException;
-import com.hbomax.mappers.CollectionDTOMapper;
+import com.hbomax.mappers.CollectionMapper;
 import com.hbomax.models.Collection;
 import com.hbomax.models.Image;
 import com.hbomax.repositories.CollectionRepository;
@@ -14,51 +13,49 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CollectionService {
-
+    private final CollectionMapper collectionMapper;
     private final CollectionRepository collectionRepository;
     private final ImageService imageService;
 
     @Autowired
-    public CollectionService(CollectionRepository collectionRepository, ImageService imageService) {
+    public CollectionService(CollectionRepository collectionRepository, ImageService imageService, CollectionMapper collectionMapper) {
         this.collectionRepository = collectionRepository;
         this.imageService = imageService;
+        this.collectionMapper = collectionMapper;
     }
 
-    public Collection createCollection(String collectionName, MultipartFile cardPicture, MultipartFile bannerPicture, MultipartFile namePicture)  {
+    public Collection createCollection(String collectionName, MultipartFile cardPicture, MultipartFile bannerPicture, MultipartFile namePicture) {
 
-        if(collectionRepository.findByCollectionName(collectionName).isPresent()){
+        if (collectionRepository.findByCollectionName(collectionName).isPresent()) {
             throw new RuntimeException("Unable to create collection, duplicated collection name");
         }
 
-        try{
+        try {
 
-            Image card=imageService.uploadImage(cardPicture,"collectionCard");
-            Image banner=imageService.uploadImage(bannerPicture,"collectionBanner");
-            Image name=imageService.uploadImage(namePicture,"collectionName");
-
-
+            Image card = imageService.uploadImage(cardPicture, "collectionCard");
+            Image banner = imageService.uploadImage(bannerPicture, "collectionBanner");
+            Image name = imageService.uploadImage(namePicture, "collectionName");
 
 
-            Collection collection=new Collection();
-        collection.setCollectionName(collectionName);
-        collection.setCardPicture(card);
-        collection.setBannerPicture(banner);
-        collection.setNamePicture(name);
-
+            Collection collection = new Collection();
+            collection.setCollectionName(collectionName);
+            collection.setCardPicture(card);
+            collection.setBannerPicture(banner);
+            collection.setNamePicture(name);
 
 
             collectionRepository.save(collection);
-            return  collection;
-       } catch (Exception e) {
-           throw new UnableToCreateCollectionException();
-       }
+            return collection;
+        } catch (Exception e) {
+            throw new UnableToCreateCollectionException();
+        }
 
     }
 
 
-    public CollectionDTO getCollectionByName(String collectionName){
-        Collection collection=collectionRepository.findByCollectionName(collectionName).orElseThrow(RuntimeException::new);
-        return CollectionDTOMapper.mapToDTO(collection);
+    public CollectionResponse getCollectionByName(String collectionName) {
+        Collection collection = collectionRepository.findByCollectionName(collectionName).orElseThrow(RuntimeException::new);
+        return collectionMapper.fromCollection(collection);
     }
 
 }

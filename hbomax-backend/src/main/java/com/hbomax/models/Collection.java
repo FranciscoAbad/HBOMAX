@@ -7,48 +7,37 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="collections")
+@Table(name = "collections")
 public class Collection {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "title_collection_junction",
+            joinColumns = {@JoinColumn(name = "collection_id")},
+            inverseJoinColumns = {@JoinColumn(name = "title_id")})
+    Set<Title> collectionTitles;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="collection_id")
+    @Column(name = "collection_id")
     private Integer collectionId;
-
-    @Column(name="collection_name")
+    @Column(name = "collection_name")
     private String collectionName;
-
-
-    @Column(name="collection_description")
+    @Column(name = "collection_description")
     private String collectionDescription;
-
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="card_picture",referencedColumnName = "image_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "card_picture", referencedColumnName = "image_id")
     private Image cardPicture;
-
-
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="banner_picture",referencedColumnName = "image_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "banner_picture", referencedColumnName = "image_id")
     private Image bannerPicture;
-
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="name_picture",referencedColumnName = "image_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_picture", referencedColumnName = "image_id")
     private Image namePicture;
-
-
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="hero_picture",referencedColumnName = "image_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hero_picture", referencedColumnName = "image_id")
     private Image heroPicture;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="title_collection_junction",
-            joinColumns ={@JoinColumn(name = "collection_id")},
-            inverseJoinColumns = {@JoinColumn(name="title_id")})
-    Set<Title> collectionTitles;
-
-
     public Collection() {
-        this.collectionTitles=new HashSet<>();
+        this.collectionTitles = new HashSet<>();
     }
 
     public Collection(Integer collectionId, String collectionName, String collectionDescription, Image cardPicture, Image bannerPicture, Image namePicture, Image heroPicture, Set<Title> collectionTitles) {
@@ -74,16 +63,16 @@ public class Collection {
         return collectionName;
     }
 
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
     public String getCollectionDescription() {
         return collectionDescription;
     }
 
     public void setCollectionDescription(String collectionDescription) {
         this.collectionDescription = collectionDescription;
-    }
-
-    public void setCollectionName(String collectionName) {
-        this.collectionName = collectionName;
     }
 
     public Image getCardPicture() {

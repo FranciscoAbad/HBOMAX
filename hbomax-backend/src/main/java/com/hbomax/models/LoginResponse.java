@@ -1,16 +1,18 @@
 package com.hbomax.models;
 
 
+import com.hbomax.dto.ApplicationUserResponse;
+
 public class LoginResponse {
     private String token;
-    private ApplicationUser user;
+    private ApplicationUserResponse user;
 
 
-    public LoginResponse(){
+    public LoginResponse() {
         super();
     }
 
-    public LoginResponse(ApplicationUser user, String token) {
+    public LoginResponse(ApplicationUserResponse user, String token) {
         this.user = user;
         this.token = token;
     }
@@ -23,11 +25,11 @@ public class LoginResponse {
         this.token = token;
     }
 
-    public ApplicationUser getUser() {
+    public ApplicationUserResponse getUser() {
         return user;
     }
 
-    public void setUser(ApplicationUser user) {
+    public void setUser(ApplicationUserResponse user) {
         this.user = user;
     }
 

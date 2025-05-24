@@ -1,37 +1,23 @@
 package com.hbomax.dto;
 
 import com.hbomax.models.Image;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class TitleDTO {
 
     private Integer titleId;
-
     private String title;
-
     private String brandName;
-
     private String type;
-
     private Integer episodeNr;
-
     private String episodeName;
-
     private Integer runtime;
-
     private String rating;
-
     private String overview;
-
     private LocalDate releaseDate;
-
     private Image banner;
-
     private Image poster;
-
     private Image name;
 
     public TitleDTO(Integer titleId, String title, String brandName, String type, Integer episodeNr, String episodeName, Integer runtime, String rating, String overview, LocalDate releaseDate, Image banner, Image poster, Image name) {

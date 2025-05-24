@@ -12,7 +12,7 @@ public class Lenguage {
     @Column(name = "lenguage_id")
     private Integer lenguageId;
 
-    @Column(name="lenguage")
+    @Column(name = "lenguage")
     private String lenguage;
 
     public Lenguage() {

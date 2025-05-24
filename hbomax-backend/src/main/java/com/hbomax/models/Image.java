@@ -1,38 +1,37 @@
 package com.hbomax.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="images")
+@Table(name = "images")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="image_id")
+    @Column(name = "image_id")
     private Long imageId;
-    @Column(name="image_name",unique = true)
+    @Column(name = "image_name", unique = true)
     private String imageName;
-    @Column(name="image_type")
+    @Column(name = "image_type")
     private String imageType;
-    @Column(name="image_path")
+    @Column(name = "image_path")
     @JsonIgnore
-    private  String imagePath;
-    @Column(name="image_url")
+    private String imagePath;
+    @Column(name = "image_url")
     private String imageURL;
-    @Column(name="image_prefix")
+    @Column(name = "image_prefix")
     private String imagePrefix;
 
-    public Image(){
+    public Image() {
         super();
     }
 
-    public Image(String imageName, String imageType, String imagePath, String imageURL,String imagePrefix) {
+    public Image(String imageName, String imageType, String imagePath, String imageURL, String imagePrefix) {
         this.imageName = imageName;
         this.imageType = imageType;
         this.imagePath = imagePath;
         this.imageURL = imageURL;
-        this.imagePrefix=imagePrefix;
+        this.imagePrefix = imagePrefix;
     }
 
     public Image(Long imageId, String imageName, String imageType, String imagePath, String imageURL) {

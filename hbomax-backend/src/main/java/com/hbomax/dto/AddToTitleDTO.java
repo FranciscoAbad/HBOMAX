@@ -5,8 +5,7 @@ public class AddToTitleDTO {
     private String firstName;
     private String lastName;
     private String titleRole;
-   private String titleName;
-
+    private String titleName;
     private String characer;
 
     public AddToTitleDTO(String firstName, String lastName, String titleRole, String titleName, String characer) {

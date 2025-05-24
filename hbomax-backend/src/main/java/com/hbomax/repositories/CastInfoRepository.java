@@ -11,8 +11,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface CastInfoRepository extends JpaRepository<CastInfo,Integer> {
-    public Optional<CastInfo> findByCastId(Integer castId);
+public interface CastInfoRepository extends JpaRepository<CastInfo, Integer> {
+    Optional<CastInfo> findByCastId(Integer castId);
 
     @Query("SELECT ci.characterPicture FROM CastInfo ci " +
             "JOIN ci.title t " +
